@@ -68,6 +68,7 @@ This repository contains the production architecture foundation:
 - Phase 55 notification inbox total summary for Social inbox review.
 - Phase 56 notification unread filter disabled state when no pending alerts remain.
 - Phase 57 notification empty inbox guidance for Social review.
+- Phase 58 notification filtered empty guidance for Social inbox filters.
 
 Later phases can deepen member history, governance UX, region boundary overlays and creator/community operations.
 
@@ -172,6 +173,7 @@ scripts                      Operational scripts
 - Phase 55: notification inbox total summary complete.
 - Phase 56: notification unread filter disabled state complete.
 - Phase 57: notification empty inbox guidance complete.
+- Phase 58: notification filtered empty guidance complete.
 
 ## Quality Gates
 

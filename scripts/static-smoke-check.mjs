@@ -407,6 +407,11 @@ assert(
     socialScreen.includes("Sin notificaciones por ahora"),
   "Social screen must show guided empty notification inbox state."
 );
+assert(
+  socialScreen.includes("formatEmptyFilteredNotificationMessage") &&
+    socialScreen.includes("No hay notificaciones para esta vista"),
+  "Social screen must show guided empty notification filter state."
+);
 
 const phaseSixteenMigration = readFileSync(
   path.join(root, "supabase/migrations/0013_player_weekly_trends.sql"),

@@ -305,6 +305,11 @@ export function SocialScreen() {
   const notificationRefreshLabel = isBusy ? "Actualizando" : "Actualizar";
   const activeNotificationFilterCount = countActiveNotificationFilters(showUnreadOnly, selectedNotificationKind);
   const notificationFilterSummary = formatNotificationFilterSummary(showUnreadOnly, selectedNotificationKind);
+  const emptyFilteredNotificationMessage = formatEmptyFilteredNotificationMessage(
+    showUnreadOnly,
+    selectedNotificationKind,
+    selectedNotificationKindLabel
+  );
   const emptyNotificationInboxMessage = formatEmptyNotificationInboxMessage(lastSocialRefreshAt);
   const unreadFilterLabel = formatUnreadFilterLabel(showUnreadOnly, unreadCount);
   const isUnreadFilterDisabled = !showUnreadOnly && unreadCount === 0;
@@ -443,11 +448,8 @@ export function SocialScreen() {
             />
           ) : null}
           {notifications.length === 0 ? <Text style={appStyles.body}>{emptyNotificationInboxMessage}</Text> : null}
-          {notifications.length > 0 && filteredNotifications.length === 0 && showUnreadOnly && !selectedNotificationKind ? (
-            <Text style={appStyles.body}>No quedan notificaciones sin leer.</Text>
-          ) : null}
-          {notifications.length > 0 && filteredNotifications.length === 0 && selectedNotificationKind ? (
-            <Text style={appStyles.body}>No hay notificaciones para este filtro.</Text>
+          {notifications.length > 0 && filteredNotifications.length === 0 ? (
+            <Text style={appStyles.body}>{emptyFilteredNotificationMessage}</Text>
           ) : null}
         </View>
       </Panel>
@@ -622,6 +624,19 @@ function formatUnreadFilterLabel(showUnreadOnly: boolean, unreadCount: number): 
 function formatEmptyNotificationInboxMessage(lastRefreshAt: string | null): string {
   const suffix = lastRefreshAt ? ` Ultima revision ${formatRefreshTime(lastRefreshAt)}.` : "";
   return `Sin notificaciones por ahora.${suffix}`;
+}
+
+function formatEmptyFilteredNotificationMessage(
+  showUnreadOnly: boolean,
+  selectedKind: string | null,
+  selectedKindLabel: string | null
+): string {
+  if (showUnreadOnly && !selectedKind) {
+    return "No quedan notificaciones sin leer.";
+  }
+
+  const suffix = selectedKind && selectedKindLabel ? ` para ${selectedKindLabel}` : "";
+  return `No hay notificaciones para esta vista${suffix}.`;
 }
 
 function formatRefreshTime(value: string): string {

@@ -339,3 +339,9 @@ Status: implemented unread filter label helper, disabled no-pending state, smoke
 Improve the Social notification empty state with a clearer message and last refresh context so riders understand that the inbox was checked.
 
 Status: implemented empty inbox formatter, refresh-aware empty copy, smoke checks and social documentation.
+
+## Phase 58: Notification Filtered Empty Guidance
+
+Improve the Social notification filtered empty state so riders get a clear explanation when unread/category filters return no matching alerts.
+
+Status: implemented filtered empty formatter, category-aware empty copy, smoke checks and social documentation.
