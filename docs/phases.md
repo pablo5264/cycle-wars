@@ -309,3 +309,9 @@ Status: implemented active category button variant, smoke checks and social docu
 Add an active filter count to the Social notification inbox so riders can see when unread and category filters are shaping the current list.
 
 Status: implemented active filter counter, visible filter count label, smoke checks and social documentation.
+
+## Phase 53: Notification Clear Filters Action
+
+Add a one-tap clear filters action to the Social notification inbox so riders can return from unread/category filtering to the full inbox quickly.
+
+Status: implemented clear filter helper, visible clear action, smoke checks and social documentation.

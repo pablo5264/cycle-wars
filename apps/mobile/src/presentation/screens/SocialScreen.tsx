@@ -29,6 +29,12 @@ export function SocialScreen() {
     setNotificationVisibleLimit(5);
   }
 
+  function clearNotificationFilters() {
+    resetNotificationVisibleLimit();
+    setShowUnreadOnly(false);
+    setSelectedNotificationKind(null);
+  }
+
   async function load() {
     resetNotificationVisibleLimit();
     setIsBusy(true);
@@ -350,9 +356,16 @@ export function SocialScreen() {
             </View>
           ) : null}
           {activeNotificationFilterCount > 0 ? (
-            <Text style={[appStyles.body, { color: colors.faint }]}>
-              Filtros activos: {activeNotificationFilterCount}
-            </Text>
+            <View style={appStyles.row}>
+              <Text style={[appStyles.body, { color: colors.faint }]}>
+                Filtros activos: {activeNotificationFilterCount}
+              </Text>
+              <ActionButton
+                label="Limpiar filtros"
+                variant="secondary"
+                onPress={clearNotificationFilters}
+              />
+            </View>
           ) : null}
           {selectedNotificationKindLabel ? (
             <View style={appStyles.row}>
