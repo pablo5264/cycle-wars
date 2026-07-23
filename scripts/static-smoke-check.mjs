@@ -423,6 +423,11 @@ assert(
     socialScreen.includes("borderBottomColor"),
   "Social screen must separate notification inbox items visually."
 );
+assert(
+  socialScreen.includes("unreadNotificationItemStyle") &&
+    socialScreen.includes("borderLeftColor"),
+  "Social screen must accent unread notification inbox items."
+);
 
 const phaseSixteenMigration = readFileSync(
   path.join(root, "supabase/migrations/0013_player_weekly_trends.sql"),

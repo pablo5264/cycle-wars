@@ -357,3 +357,9 @@ Status: implemented category-specific empty copy, unread/category empty copy, sm
 Add subtle separators between Social inbox notification items so riders can scan alerts more easily on mobile screens.
 
 Status: implemented notification item style, separator borders, smoke checks and social documentation.
+
+## Phase 61: Notification Unread Item Accent
+
+Add a subtle accent to unread Social inbox items so riders can quickly spot pending alerts while scanning the notification list.
+
+Status: implemented unread notification accent style, pending-item styling, smoke checks and social documentation.

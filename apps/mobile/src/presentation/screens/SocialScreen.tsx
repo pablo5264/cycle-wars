@@ -399,7 +399,10 @@ export function SocialScreen() {
             </View>
           ) : null}
           {displayedNotifications.map((notification) => (
-            <View key={notification.id} style={notificationItemStyle}>
+            <View
+              key={notification.id}
+              style={notification.read_at ? notificationItemStyle : [notificationItemStyle, unreadNotificationItemStyle]}
+            >
               <View style={appStyles.row}>
                 <Text style={[appStyles.body, { color: colors.cyan, fontWeight: "800" }]}>
                   {formatNotificationKind(notification.kind)}
@@ -688,6 +691,12 @@ const notificationItemStyle = {
   paddingBottom: 10,
   borderBottomWidth: 1,
   borderBottomColor: colors.border
+};
+
+const unreadNotificationItemStyle = {
+  paddingLeft: 10,
+  borderLeftWidth: 3,
+  borderLeftColor: colors.green
 };
 
 const localPosts: FeedPost[] = [

@@ -71,6 +71,7 @@ This repository contains the production architecture foundation:
 - Phase 58 notification filtered empty guidance for Social inbox filters.
 - Phase 59 notification filtered empty copy refinement.
 - Phase 60 notification item separators for clearer Social inbox scanning.
+- Phase 61 notification unread item accent for pending Social inbox alerts.
 
 Later phases can deepen member history, governance UX, region boundary overlays and creator/community operations.
 
@@ -178,6 +179,7 @@ scripts                      Operational scripts
 - Phase 58: notification filtered empty guidance complete.
 - Phase 59: notification filtered empty copy refinement complete.
 - Phase 60: notification item separators complete.
+- Phase 61: notification unread item accent complete.
 
 ## Quality Gates
 
