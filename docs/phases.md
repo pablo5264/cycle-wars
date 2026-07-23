@@ -333,3 +333,9 @@ Status: implemented inbox summary formatter, visible total/pending/read label, s
 Disable the Social inbox unread-only filter when there are no pending notifications and show a clear "Sin pendientes" label instead.
 
 Status: implemented unread filter label helper, disabled no-pending state, smoke checks and social documentation.
+
+## Phase 57: Notification Empty Inbox Guidance
+
+Improve the Social notification empty state with a clearer message and last refresh context so riders understand that the inbox was checked.
+
+Status: implemented empty inbox formatter, refresh-aware empty copy, smoke checks and social documentation.

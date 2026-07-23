@@ -402,6 +402,11 @@ assert(
     socialScreen.includes("isUnreadFilterDisabled"),
   "Social screen must disable unread filter when there are no pending notifications."
 );
+assert(
+  socialScreen.includes("formatEmptyNotificationInboxMessage") &&
+    socialScreen.includes("Sin notificaciones por ahora"),
+  "Social screen must show guided empty notification inbox state."
+);
 
 const phaseSixteenMigration = readFileSync(
   path.join(root, "supabase/migrations/0013_player_weekly_trends.sql"),

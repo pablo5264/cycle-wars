@@ -305,6 +305,7 @@ export function SocialScreen() {
   const notificationRefreshLabel = isBusy ? "Actualizando" : "Actualizar";
   const activeNotificationFilterCount = countActiveNotificationFilters(showUnreadOnly, selectedNotificationKind);
   const notificationFilterSummary = formatNotificationFilterSummary(showUnreadOnly, selectedNotificationKind);
+  const emptyNotificationInboxMessage = formatEmptyNotificationInboxMessage(lastSocialRefreshAt);
   const unreadFilterLabel = formatUnreadFilterLabel(showUnreadOnly, unreadCount);
   const isUnreadFilterDisabled = !showUnreadOnly && unreadCount === 0;
 
@@ -441,7 +442,7 @@ export function SocialScreen() {
               onPress={() => void markAllNotificationsRead()}
             />
           ) : null}
-          {notifications.length === 0 ? <Text style={appStyles.body}>Sin notificaciones nuevas.</Text> : null}
+          {notifications.length === 0 ? <Text style={appStyles.body}>{emptyNotificationInboxMessage}</Text> : null}
           {notifications.length > 0 && filteredNotifications.length === 0 && showUnreadOnly && !selectedNotificationKind ? (
             <Text style={appStyles.body}>No quedan notificaciones sin leer.</Text>
           ) : null}
@@ -616,6 +617,11 @@ function formatUnreadFilterLabel(showUnreadOnly: boolean, unreadCount: number): 
   }
 
   return unreadCount > 0 ? "Solo no leidas" : "Sin pendientes";
+}
+
+function formatEmptyNotificationInboxMessage(lastRefreshAt: string | null): string {
+  const suffix = lastRefreshAt ? ` Ultima revision ${formatRefreshTime(lastRefreshAt)}.` : "";
+  return `Sin notificaciones por ahora.${suffix}`;
 }
 
 function formatRefreshTime(value: string): string {
