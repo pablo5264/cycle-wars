@@ -455,6 +455,12 @@ assert(
     socialScreen.includes("Marcar mas antigua leida"),
   "Social screen must let riders mark the oldest pending notification as read."
 );
+assert(
+  socialScreen.includes("getNewestPendingNotification") &&
+    socialScreen.includes("newestPendingNotification") &&
+    socialScreen.includes("Marcar mas reciente leida"),
+  "Social screen must let riders mark the newest pending notification as read."
+);
 
 const phaseSixteenMigration = readFileSync(
   path.join(root, "supabase/migrations/0013_player_weekly_trends.sql"),

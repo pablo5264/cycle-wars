@@ -298,6 +298,7 @@ export function SocialScreen() {
   const notificationInboxSummary = formatNotificationInboxSummary(notifications.length, unreadCount, readCount);
   const latestNotificationSummary = formatLatestNotificationSummary(sortedFilteredNotifications[0]);
   const oldestPendingNotificationSummary = formatOldestPendingNotificationSummary(sortedFilteredNotifications);
+  const newestPendingNotification = getNewestPendingNotification(sortedFilteredNotifications);
   const oldestPendingNotification = getOldestPendingNotification(sortedFilteredNotifications);
   const notificationVisibleCountLabel = `Mostrando ${displayedNotifications.length} de ${filteredNotifications.length}`;
   const canShowMoreNotifications = displayedNotifications.length < filteredNotifications.length;
@@ -363,6 +364,13 @@ export function SocialScreen() {
           ) : null}
           {oldestPendingNotificationSummary ? (
             <Text style={[appStyles.body, { color: colors.faint }]}>{oldestPendingNotificationSummary}</Text>
+          ) : null}
+          {newestPendingNotification ? (
+            <ActionButton
+              label="Marcar mas reciente leida"
+              variant="secondary"
+              onPress={() => void markNotificationRead(newestPendingNotification.id)}
+            />
           ) : null}
           {oldestPendingNotification ? (
             <ActionButton
@@ -641,6 +649,10 @@ function formatOldestPendingNotificationSummary(notifications: AppNotification[]
 function getOldestPendingNotification(notifications: AppNotification[]): AppNotification | null {
   const pendingNotifications = notifications.filter((notification) => !notification.read_at);
   return pendingNotifications.at(-1) ?? null;
+}
+
+function getNewestPendingNotification(notifications: AppNotification[]): AppNotification | null {
+  return notifications.find((notification) => !notification.read_at) ?? null;
 }
 
 function countActiveNotificationFilters(showUnreadOnly: boolean, selectedKind: string | null): number {

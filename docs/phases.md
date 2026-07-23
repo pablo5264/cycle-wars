@@ -393,3 +393,9 @@ Status: implemented show-fewer guard, compact reset action, smoke checks and soc
 Add a quick action to mark the oldest pending Social inbox notification as read so riders can clear the longest-waiting alert first.
 
 Status: implemented oldest pending selector, quick-read action, smoke checks and social documentation.
+
+## Phase 67: Notification Newest Pending Quick Read
+
+Add a quick action to mark the newest pending Social inbox notification as read so riders can clear the latest alert first when reviewing recent activity.
+
+Status: implemented newest pending selector, quick-read action, smoke checks and social documentation.
