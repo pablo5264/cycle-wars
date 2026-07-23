@@ -315,3 +315,9 @@ Status: implemented active filter counter, visible filter count label, smoke che
 Add a one-tap clear filters action to the Social notification inbox so riders can return from unread/category filtering to the full inbox quickly.
 
 Status: implemented clear filter helper, visible clear action, smoke checks and social documentation.
+
+## Phase 54: Notification Filter Summary
+
+Add a readable Social inbox filter summary so riders can quickly understand whether they are viewing all notifications, unread alerts or a selected category.
+
+Status: implemented filter summary formatter, visible inbox summary label, smoke checks and social documentation.

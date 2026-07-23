@@ -302,6 +302,7 @@ export function SocialScreen() {
   const lastSocialRefreshLabel = lastSocialRefreshAt ? formatRefreshTime(lastSocialRefreshAt) : "Pendiente";
   const notificationRefreshLabel = isBusy ? "Actualizando" : "Actualizar";
   const activeNotificationFilterCount = countActiveNotificationFilters(showUnreadOnly, selectedNotificationKind);
+  const notificationFilterSummary = formatNotificationFilterSummary(showUnreadOnly, selectedNotificationKind);
 
   return (
     <ScrollView style={appStyles.screen} contentContainerStyle={{ gap: 16, paddingBottom: 24 }}>
@@ -367,6 +368,9 @@ export function SocialScreen() {
               />
             </View>
           ) : null}
+          <Text style={[appStyles.body, { color: colors.faint }]}>
+            Vista: {notificationFilterSummary}
+          </Text>
           {selectedNotificationKindLabel ? (
             <View style={appStyles.row}>
               <Text style={[appStyles.body, { color: colors.cyan, fontWeight: "800" }]}>
@@ -577,6 +581,23 @@ function countActiveNotificationFilters(showUnreadOnly: boolean, selectedKind: s
     count += 1;
   }
   return count;
+}
+
+function formatNotificationFilterSummary(showUnreadOnly: boolean, selectedKind: string | null): string {
+  const parts: string[] = [];
+
+  if (showUnreadOnly) {
+    parts.push("no leidas");
+  }
+
+  if (selectedKind) {
+    parts.push(formatNotificationKind(selectedKind));
+  }
+
+  if (parts.length === 0) {
+    return "todas";
+  }
+  return parts.join(" / ");
 }
 
 function formatRefreshTime(value: string): string {

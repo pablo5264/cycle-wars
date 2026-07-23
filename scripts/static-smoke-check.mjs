@@ -386,6 +386,11 @@ assert(
     socialScreen.includes("Limpiar filtros"),
   "Social screen must let riders clear active notification filters."
 );
+assert(
+  socialScreen.includes("formatNotificationFilterSummary") &&
+    socialScreen.includes("Vista:"),
+  "Social screen must show a readable notification filter summary."
+);
 
 const phaseSixteenMigration = readFileSync(
   path.join(root, "supabase/migrations/0013_player_weekly_trends.sql"),
