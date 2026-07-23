@@ -1,0 +1,30 @@
+{
+  "expo": {
+    "name": "Cycle Wars",
+    "slug": "cycle-wars",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "scheme": "cyclewars",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": false,
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.cyclewars.app",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Cycle Wars uses your location to record rides and conquer nearby H3 territories.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "Cycle Wars can record rides while the app is active during gameplay."
+      }
+    },
+    "android": {
+      "package": "com.cyclewars.app",
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION"
+      ]
+    },
+    "plugins": [
+      "expo-location",
+      "@maplibre/maplibre-react-native"
+    ]
+  }
+}

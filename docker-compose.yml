@@ -1,0 +1,19 @@
+services:
+  supabase:
+    image: supabase/postgres:15.1.1.78
+    container_name: cycle-wars-postgres
+    ports:
+      - "54322:5432"
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - cycle-wars-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  cycle-wars-db:

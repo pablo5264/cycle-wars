@@ -1,0 +1,958 @@
+openapi: 3.1.0
+info:
+  title: Cycle Wars API
+  version: 0.1.0
+  description: Public API contract for mobile and service clients.
+servers:
+  - url: https://{projectRef}.supabase.co/functions/v1
+    variables:
+      projectRef:
+        default: local
+paths:
+  /health-check:
+    get:
+      summary: Check backend health
+      operationId: getHealthCheck
+      responses:
+        "200":
+          description: Service health
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [status, service, timestamp]
+                properties:
+                  status:
+                    type: string
+                    enum: [ok]
+                  service:
+                    type: string
+                  timestamp:
+                    type: string
+                    format: date-time
+  /start-activity:
+    post:
+      summary: Start a ride activity
+      operationId: startActivity
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [startedAt]
+              properties:
+                startedAt:
+                  type: string
+                  format: date-time
+                source:
+                  type: string
+                metadata:
+                  type: object
+      responses:
+        "201":
+          description: Activity created
+  /ingest-gps-sample:
+    post:
+      summary: Ingest and validate one GPS sample
+      operationId: ingestGpsSample
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [activityId, latitude, longitude, accuracyMeters, speedKmh, recordedAt]
+              properties:
+                activityId:
+                  type: string
+                  format: uuid
+                latitude:
+                  type: number
+                longitude:
+                  type: number
+                altitudeMeters:
+                  type: number
+                  nullable: true
+                accuracyMeters:
+                  type: number
+                speedKmh:
+                  type: number
+                headingDegrees:
+                  type: number
+                  nullable: true
+                recordedAt:
+                  type: string
+                  format: date-time
+                deviceIntegrity:
+                  type: object
+      responses:
+        "200":
+          description: Sample accepted, quarantined or rejected
+  /finish-activity:
+    post:
+      summary: Finish and summarize a ride activity
+      operationId: finishActivity
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [activityId, endedAt]
+              properties:
+                activityId:
+                  type: string
+                  format: uuid
+                endedAt:
+                  type: string
+                  format: date-time
+      responses:
+        "200":
+          description: Activity finished
+  /get-territory-map:
+    get:
+      summary: Read public territory map projection
+      operationId: getTerritoryMap
+      parameters:
+        - name: h3
+          in: query
+          schema:
+            type: string
+          description: Comma-separated H3 indexes
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            maximum: 2000
+      responses:
+        "200":
+          description: Territory map projection
+  /get-region-control:
+    get:
+      summary: Read regional control snapshots
+      operationId: getRegionControl
+      parameters:
+        - name: regionId
+          in: query
+          schema:
+            type: string
+            format: uuid
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            maximum: 100
+      responses:
+        "200":
+          description: Regional control list
+  /resolve-battle:
+    post:
+      summary: Resolve a battle server-side
+      operationId: resolveBattle
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [battleId]
+              properties:
+                battleId:
+                  type: string
+                  format: uuid
+      responses:
+        "200":
+          description: Battle resolved
+  /get-active-battle:
+    get:
+      summary: Read the authenticated rider active battle
+      operationId: getActiveBattle
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Active battle or null
+  /purchase-shop-item:
+    post:
+      summary: Purchase a cosmetic item
+      operationId: purchaseShopItem
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [itemId]
+              properties:
+                itemId:
+                  type: string
+                  format: uuid
+      responses:
+        "201":
+          description: Item purchased or already owned
+  /record-performance:
+    post:
+      summary: Record mobile performance telemetry
+      operationId: recordPerformance
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [eventName]
+              properties:
+                eventName:
+                  type: string
+                  maxLength: 80
+                durationMs:
+                  type: number
+                  nullable: true
+                metadata:
+                  type: object
+      responses:
+        "200":
+          description: Performance event recorded
+  /refresh-rankings:
+    post:
+      summary: Refresh ranking materialized views
+      operationId: refreshRankings
+      parameters:
+        - name: x-cycle-wars-secret
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Rankings refreshed
+  /refresh-region-control:
+    post:
+      summary: Refresh regional control snapshots
+      operationId: refreshRegionControl
+      parameters:
+        - name: x-cycle-wars-secret
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                regionId:
+                  type: string
+                  format: uuid
+                  nullable: true
+      responses:
+        "200":
+          description: Regional snapshots refreshed
+  /settle-region-rewards:
+    post:
+      summary: Settle cosmetic rewards for regional control
+      operationId: settleRegionRewards
+      parameters:
+        - name: x-cycle-wars-secret
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                seasonId:
+                  type: string
+                  format: uuid
+                  nullable: true
+                minControlPercent:
+                  type: number
+                baseAmount:
+                  type: integer
+      responses:
+        "200":
+          description: Region rewards awarded
+  /player-region-rewards:
+    get:
+      summary: Read authenticated player's regional rewards
+      operationId: getPlayerRegionRewards
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            maximum: 100
+      responses:
+        "200":
+          description: Player regional rewards
+  /player-analytics:
+    get:
+      summary: Read authenticated player's analytics summary
+      operationId: getPlayerAnalytics
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Player analytics summary
+  /player-weekly-trends:
+    get:
+      summary: Read authenticated player's weekly trends
+      operationId: getPlayerWeeklyTrends
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: weeks
+          in: query
+          schema:
+            type: integer
+            maximum: 26
+      responses:
+        "200":
+          description: Weekly trend list
+  /player-events:
+    get:
+      summary: Refresh and read authenticated player events
+      operationId: getPlayerEvents
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Active event list with player progress
+    post:
+      summary: Refresh authenticated player event progress
+      operationId: refreshPlayerEvents
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Active event list with refreshed progress
+  /claim-event-reward:
+    post:
+      summary: Claim a completed event mission reward
+      operationId: claimEventReward
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - eventId
+              properties:
+                eventId:
+                  type: string
+                  format: uuid
+      responses:
+        "200":
+          description: Event reward claim
+  /event-leaderboard:
+    get:
+      summary: Read active event mission leaderboard
+      operationId: getEventLeaderboard
+      parameters:
+        - name: eventId
+          in: query
+          schema:
+            type: string
+            format: uuid
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            maximum: 50
+      responses:
+        "200":
+          description: Ranked active event mission leaders
+  /player-event-reward-history:
+    get:
+      summary: Read authenticated rider's claimed event rewards
+      operationId: getPlayerEventRewardHistory
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            maximum: 50
+      responses:
+        "200":
+          description: Recent event reward claims
+          content:
+            application/json:
+              schema:
+                type: object
+  /event-schedule:
+    get:
+      summary: Read upcoming event missions
+      operationId: getEventSchedule
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            maximum: 50
+        - name: includeActive
+          in: query
+          schema:
+            type: boolean
+      responses:
+        "200":
+          description: Upcoming event mission schedule
+  /event-reminders:
+    get:
+      summary: Read authenticated rider event reminders
+      operationId: getEventReminders
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            maximum: 50
+      responses:
+        "200":
+          description: Event reminder list
+    post:
+      summary: Create or cancel an event reminder
+      operationId: manageEventReminder
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [eventId]
+              properties:
+                eventId:
+                  type: string
+                  format: uuid
+                action:
+                  type: string
+                  enum: [set, cancel]
+      responses:
+        "200":
+          description: Event reminder state
+  /dispatch-event-reminders:
+    post:
+      summary: Dispatch due event reminder notifications
+      operationId: dispatchEventReminders
+      parameters:
+        - name: x-cycle-wars-secret
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                now:
+                  type: string
+                  format: date-time
+                limit:
+                  type: integer
+                  maximum: 500
+      responses:
+        "200":
+          description: Due reminders dispatched
+  /clan-analytics:
+    get:
+      summary: Read authenticated player's clan analytics
+      operationId: getClanAnalytics
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Clan analytics summary or null
+  /clan-weekly-trends:
+    get:
+      summary: Read authenticated player's clan weekly trends
+      operationId: getClanWeeklyTrends
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: weeks
+          in: query
+          schema:
+            type: integer
+            maximum: 26
+      responses:
+        "200":
+          description: Clan weekly trend list
+  /clan-member-contributions:
+    get:
+      summary: Read authenticated player's clan member contributions
+      operationId: getClanMemberContributions
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            maximum: 50
+      responses:
+        "200":
+          description: Clan member contribution list
+  /manage-clan-member:
+    post:
+      summary: Manage clan member role or removal
+      operationId: manageClanMember
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [action, targetPlayerId]
+              properties:
+                action:
+                  type: string
+                  enum: [set_role, remove_member]
+                targetPlayerId:
+                  type: string
+                  format: uuid
+                nextRole:
+                  type: string
+                  enum: [captain, veteran, member, recruit]
+                reason:
+                  type: string
+      responses:
+        "200":
+          description: Clan member mutation result
+  /clan-governance-audit:
+    get:
+      summary: Read authenticated player's clan governance audit
+      operationId: getClanGovernanceAudit
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            maximum: 100
+      responses:
+        "200":
+          description: Clan governance audit events
+  /clan-invitations:
+    get:
+      summary: Read authenticated player's clan invitations
+      operationId: getClanInvitations
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Received and sent clan invitations
+    post:
+      summary: Send or respond to a clan invitation
+      operationId: manageClanInvitation
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [action]
+              properties:
+                action:
+                  type: string
+                  enum: [send, accept, decline]
+                targetPlayerId:
+                  type: string
+                  format: uuid
+                invitationId:
+                  type: string
+                  format: uuid
+                message:
+                  type: string
+      responses:
+        "200":
+          description: Clan invitation action result
+  /clan-join-requests:
+    get:
+      summary: Read clan directory and join requests
+      operationId: getClanJoinRequests
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Clan directory plus received and sent join requests
+    post:
+      summary: Request clan access or respond to a join request
+      operationId: manageClanJoinRequest
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [action]
+              properties:
+                action:
+                  type: string
+                  enum: [request, approve, reject]
+                clanId:
+                  type: string
+                  format: uuid
+                requestId:
+                  type: string
+                  format: uuid
+                message:
+                  type: string
+      responses:
+        "200":
+          description: Clan join request action result
+  /create-clan:
+    post:
+      summary: Create a new clan for the authenticated rider
+      operationId: createClan
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name]
+              properties:
+                name:
+                  type: string
+                  minLength: 3
+                  maxLength: 32
+                description:
+                  type: string
+                  maxLength: 280
+                color:
+                  type: string
+                  example: "#39E58C"
+                city:
+                  type: string
+                countryCode:
+                  type: string
+                joinPolicy:
+                  type: string
+                  enum: [open, approval_required, invite_only]
+      responses:
+        "201":
+          description: Clan created and creator assigned as leader
+  /update-clan-settings:
+    post:
+      summary: Update authenticated rider's clan settings
+      operationId: updateClanSettings
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                  maxLength: 280
+                color:
+                  type: string
+                  example: "#39E58C"
+                city:
+                  type: string
+                countryCode:
+                  type: string
+                joinPolicy:
+                  type: string
+                  enum: [open, approval_required, invite_only]
+      responses:
+        "200":
+          description: Clan settings updated
+  /clan-lifecycle:
+    post:
+      summary: Leave clan or transfer clan leadership
+      operationId: manageClanLifecycle
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [action]
+              properties:
+                action:
+                  type: string
+                  enum: [leave, transfer_leadership]
+                targetPlayerId:
+                  type: string
+                  format: uuid
+                reason:
+                  type: string
+      responses:
+        "200":
+          description: Clan lifecycle action applied
+  /clan-wars:
+    get:
+      summary: Read authenticated rider's clan wars
+      operationId: getClanWars
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Clan war list
+    post:
+      summary: Declare or end a clan war
+      operationId: manageClanWar
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [action]
+              properties:
+                action:
+                  type: string
+                  enum: [declare, end]
+                targetClanId:
+                  type: string
+                  format: uuid
+                warId:
+                  type: string
+                  format: uuid
+                reason:
+                  type: string
+      responses:
+        "200":
+          description: Clan war action result
+  /decay-territories:
+    post:
+      summary: Apply scheduled territory influence decay
+      operationId: decayTerritories
+      parameters:
+        - name: x-cycle-wars-secret
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Territory decay applied
+  /social-feed:
+    get:
+      summary: Read global social feed
+      operationId: getSocialFeed
+      responses:
+        "200":
+          description: Feed posts
+  /create-feed-post:
+    post:
+      summary: Create a feed post
+      operationId: createFeedPost
+      security:
+        - bearerAuth: []
+      responses:
+        "201":
+          description: Feed post created
+  /toggle-feed-like:
+    post:
+      summary: Toggle like for a feed post
+      operationId: toggleFeedLike
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Like state
+  /add-feed-comment:
+    post:
+      summary: Add a feed comment
+      operationId: addFeedComment
+      security:
+        - bearerAuth: []
+      responses:
+        "201":
+          description: Comment created
+  /social-graph:
+    get:
+      summary: Read friendships, follows and notifications
+      operationId: getSocialGraph
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Social graph
+    post:
+      summary: Mutate friendship or follow state
+      operationId: mutateSocialGraph
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Social graph mutation result
+  /ensure-private-chat:
+    post:
+      summary: Create or get a private chat thread
+      operationId: ensurePrivateChat
+      security:
+        - bearerAuth: []
+      responses:
+        "201":
+          description: Chat thread
+  /ensure-clan-chat:
+    post:
+      summary: Create or get the authenticated rider clan chat
+      operationId: ensureClanChat
+      security:
+        - bearerAuth: []
+      responses:
+        "201":
+          description: Clan chat thread
+  /share-activity:
+    post:
+      summary: Share one owned activity to the feed
+      operationId: shareActivity
+      security:
+        - bearerAuth: []
+      responses:
+        "201":
+          description: Activity post
+  /share-conquest:
+    post:
+      summary: Share one owned territory conquest to the feed
+      operationId: shareConquest
+      security:
+        - bearerAuth: []
+      responses:
+        "201":
+          description: Conquest post
+  /send-chat-message:
+    post:
+      summary: Send a chat message
+      operationId: sendChatMessage
+      security:
+        - bearerAuth: []
+      responses:
+        "201":
+          description: Chat message
+  /get-chat-messages:
+    get:
+      summary: Read chat messages
+      operationId: getChatMessages
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Chat messages
+  /notifications:
+    get:
+      summary: Read notification inbox
+      operationId: getNotifications
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Notifications
+    post:
+      summary: Mark notification inbox items as read
+      operationId: updateNotifications
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [action]
+              properties:
+                action:
+                  type: string
+                  enum: [mark_read, mark_all_read]
+                notificationId:
+                  type: string
+                  format: uuid
+      responses:
+        "200":
+          description: Notification read state updated
+  /shop-catalog:
+    get:
+      summary: Read active cosmetic catalog
+      operationId: getShopCatalog
+      responses:
+        "200":
+          description: Shop catalog
+  /player-inventory:
+    get:
+      summary: Read authenticated player wallets, inventory and ledger
+      operationId: getPlayerInventory
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Inventory state
+  /equip-item:
+    post:
+      summary: Equip one owned cosmetic item
+      operationId: equipItem
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Equipped inventory item
+  /grant-currency:
+    post:
+      summary: Internal currency grant
+      operationId: grantCurrency
+      parameters:
+        - name: x-cycle-wars-secret
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Wallet after grant
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

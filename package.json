@@ -1,0 +1,42 @@
+{
+  "name": "cycle-wars",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Cycle Wars: global cycling territory conquest game.",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace @cycle-wars/mobile",
+    "dev:offline": "npm run dev:offline --workspace @cycle-wars/mobile",
+    "dev:lan": "npm run dev:lan --workspace @cycle-wars/mobile",
+    "android:stop-gradle": "set \"JAVA_HOME=C:\\Program Files\\Android\\Android Studio\\jbr\"&& set \"ANDROID_HOME=C:\\Users\\Pablo\\AppData\\Local\\Android\\Sdk\"&& set \"ANDROID_SDK_ROOT=C:\\Users\\Pablo\\AppData\\Local\\Android\\Sdk\"&& set \"PATH=%JAVA_HOME%\\bin;%ANDROID_HOME%\\platform-tools;%ANDROID_HOME%\\emulator;%PATH%\"&& pushd apps\\mobile\\android && gradlew.bat --stop & popd",
+    "android:purge-native-cache": "npm run android:stop-gradle && node scripts/clean-android-native-cache.mjs",
+    "android:install-clean": "npm run android:purge-native-cache && npm.cmd --workspace @cycle-wars/mobile run android:install-debug",
+    "android:install-short": "subst W: /D >nul 2>nul & subst W: \"%CD%\" && pushd W:\\ && npm.cmd run android:purge-native-cache && cd apps\\mobile && npm.cmd run android:install-debug & popd",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "format": "prettier --write \"**/*.{ts,tsx,js,json,md,yml,yaml,sql}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,json,md,yml,yaml,sql}\"",
+    "smoke:static": "node scripts/static-smoke-check.mjs",
+    "release:check": "node scripts/release-readiness-check.mjs",
+    "quality": "npm run typecheck && npm run lint && npm run test && npm run format:check && npm run smoke:static && npm run release:check",
+    "supabase:start": "supabase start",
+    "supabase:reset": "supabase db reset",
+    "supabase:functions": "supabase functions serve"
+  },
+  "engines": {
+    "node": ">=20.11.0",
+    "npm": ">=10.2.0"
+  },
+  "devDependencies": {
+    "@react-native-community/cli": "^20.2.0",
+    "@typescript-eslint/eslint-plugin": "^8.19.0",
+    "@typescript-eslint/parser": "^8.19.0",
+    "eslint": "^9.17.0",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.2"
+  }
+}

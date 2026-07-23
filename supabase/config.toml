@@ -1,0 +1,175 @@
+project_id = "cycle-wars"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "graphql_public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+[db]
+port = 54322
+shadow_port = 54320
+major_version = 15
+
+[realtime]
+enabled = true
+
+[studio]
+enabled = true
+port = 54323
+
+[auth]
+enabled = true
+site_url = "cyclewars://auth"
+additional_redirect_urls = ["http://localhost:19006"]
+jwt_expiry = 3600
+enable_refresh_token_rotation = true
+refresh_token_reuse_interval = 10
+enable_signup = true
+enable_anonymous_sign_ins = true
+
+[auth.email]
+enable_signup = true
+double_confirm_changes = true
+enable_confirmations = true
+
+[edge_runtime]
+enabled = true
+policy = "per_worker"
+inspector_port = 8083
+
+[functions.health-check]
+verify_jwt = false
+
+[functions.start-activity]
+verify_jwt = false
+
+[functions.ingest-gps-sample]
+verify_jwt = false
+
+[functions.finish-activity]
+verify_jwt = false
+
+[functions.get-territory-map]
+verify_jwt = false
+
+[functions.resolve-battle]
+verify_jwt = false
+
+[functions.get-active-battle]
+verify_jwt = false
+
+[functions.purchase-shop-item]
+verify_jwt = false
+
+[functions.refresh-rankings]
+verify_jwt = false
+
+[functions.decay-territories]
+verify_jwt = false
+
+[functions.social-feed]
+verify_jwt = false
+
+[functions.create-feed-post]
+verify_jwt = false
+
+[functions.toggle-feed-like]
+verify_jwt = false
+
+[functions.add-feed-comment]
+verify_jwt = false
+
+[functions.social-graph]
+verify_jwt = false
+
+[functions.ensure-private-chat]
+verify_jwt = false
+
+[functions.send-chat-message]
+verify_jwt = false
+
+[functions.get-chat-messages]
+verify_jwt = false
+
+[functions.notifications]
+verify_jwt = false
+
+[functions.ensure-clan-chat]
+verify_jwt = false
+
+[functions.share-activity]
+verify_jwt = false
+
+[functions.share-conquest]
+verify_jwt = false
+
+[functions.shop-catalog]
+verify_jwt = false
+
+[functions.player-inventory]
+verify_jwt = false
+
+[functions.equip-item]
+verify_jwt = false
+
+[functions.grant-currency]
+verify_jwt = false
+
+[functions.record-performance]
+verify_jwt = false
+
+[functions.get-region-control]
+verify_jwt = false
+
+[functions.refresh-region-control]
+verify_jwt = false
+
+[functions.settle-region-rewards]
+verify_jwt = false
+
+[functions.player-region-rewards]
+verify_jwt = false
+
+[functions.player-analytics]
+verify_jwt = false
+
+[functions.player-weekly-trends]
+verify_jwt = false
+
+[functions.clan-analytics]
+verify_jwt = false
+
+[functions.clan-weekly-trends]
+verify_jwt = false
+
+[functions.clan-member-contributions]
+verify_jwt = false
+
+[functions.manage-clan-member]
+verify_jwt = false
+
+[functions.clan-governance-audit]
+verify_jwt = false
+
+[functions.clan-invitations]
+verify_jwt = false
+
+[functions.clan-join-requests]
+verify_jwt = false
+
+[functions.create-clan]
+verify_jwt = false
+
+[functions.update-clan-settings]
+verify_jwt = false
+
+[functions.clan-lifecycle]
+verify_jwt = false
+
+[functions.clan-wars]
+verify_jwt = false
+
+[functions.player-events]
+verify_jwt = false
