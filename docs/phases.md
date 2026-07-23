@@ -285,3 +285,9 @@ Status: implemented visible notification limit state, show-more action, smoke ch
 Reset the Social notification visible limit when riders refresh the inbox, change unread/category filters or clear all alerts so each new view starts from a predictable first page.
 
 Status: implemented visible limit reset helper, filter reset hooks, smoke checks and social documentation.
+
+## Phase 49: Notification Read Status Labels
+
+Add explicit read status labels to each Social inbox item so riders can distinguish pending and read alerts without relying only on text color.
+
+Status: implemented notification status formatter, per-item status labels, smoke checks and social documentation.

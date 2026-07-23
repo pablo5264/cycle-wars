@@ -59,6 +59,7 @@ This repository contains the production architecture foundation:
 - Phase 46 notification visible count for filtered Social inbox lists.
 - Phase 47 notification show-more action for longer Social inbox lists.
 - Phase 48 notification visible limit reset for filter and refresh changes.
+- Phase 49 notification read status labels for clearer Social inbox scanning.
 
 Later phases can deepen member history, governance UX, region boundary overlays and creator/community operations.
 
@@ -154,6 +155,7 @@ scripts                      Operational scripts
 - Phase 46: notification visible count complete.
 - Phase 47: notification show-more action complete.
 - Phase 48: notification visible limit reset complete.
+- Phase 49: notification read status labels complete.
 
 ## Quality Gates
 

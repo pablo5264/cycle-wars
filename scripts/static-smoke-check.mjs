@@ -361,6 +361,12 @@ assert(
     socialScreen.includes("setNotificationVisibleLimit(5)"),
   "Social screen must reset visible notification limit when inbox filters change."
 );
+assert(
+  socialScreen.includes("formatNotificationStatus") &&
+    socialScreen.includes("Pendiente") &&
+    socialScreen.includes("Leida"),
+  "Social screen must label notification read status."
+);
 
 const phaseSixteenMigration = readFileSync(
   path.join(root, "supabase/migrations/0013_player_weekly_trends.sql"),

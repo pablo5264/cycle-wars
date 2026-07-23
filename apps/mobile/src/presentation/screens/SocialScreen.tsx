@@ -365,9 +365,14 @@ export function SocialScreen() {
           ) : null}
           {displayedNotifications.map((notification) => (
             <View key={notification.id} style={{ gap: 6 }}>
-              <Text style={[appStyles.body, { color: colors.cyan, fontWeight: "800" }]}>
-                {formatNotificationKind(notification.kind)}
-              </Text>
+              <View style={appStyles.row}>
+                <Text style={[appStyles.body, { color: colors.cyan, fontWeight: "800" }]}>
+                  {formatNotificationKind(notification.kind)}
+                </Text>
+                <Text style={[appStyles.body, { color: notification.read_at ? colors.faint : colors.green }]}>
+                  {formatNotificationStatus(notification)}
+                </Text>
+              </View>
               <Text
                 style={[
                   appStyles.body,
@@ -534,6 +539,10 @@ function sortNotificationsForInbox(notifications: AppNotification[]): AppNotific
 function getNotificationTimestamp(notification: AppNotification): number {
   const timestamp = Date.parse(notification.created_at);
   return Number.isNaN(timestamp) ? 0 : timestamp;
+}
+
+function formatNotificationStatus(notification: AppNotification): string {
+  return notification.read_at ? "Leida" : "Pendiente";
 }
 
 function formatRefreshTime(value: string): string {
