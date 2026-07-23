@@ -62,6 +62,7 @@ This repository contains the production architecture foundation:
 - Phase 49 notification read status labels for clearer Social inbox scanning.
 - Phase 50 notification received timestamp labels for Social inbox alerts.
 - Phase 51 notification category active state for focused Social inbox filters.
+- Phase 52 notification active filter count for Social inbox clarity.
 
 Later phases can deepen member history, governance UX, region boundary overlays and creator/community operations.
 
@@ -160,6 +161,7 @@ scripts                      Operational scripts
 - Phase 49: notification read status labels complete.
 - Phase 50: notification received timestamp labels complete.
 - Phase 51: notification category active state complete.
+- Phase 52: notification active filter count complete.
 
 ## Quality Gates
 

@@ -376,6 +376,11 @@ assert(
   socialScreen.includes('selectedNotificationKind === item.kind ? "primary" : "secondary"'),
   "Social screen must highlight the selected notification category filter."
 );
+assert(
+  socialScreen.includes("countActiveNotificationFilters") &&
+    socialScreen.includes("Filtros activos"),
+  "Social screen must show active notification filter count."
+);
 
 const phaseSixteenMigration = readFileSync(
   path.join(root, "supabase/migrations/0013_player_weekly_trends.sql"),

@@ -295,6 +295,7 @@ export function SocialScreen() {
     : null;
   const lastSocialRefreshLabel = lastSocialRefreshAt ? formatRefreshTime(lastSocialRefreshAt) : "Pendiente";
   const notificationRefreshLabel = isBusy ? "Actualizando" : "Actualizar";
+  const activeNotificationFilterCount = countActiveNotificationFilters(showUnreadOnly, selectedNotificationKind);
 
   return (
     <ScrollView style={appStyles.screen} contentContainerStyle={{ gap: 16, paddingBottom: 24 }}>
@@ -347,6 +348,11 @@ export function SocialScreen() {
                 />
               ))}
             </View>
+          ) : null}
+          {activeNotificationFilterCount > 0 ? (
+            <Text style={[appStyles.body, { color: colors.faint }]}>
+              Filtros activos: {activeNotificationFilterCount}
+            </Text>
           ) : null}
           {selectedNotificationKindLabel ? (
             <View style={appStyles.row}>
@@ -550,6 +556,14 @@ function formatNotificationStatus(notification: AppNotification): string {
 
 function formatNotificationCreatedAt(notification: AppNotification): string {
   return formatRefreshTime(notification.created_at);
+}
+
+function countActiveNotificationFilters(showUnreadOnly: boolean, selectedKind: string | null): number {
+  let count = showUnreadOnly ? 1 : 0;
+  if (selectedKind) {
+    count += 1;
+  }
+  return count;
 }
 
 function formatRefreshTime(value: string): string {

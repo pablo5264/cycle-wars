@@ -303,3 +303,9 @@ Status: implemented notification timestamp formatter, per-item received labels, 
 Highlight the selected Social inbox notification category so riders can see which unread category filter is currently active.
 
 Status: implemented active category button variant, smoke checks and social documentation.
+
+## Phase 52: Notification Active Filter Count
+
+Add an active filter count to the Social notification inbox so riders can see when unread and category filters are shaping the current list.
+
+Status: implemented active filter counter, visible filter count label, smoke checks and social documentation.
