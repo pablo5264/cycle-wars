@@ -320,7 +320,8 @@ assert(
   "Social screen must allow category notification filtering."
 );
 assert(
-  socialScreen.includes("No hay notificaciones para este filtro"),
+  socialScreen.includes("No hay notificaciones para esta vista") &&
+    socialScreen.includes("No hay notificaciones de"),
   "Social screen must show an empty category-filtered notification state."
 );
 assert(
@@ -411,6 +412,11 @@ assert(
   socialScreen.includes("formatEmptyFilteredNotificationMessage") &&
     socialScreen.includes("No hay notificaciones para esta vista"),
   "Social screen must show guided empty notification filter state."
+);
+assert(
+  socialScreen.includes("No hay notificaciones sin leer de") &&
+    socialScreen.includes("No hay notificaciones de"),
+  "Social screen must show refined category empty notification copy."
 );
 
 const phaseSixteenMigration = readFileSync(

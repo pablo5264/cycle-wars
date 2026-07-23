@@ -635,8 +635,13 @@ function formatEmptyFilteredNotificationMessage(
     return "No quedan notificaciones sin leer.";
   }
 
-  const suffix = selectedKind && selectedKindLabel ? ` para ${selectedKindLabel}` : "";
-  return `No hay notificaciones para esta vista${suffix}.`;
+  if (selectedKind && selectedKindLabel) {
+    return showUnreadOnly
+      ? `No hay notificaciones sin leer de ${selectedKindLabel}.`
+      : `No hay notificaciones de ${selectedKindLabel}.`;
+  }
+
+  return "No hay notificaciones para esta vista.";
 }
 
 function formatRefreshTime(value: string): string {

@@ -345,3 +345,9 @@ Status: implemented empty inbox formatter, refresh-aware empty copy, smoke check
 Improve the Social notification filtered empty state so riders get a clear explanation when unread/category filters return no matching alerts.
 
 Status: implemented filtered empty formatter, category-aware empty copy, smoke checks and social documentation.
+
+## Phase 59: Notification Filtered Empty Copy Refinement
+
+Refine the Social notification filtered empty copy so category and unread/category combinations read naturally in the inbox.
+
+Status: implemented category-specific empty copy, unread/category empty copy, smoke checks and social documentation.
