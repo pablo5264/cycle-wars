@@ -300,6 +300,8 @@ export function SocialScreen() {
   const oldestPendingNotificationSummary = formatOldestPendingNotificationSummary(sortedFilteredNotifications);
   const newestPendingNotification = getNewestPendingNotification(sortedFilteredNotifications);
   const oldestPendingNotification = getOldestPendingNotification(sortedFilteredNotifications);
+  const canShowOldestPendingQuickRead =
+    Boolean(oldestPendingNotification) && oldestPendingNotification?.id !== newestPendingNotification?.id;
   const notificationVisibleCountLabel = `Mostrando ${displayedNotifications.length} de ${filteredNotifications.length}`;
   const canShowMoreNotifications = displayedNotifications.length < filteredNotifications.length;
   const canShowFewerNotifications = notificationVisibleLimit > 5 && filteredNotifications.length > 0;
@@ -372,7 +374,7 @@ export function SocialScreen() {
               onPress={() => void markNotificationRead(newestPendingNotification.id)}
             />
           ) : null}
-          {oldestPendingNotification ? (
+          {canShowOldestPendingQuickRead && oldestPendingNotification ? (
             <ActionButton
               label="Marcar mas antigua leida"
               variant="secondary"

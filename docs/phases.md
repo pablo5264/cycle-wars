@@ -399,3 +399,9 @@ Status: implemented oldest pending selector, quick-read action, smoke checks and
 Add a quick action to mark the newest pending Social inbox notification as read so riders can clear the latest alert first when reviewing recent activity.
 
 Status: implemented newest pending selector, quick-read action, smoke checks and social documentation.
+
+## Phase 68: Notification Quick Read Dedupe
+
+Hide the oldest-pending quick-read action when it points to the same alert as the newest-pending quick-read action so the Social inbox does not show duplicate actions for one pending notification.
+
+Status: implemented quick-read dedupe guard, oldest action visibility check, smoke checks and social documentation.

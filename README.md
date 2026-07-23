@@ -78,6 +78,7 @@ This repository contains the production architecture foundation:
 - Phase 65 notification show-fewer action for compact Social inbox review.
 - Phase 66 notification oldest pending quick-read action.
 - Phase 67 notification newest pending quick-read action.
+- Phase 68 notification quick-read action dedupe.
 
 Later phases can deepen member history, governance UX, region boundary overlays and creator/community operations.
 
@@ -192,6 +193,7 @@ scripts                      Operational scripts
 - Phase 65: notification show-fewer action complete.
 - Phase 66: notification oldest pending quick-read action complete.
 - Phase 67: notification newest pending quick-read action complete.
+- Phase 68: notification quick-read action dedupe complete.
 
 ## Quality Gates
 
