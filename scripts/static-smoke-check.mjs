@@ -345,6 +345,11 @@ assert(
     socialScreen.includes("filteredNotifications"),
   "Social screen must sort notification inbox items by unread and recent priority."
 );
+assert(
+  socialScreen.includes("notificationVisibleCountLabel") &&
+    socialScreen.includes("Mostrando"),
+  "Social screen must show how many filtered notifications are visible."
+);
 
 const phaseSixteenMigration = readFileSync(
   path.join(root, "supabase/migrations/0013_player_weekly_trends.sql"),

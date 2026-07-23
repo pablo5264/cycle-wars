@@ -267,3 +267,9 @@ Status: implemented refresh action busy label, disabled refresh guard, smoke che
 Sort the Social notification inbox so unread items appear before read items, with the newest alerts first inside each group.
 
 Status: implemented inbox sorting helper, unread-first display ordering, smoke checks and social documentation.
+
+## Phase 46: Notification Visible Count
+
+Add a visible count to the Social notification inbox so riders can see how many filtered alerts are currently shown out of the total matching inbox items.
+
+Status: implemented visible count label, filtered inbox total display, smoke checks and social documentation.

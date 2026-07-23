@@ -280,6 +280,7 @@ export function SocialScreen() {
   });
   const displayedNotifications = sortNotificationsForInbox(filteredNotifications).slice(0, 5);
   const unreadCount = notifications.filter((notification) => !notification.read_at).length;
+  const notificationVisibleCountLabel = `Mostrando ${displayedNotifications.length} de ${filteredNotifications.length}`;
   const unreadSummary = summarizeUnreadNotifications(notifications);
   const selectedNotificationKindLabel = selectedNotificationKind
     ? formatNotificationKind(selectedNotificationKind)
@@ -367,6 +368,11 @@ export function SocialScreen() {
               ) : null}
             </View>
           ))}
+          {filteredNotifications.length > 0 ? (
+            <Text style={[appStyles.body, { color: colors.faint }]}>
+              {notificationVisibleCountLabel}
+            </Text>
+          ) : null}
           {notifications.some((notification) => !notification.read_at) ? (
             <ActionButton
               label="Marcar todas leidas"
