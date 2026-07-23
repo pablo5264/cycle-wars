@@ -387,3 +387,9 @@ Status: implemented oldest pending formatter, filtered inbox pending summary, sm
 Add a show-fewer action to the Social notification inbox so riders can collapse expanded filtered lists back to the compact first page.
 
 Status: implemented show-fewer guard, compact reset action, smoke checks and social documentation.
+
+## Phase 66: Notification Oldest Pending Quick Read
+
+Add a quick action to mark the oldest pending Social inbox notification as read so riders can clear the longest-waiting alert first.
+
+Status: implemented oldest pending selector, quick-read action, smoke checks and social documentation.

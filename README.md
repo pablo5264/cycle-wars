@@ -76,6 +76,7 @@ This repository contains the production architecture foundation:
 - Phase 63 notification latest alert summary for Social inbox context.
 - Phase 64 notification oldest pending summary for Social inbox triage.
 - Phase 65 notification show-fewer action for compact Social inbox review.
+- Phase 66 notification oldest pending quick-read action.
 
 Later phases can deepen member history, governance UX, region boundary overlays and creator/community operations.
 
@@ -188,6 +189,7 @@ scripts                      Operational scripts
 - Phase 63: notification latest alert summary complete.
 - Phase 64: notification oldest pending summary complete.
 - Phase 65: notification show-fewer action complete.
+- Phase 66: notification oldest pending quick-read action complete.
 
 ## Quality Gates
 
