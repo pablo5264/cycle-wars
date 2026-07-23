@@ -381,3 +381,9 @@ Status: implemented sorted inbox reuse, latest alert formatter, smoke checks and
 Add an oldest-pending summary to the Social notification inbox so riders can identify the alert that has waited longest for review.
 
 Status: implemented oldest pending formatter, filtered inbox pending summary, smoke checks and social documentation.
+
+## Phase 65: Notification Show Fewer
+
+Add a show-fewer action to the Social notification inbox so riders can collapse expanded filtered lists back to the compact first page.
+
+Status: implemented show-fewer guard, compact reset action, smoke checks and social documentation.

@@ -300,6 +300,7 @@ export function SocialScreen() {
   const oldestPendingNotificationSummary = formatOldestPendingNotificationSummary(sortedFilteredNotifications);
   const notificationVisibleCountLabel = `Mostrando ${displayedNotifications.length} de ${filteredNotifications.length}`;
   const canShowMoreNotifications = displayedNotifications.length < filteredNotifications.length;
+  const canShowFewerNotifications = notificationVisibleLimit > 5 && filteredNotifications.length > 0;
   const unreadSummary = summarizeUnreadNotifications(notifications);
   const selectedNotificationKindLabel = selectedNotificationKind
     ? formatNotificationKind(selectedNotificationKind)
@@ -455,6 +456,13 @@ export function SocialScreen() {
               label="Ver mas"
               variant="secondary"
               onPress={() => setNotificationVisibleLimit((current) => current + 5)}
+            />
+          ) : null}
+          {canShowFewerNotifications ? (
+            <ActionButton
+              label="Ver menos"
+              variant="secondary"
+              onPress={resetNotificationVisibleLimit}
             />
           ) : null}
           {notifications.some((notification) => !notification.read_at) ? (
@@ -620,7 +628,12 @@ function formatOldestPendingNotificationSummary(notifications: AppNotification[]
     return null;
   }
 
-  const oldest = pendingNotifications[pendingNotifications.length - 1];
+  const oldest = pendingNotifications.at(-1);
+
+  if (!oldest) {
+    return null;
+  }
+
   return `Pendiente mas antigua: ${formatNotificationKind(oldest.kind)} / ${formatNotificationCreatedAt(oldest)}`;
 }
 

@@ -444,6 +444,11 @@ assert(
     socialScreen.includes("Pendiente mas antigua:"),
   "Social screen must show oldest pending notification summary for the current view."
 );
+assert(
+  socialScreen.includes("canShowFewerNotifications") &&
+    socialScreen.includes("Ver menos"),
+  "Social screen must let riders collapse expanded notification lists."
+);
 
 const phaseSixteenMigration = readFileSync(
   path.join(root, "supabase/migrations/0013_player_weekly_trends.sql"),
