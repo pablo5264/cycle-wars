@@ -396,6 +396,12 @@ assert(
     socialScreen.includes("Bandeja:"),
   "Social screen must show notification inbox total summary."
 );
+assert(
+  socialScreen.includes("formatUnreadFilterLabel") &&
+    socialScreen.includes("Sin pendientes") &&
+    socialScreen.includes("isUnreadFilterDisabled"),
+  "Social screen must disable unread filter when there are no pending notifications."
+);
 
 const phaseSixteenMigration = readFileSync(
   path.join(root, "supabase/migrations/0013_player_weekly_trends.sql"),

@@ -305,6 +305,8 @@ export function SocialScreen() {
   const notificationRefreshLabel = isBusy ? "Actualizando" : "Actualizar";
   const activeNotificationFilterCount = countActiveNotificationFilters(showUnreadOnly, selectedNotificationKind);
   const notificationFilterSummary = formatNotificationFilterSummary(showUnreadOnly, selectedNotificationKind);
+  const unreadFilterLabel = formatUnreadFilterLabel(showUnreadOnly, unreadCount);
+  const isUnreadFilterDisabled = !showUnreadOnly && unreadCount === 0;
 
   return (
     <ScrollView style={appStyles.screen} contentContainerStyle={{ gap: 16, paddingBottom: 24 }}>
@@ -329,12 +331,13 @@ export function SocialScreen() {
             <Text style={appStyles.body}>{unreadCount} sin leer</Text>
             <Text style={[appStyles.body, { color: colors.faint }]}>Actualizado {lastSocialRefreshLabel}</Text>
             <ActionButton
-              label={showUnreadOnly ? "Ver todas" : "Solo no leidas"}
+              label={unreadFilterLabel}
               variant="secondary"
               onPress={() => {
                 resetNotificationVisibleLimit();
                 setShowUnreadOnly((current) => !current);
               }}
+              disabled={isUnreadFilterDisabled}
             />
             <ActionButton
               label={notificationRefreshLabel}
@@ -605,6 +608,14 @@ function formatNotificationFilterSummary(showUnreadOnly: boolean, selectedKind: 
 
 function formatNotificationInboxSummary(total: number, unread: number, read: number): string {
   return `Bandeja: ${total} total / ${unread} pendientes / ${read} leidas`;
+}
+
+function formatUnreadFilterLabel(showUnreadOnly: boolean, unreadCount: number): string {
+  if (showUnreadOnly) {
+    return "Ver todas";
+  }
+
+  return unreadCount > 0 ? "Solo no leidas" : "Sin pendientes";
 }
 
 function formatRefreshTime(value: string): string {

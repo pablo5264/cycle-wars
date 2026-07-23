@@ -327,3 +327,9 @@ Status: implemented filter summary formatter, visible inbox summary label, smoke
 Add a compact Social inbox total summary so riders can see total, pending and read notification counts while reviewing alerts.
 
 Status: implemented inbox summary formatter, visible total/pending/read label, smoke checks and social documentation.
+
+## Phase 56: Notification Unread Filter Disabled State
+
+Disable the Social inbox unread-only filter when there are no pending notifications and show a clear "Sin pendientes" label instead.
+
+Status: implemented unread filter label helper, disabled no-pending state, smoke checks and social documentation.
