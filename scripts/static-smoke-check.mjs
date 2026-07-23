@@ -356,6 +356,11 @@ assert(
     socialScreen.includes("Ver mas"),
   "Social screen must allow riders to reveal more filtered notifications."
 );
+assert(
+  socialScreen.includes("resetNotificationVisibleLimit") &&
+    socialScreen.includes("setNotificationVisibleLimit(5)"),
+  "Social screen must reset visible notification limit when inbox filters change."
+);
 
 const phaseSixteenMigration = readFileSync(
   path.join(root, "supabase/migrations/0013_player_weekly_trends.sql"),

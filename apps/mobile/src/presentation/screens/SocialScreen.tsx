@@ -25,7 +25,12 @@ export function SocialScreen() {
   const [lastSocialRefreshAt, setLastSocialRefreshAt] = useState<string | null>(null);
   const [notificationVisibleLimit, setNotificationVisibleLimit] = useState(5);
 
+  function resetNotificationVisibleLimit() {
+    setNotificationVisibleLimit(5);
+  }
+
   async function load() {
+    resetNotificationVisibleLimit();
     setIsBusy(true);
     setStatus(null);
     try {
@@ -268,6 +273,7 @@ export function SocialScreen() {
       );
       setSelectedNotificationKind(null);
       setShowUnreadOnly(false);
+      resetNotificationVisibleLimit();
       setStatus("Notificaciones leidas.");
     } catch (caught) {
       setStatus(caught instanceof Error ? caught.message : "No se pudieron marcar notificaciones.");
@@ -315,7 +321,10 @@ export function SocialScreen() {
             <ActionButton
               label={showUnreadOnly ? "Ver todas" : "Solo no leidas"}
               variant="secondary"
-              onPress={() => setShowUnreadOnly((current) => !current)}
+              onPress={() => {
+                resetNotificationVisibleLimit();
+                setShowUnreadOnly((current) => !current);
+              }}
             />
             <ActionButton
               label={notificationRefreshLabel}
@@ -331,7 +340,10 @@ export function SocialScreen() {
                   key={item.label}
                   label={`${item.label}: ${item.count}`}
                   variant="secondary"
-                  onPress={() => setSelectedNotificationKind(item.kind)}
+                  onPress={() => {
+                    resetNotificationVisibleLimit();
+                    setSelectedNotificationKind(item.kind);
+                  }}
                 />
               ))}
             </View>
@@ -344,7 +356,10 @@ export function SocialScreen() {
               <ActionButton
                 label="Ver categorias"
                 variant="secondary"
-                onPress={() => setSelectedNotificationKind(null)}
+                onPress={() => {
+                  resetNotificationVisibleLimit();
+                  setSelectedNotificationKind(null);
+                }}
               />
             </View>
           ) : null}

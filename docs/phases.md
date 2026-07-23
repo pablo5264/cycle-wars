@@ -279,3 +279,9 @@ Status: implemented visible count label, filtered inbox total display, smoke che
 Add a Social inbox show-more action so riders can expand filtered notification results in small batches without leaving the screen.
 
 Status: implemented visible notification limit state, show-more action, smoke checks and social documentation.
+
+## Phase 48: Notification Visible Limit Reset
+
+Reset the Social notification visible limit when riders refresh the inbox, change unread/category filters or clear all alerts so each new view starts from a predictable first page.
+
+Status: implemented visible limit reset helper, filter reset hooks, smoke checks and social documentation.
