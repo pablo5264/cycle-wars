@@ -291,10 +291,12 @@ export function SocialScreen() {
     const matchesKind = !selectedNotificationKind || notification.kind === selectedNotificationKind;
     return matchesUnread && matchesKind;
   });
-  const displayedNotifications = sortNotificationsForInbox(filteredNotifications).slice(0, notificationVisibleLimit);
+  const sortedFilteredNotifications = sortNotificationsForInbox(filteredNotifications);
+  const displayedNotifications = sortedFilteredNotifications.slice(0, notificationVisibleLimit);
   const unreadCount = notifications.filter((notification) => !notification.read_at).length;
   const readCount = notifications.length - unreadCount;
   const notificationInboxSummary = formatNotificationInboxSummary(notifications.length, unreadCount, readCount);
+  const latestNotificationSummary = formatLatestNotificationSummary(sortedFilteredNotifications[0]);
   const notificationVisibleCountLabel = `Mostrando ${displayedNotifications.length} de ${filteredNotifications.length}`;
   const canShowMoreNotifications = displayedNotifications.length < filteredNotifications.length;
   const unreadSummary = summarizeUnreadNotifications(notifications);
@@ -353,6 +355,9 @@ export function SocialScreen() {
             />
           </View>
           <Text style={[appStyles.body, { color: colors.faint }]}>{notificationInboxSummary}</Text>
+          {latestNotificationSummary ? (
+            <Text style={[appStyles.body, { color: colors.faint }]}>{latestNotificationSummary}</Text>
+          ) : null}
           {unreadSummary.length > 0 ? (
             <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 8 }}>
               {unreadSummary.map((item) => (
@@ -594,6 +599,14 @@ function formatNotificationCreatedAt(notification: AppNotification): string {
 
 function formatNotificationReadAt(notification: AppNotification): string {
   return notification.read_at ? formatRefreshTime(notification.read_at) : "Pendiente";
+}
+
+function formatLatestNotificationSummary(notification: AppNotification | undefined): string | null {
+  if (!notification) {
+    return null;
+  }
+
+  return `Ultima alerta: ${formatNotificationKind(notification.kind)} / ${formatNotificationCreatedAt(notification)}`;
 }
 
 function countActiveNotificationFilters(showUnreadOnly: boolean, selectedKind: string | null): number {

@@ -369,3 +369,9 @@ Status: implemented unread notification accent style, pending-item styling, smok
 Add read-time labels to reviewed Social inbox notifications so riders can confirm when each alert was marked as read.
 
 Status: implemented read-time formatter, per-item read labels, smoke checks and social documentation.
+
+## Phase 63: Notification Latest Alert Summary
+
+Add a compact latest-alert summary to the Social notification inbox so riders can quickly see the newest matching alert in the current view.
+
+Status: implemented sorted inbox reuse, latest alert formatter, smoke checks and social documentation.
