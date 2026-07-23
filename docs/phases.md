@@ -261,3 +261,9 @@ Status: implemented refresh timestamp state, compact inbox label, smoke checks a
 Add an in-progress refresh label to the Social inbox so riders can see when the notification refresh action is actively loading.
 
 Status: implemented refresh action busy label, disabled refresh guard, smoke checks and social documentation.
+
+## Phase 45: Notification Inbox Priority Sorting
+
+Sort the Social notification inbox so unread items appear before read items, with the newest alerts first inside each group.
+
+Status: implemented inbox sorting helper, unread-first display ordering, smoke checks and social documentation.

@@ -278,7 +278,7 @@ export function SocialScreen() {
     const matchesKind = !selectedNotificationKind || notification.kind === selectedNotificationKind;
     return matchesUnread && matchesKind;
   });
-  const displayedNotifications = filteredNotifications.slice(0, 5);
+  const displayedNotifications = sortNotificationsForInbox(filteredNotifications).slice(0, 5);
   const unreadCount = notifications.filter((notification) => !notification.read_at).length;
   const unreadSummary = summarizeUnreadNotifications(notifications);
   const selectedNotificationKindLabel = selectedNotificationKind
@@ -485,6 +485,25 @@ function summarizeUnreadNotifications(notifications: AppNotification[]): Array<{
   }
 
   return Array.from(summary.entries()).map(([label, item]) => ({ label, ...item }));
+}
+
+function sortNotificationsForInbox(notifications: AppNotification[]): AppNotification[] {
+  return [...notifications].sort((first, second) => {
+    if (!first.read_at && second.read_at) {
+      return -1;
+    }
+
+    if (first.read_at && !second.read_at) {
+      return 1;
+    }
+
+    return getNotificationTimestamp(second) - getNotificationTimestamp(first);
+  });
+}
+
+function getNotificationTimestamp(notification: AppNotification): number {
+  const timestamp = Date.parse(notification.created_at);
+  return Number.isNaN(timestamp) ? 0 : timestamp;
 }
 
 function formatRefreshTime(value: string): string {

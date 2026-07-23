@@ -339,6 +339,12 @@ assert(
   socialScreen.includes("lastSocialRefreshAt") && socialScreen.includes("Actualizado"),
   "Social screen must show the latest notification refresh timestamp."
 );
+assert(
+  socialScreen.includes("sortNotificationsForInbox") &&
+    socialScreen.includes("getNotificationTimestamp") &&
+    socialScreen.includes("filteredNotifications"),
+  "Social screen must sort notification inbox items by unread and recent priority."
+);
 
 const phaseSixteenMigration = readFileSync(
   path.join(root, "supabase/migrations/0013_player_weekly_trends.sql"),
