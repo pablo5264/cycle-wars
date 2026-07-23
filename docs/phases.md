@@ -321,3 +321,9 @@ Status: implemented clear filter helper, visible clear action, smoke checks and 
 Add a readable Social inbox filter summary so riders can quickly understand whether they are viewing all notifications, unread alerts or a selected category.
 
 Status: implemented filter summary formatter, visible inbox summary label, smoke checks and social documentation.
+
+## Phase 55: Notification Inbox Total Summary
+
+Add a compact Social inbox total summary so riders can see total, pending and read notification counts while reviewing alerts.
+
+Status: implemented inbox summary formatter, visible total/pending/read label, smoke checks and social documentation.

@@ -293,6 +293,8 @@ export function SocialScreen() {
   });
   const displayedNotifications = sortNotificationsForInbox(filteredNotifications).slice(0, notificationVisibleLimit);
   const unreadCount = notifications.filter((notification) => !notification.read_at).length;
+  const readCount = notifications.length - unreadCount;
+  const notificationInboxSummary = formatNotificationInboxSummary(notifications.length, unreadCount, readCount);
   const notificationVisibleCountLabel = `Mostrando ${displayedNotifications.length} de ${filteredNotifications.length}`;
   const canShowMoreNotifications = displayedNotifications.length < filteredNotifications.length;
   const unreadSummary = summarizeUnreadNotifications(notifications);
@@ -341,6 +343,7 @@ export function SocialScreen() {
               disabled={isBusy}
             />
           </View>
+          <Text style={[appStyles.body, { color: colors.faint }]}>{notificationInboxSummary}</Text>
           {unreadSummary.length > 0 ? (
             <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 8 }}>
               {unreadSummary.map((item) => (
@@ -598,6 +601,10 @@ function formatNotificationFilterSummary(showUnreadOnly: boolean, selectedKind: 
     return "todas";
   }
   return parts.join(" / ");
+}
+
+function formatNotificationInboxSummary(total: number, unread: number, read: number): string {
+  return `Bandeja: ${total} total / ${unread} pendientes / ${read} leidas`;
 }
 
 function formatRefreshTime(value: string): string {

@@ -391,6 +391,11 @@ assert(
     socialScreen.includes("Vista:"),
   "Social screen must show a readable notification filter summary."
 );
+assert(
+  socialScreen.includes("formatNotificationInboxSummary") &&
+    socialScreen.includes("Bandeja:"),
+  "Social screen must show notification inbox total summary."
+);
 
 const phaseSixteenMigration = readFileSync(
   path.join(root, "supabase/migrations/0013_player_weekly_trends.sql"),
