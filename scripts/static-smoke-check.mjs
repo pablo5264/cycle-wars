@@ -428,6 +428,11 @@ assert(
     socialScreen.includes("borderLeftColor"),
   "Social screen must accent unread notification inbox items."
 );
+assert(
+  socialScreen.includes("formatNotificationReadAt") &&
+    socialScreen.includes("Leida {formatNotificationReadAt(notification)}"),
+  "Social screen must show read time labels for reviewed notifications."
+);
 
 const phaseSixteenMigration = readFileSync(
   path.join(root, "supabase/migrations/0013_player_weekly_trends.sql"),

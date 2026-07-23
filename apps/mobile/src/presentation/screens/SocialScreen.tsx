@@ -414,6 +414,11 @@ export function SocialScreen() {
               <Text style={[appStyles.body, { color: colors.faint }]}>
                 Recibida {formatNotificationCreatedAt(notification)}
               </Text>
+              {notification.read_at ? (
+                <Text style={[appStyles.body, { color: colors.faint }]}>
+                  Leida {formatNotificationReadAt(notification)}
+                </Text>
+              ) : null}
               <Text
                 style={[
                   appStyles.body,
@@ -585,6 +590,10 @@ function formatNotificationStatus(notification: AppNotification): string {
 
 function formatNotificationCreatedAt(notification: AppNotification): string {
   return formatRefreshTime(notification.created_at);
+}
+
+function formatNotificationReadAt(notification: AppNotification): string {
+  return notification.read_at ? formatRefreshTime(notification.read_at) : "Pendiente";
 }
 
 function countActiveNotificationFilters(showUnreadOnly: boolean, selectedKind: string | null): number {

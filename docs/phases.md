@@ -363,3 +363,9 @@ Status: implemented notification item style, separator borders, smoke checks and
 Add a subtle accent to unread Social inbox items so riders can quickly spot pending alerts while scanning the notification list.
 
 Status: implemented unread notification accent style, pending-item styling, smoke checks and social documentation.
+
+## Phase 62: Notification Read Time Labels
+
+Add read-time labels to reviewed Social inbox notifications so riders can confirm when each alert was marked as read.
+
+Status: implemented read-time formatter, per-item read labels, smoke checks and social documentation.
