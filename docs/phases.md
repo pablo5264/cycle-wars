@@ -351,3 +351,9 @@ Status: implemented filtered empty formatter, category-aware empty copy, smoke c
 Refine the Social notification filtered empty copy so category and unread/category combinations read naturally in the inbox.
 
 Status: implemented category-specific empty copy, unread/category empty copy, smoke checks and social documentation.
+
+## Phase 60: Notification Item Separators
+
+Add subtle separators between Social inbox notification items so riders can scan alerts more easily on mobile screens.
+
+Status: implemented notification item style, separator borders, smoke checks and social documentation.

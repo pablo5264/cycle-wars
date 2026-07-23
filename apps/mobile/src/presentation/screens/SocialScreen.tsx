@@ -399,7 +399,7 @@ export function SocialScreen() {
             </View>
           ) : null}
           {displayedNotifications.map((notification) => (
-            <View key={notification.id} style={{ gap: 6 }}>
+            <View key={notification.id} style={notificationItemStyle}>
               <View style={appStyles.row}>
                 <Text style={[appStyles.body, { color: colors.cyan, fontWeight: "800" }]}>
                   {formatNotificationKind(notification.kind)}
@@ -682,6 +682,13 @@ function SocialInput({ value, onChangeText, placeholder }: SocialInputProps) {
     />
   );
 }
+
+const notificationItemStyle = {
+  gap: 6,
+  paddingBottom: 10,
+  borderBottomWidth: 1,
+  borderBottomColor: colors.border
+};
 
 const localPosts: FeedPost[] = [
   {

@@ -418,6 +418,11 @@ assert(
     socialScreen.includes("No hay notificaciones de"),
   "Social screen must show refined category empty notification copy."
 );
+assert(
+  socialScreen.includes("notificationItemStyle") &&
+    socialScreen.includes("borderBottomColor"),
+  "Social screen must separate notification inbox items visually."
+);
 
 const phaseSixteenMigration = readFileSync(
   path.join(root, "supabase/migrations/0013_player_weekly_trends.sql"),
