@@ -74,6 +74,7 @@ This repository contains the production architecture foundation:
 - Phase 61 notification unread item accent for pending Social inbox alerts.
 - Phase 62 notification read time labels for reviewed Social inbox alerts.
 - Phase 63 notification latest alert summary for Social inbox context.
+- Phase 64 notification oldest pending summary for Social inbox triage.
 
 Later phases can deepen member history, governance UX, region boundary overlays and creator/community operations.
 
@@ -184,6 +185,7 @@ scripts                      Operational scripts
 - Phase 61: notification unread item accent complete.
 - Phase 62: notification read time labels complete.
 - Phase 63: notification latest alert summary complete.
+- Phase 64: notification oldest pending summary complete.
 
 ## Quality Gates
 

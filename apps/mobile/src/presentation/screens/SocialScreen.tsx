@@ -297,6 +297,7 @@ export function SocialScreen() {
   const readCount = notifications.length - unreadCount;
   const notificationInboxSummary = formatNotificationInboxSummary(notifications.length, unreadCount, readCount);
   const latestNotificationSummary = formatLatestNotificationSummary(sortedFilteredNotifications[0]);
+  const oldestPendingNotificationSummary = formatOldestPendingNotificationSummary(sortedFilteredNotifications);
   const notificationVisibleCountLabel = `Mostrando ${displayedNotifications.length} de ${filteredNotifications.length}`;
   const canShowMoreNotifications = displayedNotifications.length < filteredNotifications.length;
   const unreadSummary = summarizeUnreadNotifications(notifications);
@@ -357,6 +358,9 @@ export function SocialScreen() {
           <Text style={[appStyles.body, { color: colors.faint }]}>{notificationInboxSummary}</Text>
           {latestNotificationSummary ? (
             <Text style={[appStyles.body, { color: colors.faint }]}>{latestNotificationSummary}</Text>
+          ) : null}
+          {oldestPendingNotificationSummary ? (
+            <Text style={[appStyles.body, { color: colors.faint }]}>{oldestPendingNotificationSummary}</Text>
           ) : null}
           {unreadSummary.length > 0 ? (
             <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 8 }}>
@@ -607,6 +611,17 @@ function formatLatestNotificationSummary(notification: AppNotification | undefin
   }
 
   return `Ultima alerta: ${formatNotificationKind(notification.kind)} / ${formatNotificationCreatedAt(notification)}`;
+}
+
+function formatOldestPendingNotificationSummary(notifications: AppNotification[]): string | null {
+  const pendingNotifications = notifications.filter((notification) => !notification.read_at);
+
+  if (pendingNotifications.length === 0) {
+    return null;
+  }
+
+  const oldest = pendingNotifications[pendingNotifications.length - 1];
+  return `Pendiente mas antigua: ${formatNotificationKind(oldest.kind)} / ${formatNotificationCreatedAt(oldest)}`;
 }
 
 function countActiveNotificationFilters(showUnreadOnly: boolean, selectedKind: string | null): number {

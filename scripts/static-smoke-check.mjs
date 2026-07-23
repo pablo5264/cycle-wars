@@ -439,6 +439,11 @@ assert(
     socialScreen.includes("sortedFilteredNotifications"),
   "Social screen must show latest notification summary for the current view."
 );
+assert(
+  socialScreen.includes("formatOldestPendingNotificationSummary") &&
+    socialScreen.includes("Pendiente mas antigua:"),
+  "Social screen must show oldest pending notification summary for the current view."
+);
 
 const phaseSixteenMigration = readFileSync(
   path.join(root, "supabase/migrations/0013_player_weekly_trends.sql"),
