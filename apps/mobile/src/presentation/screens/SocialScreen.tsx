@@ -373,6 +373,9 @@ export function SocialScreen() {
                   {formatNotificationStatus(notification)}
                 </Text>
               </View>
+              <Text style={[appStyles.body, { color: colors.faint }]}>
+                Recibida {formatNotificationCreatedAt(notification)}
+              </Text>
               <Text
                 style={[
                   appStyles.body,
@@ -543,6 +546,10 @@ function getNotificationTimestamp(notification: AppNotification): number {
 
 function formatNotificationStatus(notification: AppNotification): string {
   return notification.read_at ? "Leida" : "Pendiente";
+}
+
+function formatNotificationCreatedAt(notification: AppNotification): string {
+  return formatRefreshTime(notification.created_at);
 }
 
 function formatRefreshTime(value: string): string {

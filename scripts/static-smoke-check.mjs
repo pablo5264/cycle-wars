@@ -367,6 +367,11 @@ assert(
     socialScreen.includes("Leida"),
   "Social screen must label notification read status."
 );
+assert(
+  socialScreen.includes("formatNotificationCreatedAt") &&
+    socialScreen.includes("Recibida"),
+  "Social screen must show received timestamp labels for notifications."
+);
 
 const phaseSixteenMigration = readFileSync(
   path.join(root, "supabase/migrations/0013_player_weekly_trends.sql"),

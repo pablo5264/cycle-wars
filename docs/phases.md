@@ -291,3 +291,9 @@ Status: implemented visible limit reset helper, filter reset hooks, smoke checks
 Add explicit read status labels to each Social inbox item so riders can distinguish pending and read alerts without relying only on text color.
 
 Status: implemented notification status formatter, per-item status labels, smoke checks and social documentation.
+
+## Phase 50: Notification Received Timestamp Labels
+
+Add compact received-time labels to each Social inbox notification so riders can understand when alerts arrived while reviewing filtered inbox results.
+
+Status: implemented notification timestamp formatter, per-item received labels, smoke checks and social documentation.
