@@ -372,6 +372,10 @@ assert(
     socialScreen.includes("Recibida"),
   "Social screen must show received timestamp labels for notifications."
 );
+assert(
+  socialScreen.includes('selectedNotificationKind === item.kind ? "primary" : "secondary"'),
+  "Social screen must highlight the selected notification category filter."
+);
 
 const phaseSixteenMigration = readFileSync(
   path.join(root, "supabase/migrations/0013_player_weekly_trends.sql"),

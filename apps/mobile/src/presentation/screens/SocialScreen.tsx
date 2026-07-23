@@ -339,7 +339,7 @@ export function SocialScreen() {
                 <ActionButton
                   key={item.label}
                   label={`${item.label}: ${item.count}`}
-                  variant="secondary"
+                  variant={selectedNotificationKind === item.kind ? "primary" : "secondary"}
                   onPress={() => {
                     resetNotificationVisibleLimit();
                     setSelectedNotificationKind(item.kind);

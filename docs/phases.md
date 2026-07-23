@@ -297,3 +297,9 @@ Status: implemented notification status formatter, per-item status labels, smoke
 Add compact received-time labels to each Social inbox notification so riders can understand when alerts arrived while reviewing filtered inbox results.
 
 Status: implemented notification timestamp formatter, per-item received labels, smoke checks and social documentation.
+
+## Phase 51: Notification Category Active State
+
+Highlight the selected Social inbox notification category so riders can see which unread category filter is currently active.
+
+Status: implemented active category button variant, smoke checks and social documentation.

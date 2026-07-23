@@ -25,6 +25,7 @@ Phase 8 implements the social layer for Cycle Wars.
 - Notification inbox visible limit reset when filters or refresh change.
 - Notification inbox read status labels.
 - Notification inbox received timestamp labels.
+- Notification inbox active category filter state.
 - Notification filter reset after bulk read actions.
 - Notification inbox read actions for one item or all unread items.
 - Notification inbox unread-only filter.
