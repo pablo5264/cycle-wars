@@ -350,6 +350,12 @@ assert(
     socialScreen.includes("Mostrando"),
   "Social screen must show how many filtered notifications are visible."
 );
+assert(
+  socialScreen.includes("notificationVisibleLimit") &&
+    socialScreen.includes("canShowMoreNotifications") &&
+    socialScreen.includes("Ver mas"),
+  "Social screen must allow riders to reveal more filtered notifications."
+);
 
 const phaseSixteenMigration = readFileSync(
   path.join(root, "supabase/migrations/0013_player_weekly_trends.sql"),

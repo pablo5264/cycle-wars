@@ -23,6 +23,7 @@ export function SocialScreen() {
   const [showUnreadOnly, setShowUnreadOnly] = useState(false);
   const [selectedNotificationKind, setSelectedNotificationKind] = useState<string | null>(null);
   const [lastSocialRefreshAt, setLastSocialRefreshAt] = useState<string | null>(null);
+  const [notificationVisibleLimit, setNotificationVisibleLimit] = useState(5);
 
   async function load() {
     setIsBusy(true);
@@ -278,9 +279,10 @@ export function SocialScreen() {
     const matchesKind = !selectedNotificationKind || notification.kind === selectedNotificationKind;
     return matchesUnread && matchesKind;
   });
-  const displayedNotifications = sortNotificationsForInbox(filteredNotifications).slice(0, 5);
+  const displayedNotifications = sortNotificationsForInbox(filteredNotifications).slice(0, notificationVisibleLimit);
   const unreadCount = notifications.filter((notification) => !notification.read_at).length;
   const notificationVisibleCountLabel = `Mostrando ${displayedNotifications.length} de ${filteredNotifications.length}`;
+  const canShowMoreNotifications = displayedNotifications.length < filteredNotifications.length;
   const unreadSummary = summarizeUnreadNotifications(notifications);
   const selectedNotificationKindLabel = selectedNotificationKind
     ? formatNotificationKind(selectedNotificationKind)
@@ -372,6 +374,13 @@ export function SocialScreen() {
             <Text style={[appStyles.body, { color: colors.faint }]}>
               {notificationVisibleCountLabel}
             </Text>
+          ) : null}
+          {canShowMoreNotifications ? (
+            <ActionButton
+              label="Ver mas"
+              variant="secondary"
+              onPress={() => setNotificationVisibleLimit((current) => current + 5)}
+            />
           ) : null}
           {notifications.some((notification) => !notification.read_at) ? (
             <ActionButton

@@ -57,6 +57,7 @@ This repository contains the production architecture foundation:
 - Phase 44 notification refresh loading label for clearer Social inbox feedback.
 - Phase 45 notification inbox priority sorting for unread and recent alerts.
 - Phase 46 notification visible count for filtered Social inbox lists.
+- Phase 47 notification show-more action for longer Social inbox lists.
 
 Later phases can deepen member history, governance UX, region boundary overlays and creator/community operations.
 
@@ -150,6 +151,7 @@ scripts                      Operational scripts
 - Phase 44: notification refresh loading label complete.
 - Phase 45: notification inbox priority sorting complete.
 - Phase 46: notification visible count complete.
+- Phase 47: notification show-more action complete.
 
 ## Quality Gates
 

@@ -273,3 +273,9 @@ Status: implemented inbox sorting helper, unread-first display ordering, smoke c
 Add a visible count to the Social notification inbox so riders can see how many filtered alerts are currently shown out of the total matching inbox items.
 
 Status: implemented visible count label, filtered inbox total display, smoke checks and social documentation.
+
+## Phase 47: Notification Show More
+
+Add a Social inbox show-more action so riders can expand filtered notification results in small batches without leaving the screen.
+
+Status: implemented visible notification limit state, show-more action, smoke checks and social documentation.
