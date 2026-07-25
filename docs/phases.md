@@ -561,3 +561,9 @@ Status: implemented Social latest post preview, smoke checks and social document
 Show whether the latest Social feed post is text, a route share or a conquest share so riders can understand the newest activity at a glance.
 
 Status: implemented Social latest post kind summary, smoke checks and social documentation.
+
+## Phase 95: Social Latest Post Engagement Summary
+
+Show likes and comments for the latest Social feed post so riders can verify newest-post reactions at a glance.
+
+Status: implemented Social latest post engagement summary, smoke checks and social documentation.

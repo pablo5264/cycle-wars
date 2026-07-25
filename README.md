@@ -105,6 +105,7 @@ This repository contains the production architecture foundation:
 - Phase 92 social feed route share summary.
 - Phase 93 social latest post preview.
 - Phase 94 social latest post kind summary.
+- Phase 95 social latest post engagement summary.
 
 Later phases can deepen member history, governance UX, region boundary overlays and creator/community operations.
 
@@ -246,6 +247,7 @@ scripts                      Operational scripts
 - Phase 92: social feed route share summary complete.
 - Phase 93: social latest post preview complete.
 - Phase 94: social latest post kind summary complete.
+- Phase 95: social latest post engagement summary complete.
 
 ## Quality Gates
 
