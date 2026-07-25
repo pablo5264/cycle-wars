@@ -441,3 +441,9 @@ Status: implemented busy labels for notification read actions, smoke checks and 
 Disable Social inbox filter controls while the screen is busy so riders cannot change the notification view during read or refresh operations.
 
 Status: implemented busy guard for notification filters, smoke checks and social documentation.
+
+## Phase 75: Notification Pagination Busy Guard
+
+Disable Social inbox show-more and show-fewer controls while the screen is busy so pagination cannot change during read or refresh operations.
+
+Status: implemented busy guard for notification pagination, smoke checks and social documentation.

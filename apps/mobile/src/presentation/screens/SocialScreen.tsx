@@ -505,6 +505,7 @@ export function SocialScreen() {
               label="Ver mas"
               variant="secondary"
               onPress={() => setNotificationVisibleLimit((current) => current + 5)}
+              disabled={isBusy}
             />
           ) : null}
           {canShowFewerNotifications ? (
@@ -512,6 +513,7 @@ export function SocialScreen() {
               label="Ver menos"
               variant="secondary"
               onPress={resetNotificationVisibleLimit}
+              disabled={isBusy}
             />
           ) : null}
           {notifications.some((notification) => !notification.read_at) ? (

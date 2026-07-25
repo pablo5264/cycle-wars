@@ -505,6 +505,14 @@ assert(
     socialScreen.includes("disabled={isBusy}"),
   "Social screen must guard notification filters while busy."
 );
+assert(
+  socialScreen.includes('label="Ver mas"') &&
+    socialScreen.includes("setNotificationVisibleLimit((current) => current + 5)") &&
+    socialScreen.includes('label="Ver menos"') &&
+    socialScreen.includes("onPress={resetNotificationVisibleLimit}") &&
+    socialScreen.includes("disabled={isBusy}"),
+  "Social screen must guard notification pagination while busy."
+);
 
 const phaseSixteenMigration = readFileSync(
   path.join(root, "supabase/migrations/0013_player_weekly_trends.sql"),
