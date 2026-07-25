@@ -537,6 +537,16 @@ assert(
     socialScreen.includes("disabled={isBusy}"),
   "Social screen must guard chat sending while busy."
 );
+assert(
+  socialScreen.includes('const likeActionLabel = isBusy ? "Marcando like" : "Like"') &&
+    socialScreen.includes('const commentActionLabel = isBusy ? "Comentando" : "Comentar"') &&
+    socialScreen.includes("async function like(postId: string)") &&
+    socialScreen.includes("async function comment(postId: string)") &&
+    socialScreen.includes("label={`${likeActionLabel} ${post.like_count}`}") &&
+    socialScreen.includes("label={`${commentActionLabel} ${post.comment_count}`}") &&
+    socialScreen.includes("disabled={isBusy}"),
+  "Social screen must guard feed reactions while busy."
+);
 
 const phaseSixteenMigration = readFileSync(
   path.join(root, "supabase/migrations/0013_player_weekly_trends.sql"),

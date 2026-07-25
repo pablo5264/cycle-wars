@@ -465,3 +465,9 @@ Status: implemented share busy guard, share busy labels, smoke checks and social
 Guard Social chat message sending against repeated taps and show an in-progress label while messages are being sent.
 
 Status: implemented chat send busy guard, chat send busy label, smoke checks and social documentation.
+
+## Phase 79: Social Feed Reaction Busy Guard
+
+Guard Social feed likes and comments against repeated taps and show in-progress labels while reaction actions are being processed.
+
+Status: implemented feed reaction busy guard, reaction busy labels, smoke checks and social documentation.

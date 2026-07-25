@@ -106,6 +106,12 @@ export function SocialScreen() {
   }
 
   async function like(postId: string) {
+    if (isBusy) {
+      return;
+    }
+
+    setIsBusy(true);
+
     try {
       if (api.isConfigured()) {
         await api.toggleFeedLike(postId);
@@ -117,10 +123,18 @@ export function SocialScreen() {
       );
     } catch (caught) {
       setStatus(caught instanceof Error ? caught.message : "No se pudo marcar like.");
+    } finally {
+      setIsBusy(false);
     }
   }
 
   async function comment(postId: string) {
+    if (isBusy) {
+      return;
+    }
+
+    setIsBusy(true);
+
     try {
       if (api.isConfigured()) {
         await api.addFeedComment(postId, "Gran conquista.");
@@ -132,6 +146,8 @@ export function SocialScreen() {
       );
     } catch (caught) {
       setStatus(caught instanceof Error ? caught.message : "No se pudo comentar.");
+    } finally {
+      setIsBusy(false);
     }
   }
 
@@ -352,6 +368,8 @@ export function SocialScreen() {
   const shareActivityActionLabel = isBusy ? "Compartiendo ruta" : "Compartir ruta";
   const shareConquestActionLabel = isBusy ? "Compartiendo conquista" : "Compartir conquista";
   const sendMessageActionLabel = isBusy ? "Enviando" : "Enviar";
+  const likeActionLabel = isBusy ? "Marcando like" : "Like";
+  const commentActionLabel = isBusy ? "Comentando" : "Comentar";
   const notificationRefreshLabel = isBusy ? "Actualizando" : "Actualizar";
   const notificationReadActionLabel = isBusy ? "Marcando" : "Marcar leida";
   const notificationReadAllActionLabel = isBusy ? "Marcando todas" : "Marcar todas leidas";
@@ -614,8 +632,18 @@ export function SocialScreen() {
               <Text style={appStyles.body}>{post.body ?? "Conquista compartida."}</Text>
               {post.territory_h3_index ? <Text style={appStyles.body}>H3: {post.territory_h3_index}</Text> : null}
               <View style={{ flexDirection: "row", gap: 10 }}>
-                <ActionButton label={`Like ${post.like_count}`} variant="secondary" onPress={() => void like(post.id)} />
-                <ActionButton label={`Comentar ${post.comment_count}`} variant="secondary" onPress={() => void comment(post.id)} />
+                <ActionButton
+                  label={`${likeActionLabel} ${post.like_count}`}
+                  variant="secondary"
+                  onPress={() => void like(post.id)}
+                  disabled={isBusy}
+                />
+                <ActionButton
+                  label={`${commentActionLabel} ${post.comment_count}`}
+                  variant="secondary"
+                  onPress={() => void comment(post.id)}
+                  disabled={isBusy}
+                />
               </View>
             </View>
           </Panel>
