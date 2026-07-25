@@ -579,3 +579,9 @@ Status: implemented Social latest post freshness summary, smoke checks and socia
 Show average interactions per visible Social feed post so riders can quickly compare engagement density.
 
 Status: implemented Social feed average engagement summary, smoke checks and social documentation.
+
+## Phase 98: Social Feed Top Engagement Summary
+
+Show the visible Social feed post with the highest combined likes and comments so riders can spot the current leader.
+
+Status: implemented Social feed top engagement summary, smoke checks and social documentation.

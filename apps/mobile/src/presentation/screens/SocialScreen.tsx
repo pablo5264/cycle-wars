@@ -427,6 +427,18 @@ export function SocialScreen() {
     posts.length > 0
       ? `Promedio engagement: ${((socialFeedLikeCount + socialFeedCommentCount) / posts.length).toFixed(1)} interacciones/post`
       : null;
+  const topEngagementPost = posts.reduce<FeedPost | null>((currentTop, post) => {
+    const postEngagement = Number(post.like_count) + Number(post.comment_count);
+    const currentTopEngagement = currentTop ? Number(currentTop.like_count) + Number(currentTop.comment_count) : -1;
+
+    return postEngagement > currentTopEngagement ? post : currentTop;
+  }, null);
+  const topEngagementPostScore = topEngagementPost
+    ? Number(topEngagementPost.like_count) + Number(topEngagementPost.comment_count)
+    : 0;
+  const topEngagementPostSummary = topEngagementPost
+    ? `Top engagement: ${topEngagementPost.author_name} / ${topEngagementPostScore} interacciones`
+    : null;
   const latestFeedPost = posts[0];
   const socialFeedTypeSummary = `Tipo: ${socialFeedTextPostCount} texto / ${socialFeedRouteCount} rutas / ${socialFeedConquestCount} conquistas`;
   const latestFeedPostKind = latestFeedPost?.activity_id
@@ -695,6 +707,9 @@ export function SocialScreen() {
         {posts.length > 0 ? <Text style={[appStyles.body, { color: colors.faint }]}>{socialFeedTypeSummary}</Text> : null}
         {latestFeedPostSummary ? (
           <Text style={[appStyles.body, { color: colors.faint }]}>{socialFeedAverageEngagementSummary}</Text>
+        ) : null}
+        {topEngagementPostSummary ? (
+          <Text style={[appStyles.body, { color: colors.faint }]}>{topEngagementPostSummary}</Text>
         ) : null}
         {latestFeedPostSummary ? (
           <Text style={[appStyles.body, { color: colors.faint }]}>{latestFeedPostSummary}</Text>

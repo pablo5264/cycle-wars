@@ -642,6 +642,16 @@ assert(
   "Social screen must show average feed engagement summary."
 );
 assert(
+  socialScreen.includes("const topEngagementPost = posts.reduce<FeedPost | null>") &&
+    socialScreen.includes("const postEngagement = Number(post.like_count) + Number(post.comment_count)") &&
+    socialScreen.includes("const currentTopEngagement = currentTop") &&
+    socialScreen.includes("const topEngagementPostScore = topEngagementPost") &&
+    socialScreen.includes("const topEngagementPostSummary = topEngagementPost") &&
+    socialScreen.includes("Top engagement:") &&
+    socialScreen.includes("{topEngagementPostSummary}"),
+  "Social screen must show top feed engagement summary."
+);
+assert(
   socialScreen.includes("const latestFeedPost = posts[0]") &&
     socialScreen.includes("const latestFeedPostKind = latestFeedPost?.activity_id") &&
     socialScreen.includes("? \"ruta\"") &&
