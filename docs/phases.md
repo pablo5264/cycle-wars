@@ -405,3 +405,9 @@ Status: implemented newest pending selector, quick-read action, smoke checks and
 Hide the oldest-pending quick-read action when it points to the same alert as the newest-pending quick-read action so the Social inbox does not show duplicate actions for one pending notification.
 
 Status: implemented quick-read dedupe guard, oldest action visibility check, smoke checks and social documentation.
+
+## Phase 69: Notification Quick Actions Row Layout
+
+Group Social inbox quick-read actions into a compact wrapping row so newest/oldest pending actions use less vertical space on mobile.
+
+Status: implemented quick actions row style, grouped quick-read controls, smoke checks and social documentation.

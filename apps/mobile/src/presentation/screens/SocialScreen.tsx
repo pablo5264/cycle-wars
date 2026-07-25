@@ -368,18 +368,20 @@ export function SocialScreen() {
             <Text style={[appStyles.body, { color: colors.faint }]}>{oldestPendingNotificationSummary}</Text>
           ) : null}
           {newestPendingNotification ? (
-            <ActionButton
-              label="Marcar mas reciente leida"
-              variant="secondary"
-              onPress={() => void markNotificationRead(newestPendingNotification.id)}
-            />
-          ) : null}
-          {canShowOldestPendingQuickRead && oldestPendingNotification ? (
-            <ActionButton
-              label="Marcar mas antigua leida"
-              variant="secondary"
-              onPress={() => void markNotificationRead(oldestPendingNotification.id)}
-            />
+            <View style={notificationQuickActionsStyle}>
+              <ActionButton
+                label="Marcar mas reciente leida"
+                variant="secondary"
+                onPress={() => void markNotificationRead(newestPendingNotification.id)}
+              />
+              {canShowOldestPendingQuickRead && oldestPendingNotification ? (
+                <ActionButton
+                  label="Marcar mas antigua leida"
+                  variant="secondary"
+                  onPress={() => void markNotificationRead(oldestPendingNotification.id)}
+                />
+              ) : null}
+            </View>
           ) : null}
           {unreadSummary.length > 0 ? (
             <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 8 }}>
@@ -767,6 +769,12 @@ const unreadNotificationItemStyle = {
   paddingLeft: 10,
   borderLeftWidth: 3,
   borderLeftColor: colors.green
+};
+
+const notificationQuickActionsStyle = {
+  flexDirection: "row" as const,
+  flexWrap: "wrap" as const,
+  gap: 8
 };
 
 const localPosts: FeedPost[] = [

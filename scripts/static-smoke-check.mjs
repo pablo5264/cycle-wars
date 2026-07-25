@@ -466,6 +466,11 @@ assert(
     socialScreen.includes("oldestPendingNotification?.id !== newestPendingNotification?.id"),
   "Social screen must avoid duplicate quick-read actions for one pending notification."
 );
+assert(
+  socialScreen.includes("notificationQuickActionsStyle") &&
+    socialScreen.includes('flexDirection: "row"'),
+  "Social screen must group notification quick actions in a compact row."
+);
 
 const phaseSixteenMigration = readFileSync(
   path.join(root, "supabase/migrations/0013_player_weekly_trends.sql"),

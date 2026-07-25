@@ -79,6 +79,7 @@ This repository contains the production architecture foundation:
 - Phase 66 notification oldest pending quick-read action.
 - Phase 67 notification newest pending quick-read action.
 - Phase 68 notification quick-read action dedupe.
+- Phase 69 notification quick actions row layout.
 
 Later phases can deepen member history, governance UX, region boundary overlays and creator/community operations.
 
@@ -194,6 +195,7 @@ scripts                      Operational scripts
 - Phase 66: notification oldest pending quick-read action complete.
 - Phase 67: notification newest pending quick-read action complete.
 - Phase 68: notification quick-read action dedupe complete.
+- Phase 69: notification quick actions row layout complete.
 
 ## Quality Gates
 
