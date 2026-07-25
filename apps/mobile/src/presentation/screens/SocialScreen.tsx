@@ -418,12 +418,13 @@ export function SocialScreen() {
   const socialFeedLikeCount = posts.reduce((total, post) => total + Number(post.like_count), 0);
   const socialFeedCommentCount = posts.reduce((total, post) => total + Number(post.comment_count), 0);
   const socialFeedConquestCount = posts.filter((post) => Boolean(post.territory_h3_index)).length;
-  const socialFeedTextPostCount = posts.length - socialFeedConquestCount;
+  const socialFeedRouteCount = posts.filter((post) => Boolean(post.activity_id)).length;
+  const socialFeedTextPostCount = posts.filter((post) => !post.activity_id && !post.territory_h3_index).length;
   const socialFeedSummary = `Feed: ${posts.length} ${
     posts.length === 1 ? "publicacion" : "publicaciones"
   } / ${socialFeedLikeCount} likes / ${socialFeedCommentCount} comentarios`;
   const latestFeedPost = posts[0];
-  const socialFeedTypeSummary = `Tipo: ${socialFeedTextPostCount} texto / ${socialFeedConquestCount} conquistas`;
+  const socialFeedTypeSummary = `Tipo: ${socialFeedTextPostCount} texto / ${socialFeedRouteCount} rutas / ${socialFeedConquestCount} conquistas`;
   const latestFeedPostSummary = latestFeedPost
     ? `Ultima publicacion: ${latestFeedPost.author_name} / ${new Date(latestFeedPost.created_at).toLocaleDateString()}`
     : null;

@@ -30,6 +30,7 @@ Phase 8 implements the social layer for Cycle Wars.
 - Social feed engagement summary.
 - Social latest post summary.
 - Social feed type summary.
+- Social feed route share summary.
 - Social tab unread notification badge.
 - Notification inbox manual refresh action.
 - Notification inbox refresh timestamp.

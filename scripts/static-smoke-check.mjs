@@ -643,10 +643,12 @@ assert(
 assert(
   socialScreen.includes("const socialFeedConquestCount = posts.filter") &&
     socialScreen.includes("Boolean(post.territory_h3_index)") &&
-    socialScreen.includes("const socialFeedTextPostCount = posts.length - socialFeedConquestCount") &&
-    socialScreen.includes("Tipo: ${socialFeedTextPostCount} texto / ${socialFeedConquestCount} conquistas") &&
+    socialScreen.includes("const socialFeedRouteCount = posts.filter") &&
+    socialScreen.includes("Boolean(post.activity_id)") &&
+    socialScreen.includes("!post.activity_id && !post.territory_h3_index") &&
+    socialScreen.includes("Tipo: ${socialFeedTextPostCount} texto / ${socialFeedRouteCount} rutas / ${socialFeedConquestCount} conquistas") &&
     socialScreen.includes("{socialFeedTypeSummary}"),
-  "Social screen must show feed type summary."
+  "Social screen must show feed type summary with route shares."
 );
 
 const phaseSixteenMigration = readFileSync(
