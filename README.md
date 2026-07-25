@@ -101,6 +101,7 @@ This repository contains the production architecture foundation:
 - Phase 88 social feed summary.
 - Phase 89 social feed engagement summary.
 - Phase 90 social latest post summary.
+- Phase 91 social feed type summary.
 
 Later phases can deepen member history, governance UX, region boundary overlays and creator/community operations.
 
@@ -238,6 +239,7 @@ scripts                      Operational scripts
 - Phase 88: social feed summary complete.
 - Phase 89: social feed engagement summary complete.
 - Phase 90: social latest post summary complete.
+- Phase 91: social feed type summary complete.
 
 ## Quality Gates
 

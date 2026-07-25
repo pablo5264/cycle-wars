@@ -417,10 +417,13 @@ export function SocialScreen() {
   const isShareConquestDisabled = isBusy || !shareH3Index.trim();
   const socialFeedLikeCount = posts.reduce((total, post) => total + Number(post.like_count), 0);
   const socialFeedCommentCount = posts.reduce((total, post) => total + Number(post.comment_count), 0);
+  const socialFeedConquestCount = posts.filter((post) => Boolean(post.territory_h3_index)).length;
+  const socialFeedTextPostCount = posts.length - socialFeedConquestCount;
   const socialFeedSummary = `Feed: ${posts.length} ${
     posts.length === 1 ? "publicacion" : "publicaciones"
   } / ${socialFeedLikeCount} likes / ${socialFeedCommentCount} comentarios`;
   const latestFeedPost = posts[0];
+  const socialFeedTypeSummary = `Tipo: ${socialFeedTextPostCount} texto / ${socialFeedConquestCount} conquistas`;
   const latestFeedPostSummary = latestFeedPost
     ? `Ultima publicacion: ${latestFeedPost.author_name} / ${new Date(latestFeedPost.created_at).toLocaleDateString()}`
     : null;
@@ -664,6 +667,7 @@ export function SocialScreen() {
 
       <View style={{ gap: 10 }}>
         {posts.length > 0 ? <Text style={[appStyles.body, { color: colors.faint }]}>{socialFeedSummary}</Text> : null}
+        {posts.length > 0 ? <Text style={[appStyles.body, { color: colors.faint }]}>{socialFeedTypeSummary}</Text> : null}
         {latestFeedPostSummary ? (
           <Text style={[appStyles.body, { color: colors.faint }]}>{latestFeedPostSummary}</Text>
         ) : null}

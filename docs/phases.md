@@ -537,3 +537,9 @@ Status: implemented Social feed engagement summary, smoke checks and social docu
 Show a compact latest-post summary in the Social feed so riders can confirm the newest visible author and date at a glance.
 
 Status: implemented Social latest post summary, smoke checks and social documentation.
+
+## Phase 91: Social Feed Type Summary
+
+Show text-post and conquest-share counts in the Social feed summary so riders can see what kind of activity is visible.
+
+Status: implemented Social feed type summary, smoke checks and social documentation.
