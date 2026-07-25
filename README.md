@@ -100,6 +100,7 @@ This repository contains the production architecture foundation:
 - Phase 87 social feed empty state.
 - Phase 88 social feed summary.
 - Phase 89 social feed engagement summary.
+- Phase 90 social latest post summary.
 
 Later phases can deepen member history, governance UX, region boundary overlays and creator/community operations.
 
@@ -236,6 +237,7 @@ scripts                      Operational scripts
 - Phase 87: social feed empty state complete.
 - Phase 88: social feed summary complete.
 - Phase 89: social feed engagement summary complete.
+- Phase 90: social latest post summary complete.
 
 ## Quality Gates
 

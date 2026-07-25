@@ -633,6 +633,13 @@ assert(
     socialScreen.includes("${socialFeedLikeCount} likes / ${socialFeedCommentCount} comentarios"),
   "Social screen must show feed engagement totals."
 );
+assert(
+  socialScreen.includes("const latestFeedPost = posts[0]") &&
+    socialScreen.includes("const latestFeedPostSummary = latestFeedPost") &&
+    socialScreen.includes("Ultima publicacion:") &&
+    socialScreen.includes("{latestFeedPostSummary}"),
+  "Social screen must show latest feed post summary."
+);
 
 const phaseSixteenMigration = readFileSync(
   path.join(root, "supabase/migrations/0013_player_weekly_trends.sql"),

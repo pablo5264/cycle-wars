@@ -531,3 +531,9 @@ Status: implemented Social feed summary, smoke checks and social documentation.
 Add total likes and comments to the Social feed summary so riders can quickly confirm visible engagement after reactions update.
 
 Status: implemented Social feed engagement summary, smoke checks and social documentation.
+
+## Phase 90: Social Latest Post Summary
+
+Show a compact latest-post summary in the Social feed so riders can confirm the newest visible author and date at a glance.
+
+Status: implemented Social latest post summary, smoke checks and social documentation.
