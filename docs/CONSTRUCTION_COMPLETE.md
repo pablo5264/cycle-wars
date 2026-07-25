@@ -41,3 +41,5 @@ The next stage should focus on:
 - Crash logs, device logs, release bundle verification and performance checks.
 
 Any new feature request after this point should start a new construction cycle or be tracked as a post-construction change.
+
+The first testing artifact is `docs/MOBILE_TESTING.md`.
