@@ -498,6 +498,13 @@ assert(
     socialScreen.includes('isBusy ? "Marcando antigua" : "Marcar mas antigua leida"'),
   "Social screen must show busy labels for notification read actions."
 );
+assert(
+  socialScreen.includes("const isUnreadFilterDisabled = isBusy ||") &&
+    socialScreen.includes("setSelectedNotificationKind(item.kind)") &&
+    socialScreen.includes("onPress={clearNotificationFilters}") &&
+    socialScreen.includes("disabled={isBusy}"),
+  "Social screen must guard notification filters while busy."
+);
 
 const phaseSixteenMigration = readFileSync(
   path.join(root, "supabase/migrations/0013_player_weekly_trends.sql"),

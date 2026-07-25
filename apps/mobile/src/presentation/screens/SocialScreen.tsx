@@ -338,7 +338,7 @@ export function SocialScreen() {
   );
   const emptyNotificationInboxMessage = formatEmptyNotificationInboxMessage(lastSocialRefreshAt);
   const unreadFilterLabel = formatUnreadFilterLabel(showUnreadOnly, unreadCount);
-  const isUnreadFilterDisabled = !showUnreadOnly && unreadCount === 0;
+  const isUnreadFilterDisabled = isBusy || (!showUnreadOnly && unreadCount === 0);
 
   return (
     <ScrollView style={appStyles.screen} contentContainerStyle={{ gap: 16, paddingBottom: 24 }}>
@@ -419,6 +419,7 @@ export function SocialScreen() {
                     resetNotificationVisibleLimit();
                     setSelectedNotificationKind(item.kind);
                   }}
+                  disabled={isBusy}
                 />
               ))}
             </View>
@@ -432,6 +433,7 @@ export function SocialScreen() {
                 label="Limpiar filtros"
                 variant="secondary"
                 onPress={clearNotificationFilters}
+                disabled={isBusy}
               />
             </View>
           ) : null}
@@ -450,6 +452,7 @@ export function SocialScreen() {
                   resetNotificationVisibleLimit();
                   setSelectedNotificationKind(null);
                 }}
+                disabled={isBusy}
               />
             </View>
           ) : null}

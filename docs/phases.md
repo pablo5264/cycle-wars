@@ -435,3 +435,9 @@ Status: implemented busy guard for notification read actions, smoke checks and s
 Show in-progress labels on Social inbox read actions so riders can see when a read or bulk-read mutation is being processed.
 
 Status: implemented busy labels for notification read actions, smoke checks and social documentation.
+
+## Phase 74: Notification Filters Busy Guard
+
+Disable Social inbox filter controls while the screen is busy so riders cannot change the notification view during read or refresh operations.
+
+Status: implemented busy guard for notification filters, smoke checks and social documentation.
