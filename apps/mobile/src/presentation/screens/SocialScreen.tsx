@@ -654,6 +654,9 @@ export function SocialScreen() {
       </Panel>
 
       <View style={{ gap: 10 }}>
+        {posts.length === 0 ? (
+          <Text style={appStyles.body}>Sin publicaciones por ahora. Publica una ruta o conquista para iniciar el feed.</Text>
+        ) : null}
         {posts.map((post) => (
           <Panel key={post.id}>
             <View style={{ gap: 10 }}>

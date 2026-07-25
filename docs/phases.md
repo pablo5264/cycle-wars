@@ -513,3 +513,9 @@ Status: implemented empty-input disabled state for Social actions, smoke checks 
 Show clear disabled-action labels on Social buttons when required text or ids are missing so riders know what to enter next.
 
 Status: implemented empty-action labels, smoke checks and social documentation.
+
+## Phase 87: Social Feed Empty State
+
+Show a helpful empty state when the Social feed has no posts so riders know how to start activity in the feed.
+
+Status: implemented Social feed empty state, smoke checks and social documentation.

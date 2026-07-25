@@ -97,6 +97,7 @@ This repository contains the production architecture foundation:
 - Phase 84 social input busy guard.
 - Phase 85 social empty action disabled state.
 - Phase 86 social empty action labels.
+- Phase 87 social feed empty state.
 
 Later phases can deepen member history, governance UX, region boundary overlays and creator/community operations.
 
@@ -230,6 +231,7 @@ scripts                      Operational scripts
 - Phase 84: social input busy guard complete.
 - Phase 85: social empty action disabled state complete.
 - Phase 86: social empty action labels complete.
+- Phase 87: social feed empty state complete.
 
 ## Quality Gates
 

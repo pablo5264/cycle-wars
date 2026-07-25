@@ -613,6 +613,12 @@ assert(
     socialScreen.includes('"Ingresa ID"'),
   "Social screen must label empty input actions."
 );
+assert(
+  socialScreen.includes("posts.length === 0") &&
+    socialScreen.includes("Sin publicaciones por ahora.") &&
+    socialScreen.includes("Publica una ruta o conquista"),
+  "Social screen must show an empty state for the feed."
+);
 
 const phaseSixteenMigration = readFileSync(
   path.join(root, "supabase/migrations/0013_player_weekly_trends.sql"),
