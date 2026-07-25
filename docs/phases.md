@@ -447,3 +447,9 @@ Status: implemented busy guard for notification filters, smoke checks and social
 Disable Social inbox show-more and show-fewer controls while the screen is busy so pagination cannot change during read or refresh operations.
 
 Status: implemented busy guard for notification pagination, smoke checks and social documentation.
+
+## Phase 76: Social Publish Busy Label
+
+Show a processing label on the Social publish action while the screen is busy so riders get immediate feedback after tapping publish.
+
+Status: implemented publish busy label, smoke checks and social documentation.

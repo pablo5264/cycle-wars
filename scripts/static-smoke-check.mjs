@@ -513,6 +513,12 @@ assert(
     socialScreen.includes("disabled={isBusy}"),
   "Social screen must guard notification pagination while busy."
 );
+assert(
+  socialScreen.includes('const publishActionLabel = isBusy ? "Procesando" : "Publicar"') &&
+    socialScreen.includes("label={publishActionLabel}") &&
+    socialScreen.includes("onPress={() => void publish()}"),
+  "Social screen must show a busy label for publishing."
+);
 
 const phaseSixteenMigration = readFileSync(
   path.join(root, "supabase/migrations/0013_player_weekly_trends.sql"),

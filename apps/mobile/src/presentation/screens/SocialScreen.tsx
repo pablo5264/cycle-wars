@@ -324,6 +324,7 @@ export function SocialScreen() {
     ? formatNotificationKind(selectedNotificationKind)
     : null;
   const lastSocialRefreshLabel = lastSocialRefreshAt ? formatRefreshTime(lastSocialRefreshAt) : "Pendiente";
+  const publishActionLabel = isBusy ? "Procesando" : "Publicar";
   const notificationRefreshLabel = isBusy ? "Actualizando" : "Actualizar";
   const notificationReadActionLabel = isBusy ? "Marcando" : "Marcar leida";
   const notificationReadAllActionLabel = isBusy ? "Marcando todas" : "Marcar todas leidas";
@@ -353,7 +354,7 @@ export function SocialScreen() {
       <Panel title="Publicar">
         <View style={{ gap: 10 }}>
           <SocialInput value={postBody} onChangeText={setPostBody} placeholder="Cuenta tu conquista..." />
-          <ActionButton label="Publicar" onPress={() => void publish()} disabled={isBusy} />
+          <ActionButton label={publishActionLabel} onPress={() => void publish()} disabled={isBusy} />
         </View>
       </Panel>
 
