@@ -477,3 +477,9 @@ Status: implemented feed reaction busy guard, reaction busy labels, smoke checks
 Show in-progress labels on Social private and clan chat open actions while chat threads and messages are being loaded.
 
 Status: implemented chat open busy labels, smoke checks and social documentation.
+
+## Phase 81: Social Chat Open Busy Guard
+
+Guard Social private and clan chat open actions against repeated taps before the chat thread has finished loading.
+
+Status: implemented chat open busy guard, smoke checks and social documentation.

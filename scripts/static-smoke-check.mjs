@@ -556,6 +556,14 @@ assert(
     socialScreen.includes("onPress={() => void openClanChat()}"),
   "Social screen must show busy labels when opening chats."
 );
+assert(
+  socialScreen.includes("async function openChat()") &&
+    socialScreen.includes("async function openClanChat()") &&
+    socialScreen.includes("if (isBusy)") &&
+    socialScreen.includes("setIsBusy(true)") &&
+    socialScreen.includes("setIsBusy(false)"),
+  "Social screen must guard chat opening while busy."
+);
 
 const phaseSixteenMigration = readFileSync(
   path.join(root, "supabase/migrations/0013_player_weekly_trends.sql"),

@@ -157,6 +157,10 @@ export function SocialScreen() {
       return;
     }
 
+    if (isBusy) {
+      return;
+    }
+
     setIsBusy(true);
     setStatus(null);
     try {
@@ -176,6 +180,10 @@ export function SocialScreen() {
   }
 
   async function openClanChat() {
+    if (isBusy) {
+      return;
+    }
+
     setIsBusy(true);
     setStatus(null);
     try {
