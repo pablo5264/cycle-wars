@@ -81,3 +81,5 @@ Expected result:
 - Physical phone launch screenshot.
 - `adb logcat` excerpt for any crash or blocking error.
 - Notes for each failed QA path with exact screen and action.
+
+Record each run in `docs/MOBILE_QA_REPORT.md`.

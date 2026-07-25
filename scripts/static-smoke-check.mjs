@@ -12,6 +12,7 @@ const requiredFiles = [
   "docs/EVENTS.md",
   "docs/CONSTRUCTION_COMPLETE.md",
   "docs/MOBILE_TESTING.md",
+  "docs/MOBILE_QA_REPORT.md",
   "docs/REGIONAL_CONTROL.md",
   "supabase/migrations/0009_optimization_observability.sql",
   "supabase/migrations/0010_regional_control.sql",
@@ -131,6 +132,15 @@ assert(mobileTestingDoc.includes("Mobile Testing Checklist"), "Mobile testing do
 assert(mobileTestingDoc.includes("APK Build"), "Mobile testing doc must include APK build steps.");
 assert(mobileTestingDoc.includes("Install And Launch"), "Mobile testing doc must include install and launch steps.");
 assert(mobileTestingDoc.includes("Manual QA Paths"), "Mobile testing doc must include manual QA paths.");
+
+const mobileQaReportDoc = readFileSync(
+  path.join(root, "docs/MOBILE_QA_REPORT.md"),
+  "utf8"
+);
+assert(mobileQaReportDoc.includes("Mobile QA Report"), "Mobile QA report doc must define the report template.");
+assert(mobileQaReportDoc.includes("Manual QA Matrix"), "Mobile QA report doc must include the manual QA matrix.");
+assert(mobileQaReportDoc.includes("Crash And Log Review"), "Mobile QA report doc must include crash and log review.");
+assert(mobileQaReportDoc.includes("Exit Decision"), "Mobile QA report doc must include an exit decision section.");
 
 for (const functionName of requiredFunctions) {
   assert(

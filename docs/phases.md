@@ -615,3 +615,9 @@ Status: implemented construction closeout document, README state update, smoke c
 Document the Android testing environment, APK build, install, launch and manual QA paths needed to start post-construction validation.
 
 Status: implemented mobile testing checklist, README state update and smoke check coverage.
+
+## Phase 104: Mobile QA Report Template
+
+Add a reusable mobile QA report template for recording APK, emulator, physical-device, manual-flow and crash-log evidence.
+
+Status: implemented mobile QA report template, mobile testing link, README state update and smoke check coverage.
