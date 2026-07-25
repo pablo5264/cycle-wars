@@ -495,3 +495,9 @@ Status: implemented status reset for Social actions, smoke checks and social doc
 Clear stale Social status messages when starting individual and bulk notification read actions so notification feedback reflects the current operation.
 
 Status: implemented status reset for notification read actions, smoke checks and social documentation.
+
+## Phase 84: Social Input Busy Guard
+
+Disable Social text inputs while actions are busy so riders cannot edit fields during publish, share, chat or notification operations.
+
+Status: implemented Social input disabled state, smoke checks and social documentation.

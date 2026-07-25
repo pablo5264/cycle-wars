@@ -578,6 +578,15 @@ assert(
     socialScreen.includes("setStatus(\"Notificacion leida.\")"),
   "Social screen must clear stale status when starting notification read actions."
 );
+assert(
+  socialScreen.includes("disabled?: boolean") &&
+    socialScreen.includes("editable={!disabled}") &&
+    socialScreen.includes("opacity: disabled ? 0.55 : 1") &&
+    socialScreen.includes("placeholder=\"Cuenta tu conquista...\" disabled={isBusy}") &&
+    socialScreen.includes("placeholder=\"Mensaje\" disabled={isBusy}") &&
+    socialScreen.includes("placeholder=\"H3 conquistado\" disabled={isBusy}"),
+  "Social screen must disable text inputs while busy."
+);
 
 const phaseSixteenMigration = readFileSync(
   path.join(root, "supabase/migrations/0013_player_weekly_trends.sql"),

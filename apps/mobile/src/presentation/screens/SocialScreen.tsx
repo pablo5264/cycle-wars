@@ -415,7 +415,7 @@ export function SocialScreen() {
 
       <Panel title="Publicar">
         <View style={{ gap: 10 }}>
-          <SocialInput value={postBody} onChangeText={setPostBody} placeholder="Cuenta tu conquista..." />
+          <SocialInput value={postBody} onChangeText={setPostBody} placeholder="Cuenta tu conquista..." disabled={isBusy} />
           <ActionButton label={publishActionLabel} onPress={() => void publish()} disabled={isBusy} />
         </View>
       </Panel>
@@ -596,7 +596,7 @@ export function SocialScreen() {
 
       <Panel title="Chat privado">
         <View style={{ gap: 10 }}>
-          <SocialInput value={targetPlayerId} onChangeText={setTargetPlayerId} placeholder="ID del rider" />
+          <SocialInput value={targetPlayerId} onChangeText={setTargetPlayerId} placeholder="ID del rider" disabled={isBusy} />
           <ActionButton label={openChatActionLabel} variant="secondary" onPress={() => void openChat()} disabled={isBusy} />
           <ActionButton
             label={openClanChatActionLabel}
@@ -614,7 +614,7 @@ export function SocialScreen() {
                   {message.sender_id.slice(0, 8)}: {message.body}
                 </Text>
               ))}
-              <SocialInput value={messageBody} onChangeText={setMessageBody} placeholder="Mensaje" />
+              <SocialInput value={messageBody} onChangeText={setMessageBody} placeholder="Mensaje" disabled={isBusy} />
               <ActionButton label={sendMessageActionLabel} onPress={() => void sendMessage()} disabled={isBusy} />
             </View>
           ) : null}
@@ -623,14 +623,14 @@ export function SocialScreen() {
 
       <Panel title="Compartir">
         <View style={{ gap: 10 }}>
-          <SocialInput value={shareActivityId} onChangeText={setShareActivityId} placeholder="ID de actividad" />
+          <SocialInput value={shareActivityId} onChangeText={setShareActivityId} placeholder="ID de actividad" disabled={isBusy} />
           <ActionButton
             label={shareActivityActionLabel}
             variant="secondary"
             onPress={() => void shareActivity()}
             disabled={isBusy}
           />
-          <SocialInput value={shareH3Index} onChangeText={setShareH3Index} placeholder="H3 conquistado" />
+          <SocialInput value={shareH3Index} onChangeText={setShareH3Index} placeholder="H3 conquistado" disabled={isBusy} />
           <ActionButton
             label={shareConquestActionLabel}
             variant="secondary"
@@ -856,13 +856,15 @@ interface SocialInputProps {
   value: string;
   onChangeText: (value: string) => void;
   placeholder: string;
+  disabled?: boolean;
 }
 
-function SocialInput({ value, onChangeText, placeholder }: SocialInputProps) {
+function SocialInput({ value, onChangeText, placeholder, disabled = false }: SocialInputProps) {
   return (
     <TextInput
       value={value}
       onChangeText={onChangeText}
+      editable={!disabled}
       placeholder={placeholder}
       placeholderTextColor={colors.faint}
       style={{
@@ -872,6 +874,7 @@ function SocialInput({ value, onChangeText, placeholder }: SocialInputProps) {
         borderColor: colors.border,
         backgroundColor: colors.surface,
         color: colors.text,
+        opacity: disabled ? 0.55 : 1,
         paddingHorizontal: 12
       }}
     />

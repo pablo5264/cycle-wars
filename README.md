@@ -94,6 +94,7 @@ This repository contains the production architecture foundation:
 - Phase 81 social chat open busy guard.
 - Phase 82 social action status reset.
 - Phase 83 notification action status reset.
+- Phase 84 social input busy guard.
 
 Later phases can deepen member history, governance UX, region boundary overlays and creator/community operations.
 
@@ -224,6 +225,7 @@ scripts                      Operational scripts
 - Phase 81: social chat open busy guard complete.
 - Phase 82: social action status reset complete.
 - Phase 83: notification action status reset complete.
+- Phase 84: social input busy guard complete.
 
 ## Quality Gates
 
