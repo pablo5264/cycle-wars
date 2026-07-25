@@ -402,6 +402,11 @@ export function SocialScreen() {
   const emptyNotificationInboxMessage = formatEmptyNotificationInboxMessage(lastSocialRefreshAt);
   const unreadFilterLabel = formatUnreadFilterLabel(showUnreadOnly, unreadCount);
   const isUnreadFilterDisabled = isBusy || (!showUnreadOnly && unreadCount === 0);
+  const isPublishDisabled = isBusy || !postBody.trim();
+  const isOpenChatDisabled = isBusy || !targetPlayerId.trim();
+  const isSendMessageDisabled = isBusy || !messageBody.trim();
+  const isShareActivityDisabled = isBusy || !shareActivityId.trim();
+  const isShareConquestDisabled = isBusy || !shareH3Index.trim();
 
   return (
     <ScrollView style={appStyles.screen} contentContainerStyle={{ gap: 16, paddingBottom: 24 }}>
@@ -416,7 +421,7 @@ export function SocialScreen() {
       <Panel title="Publicar">
         <View style={{ gap: 10 }}>
           <SocialInput value={postBody} onChangeText={setPostBody} placeholder="Cuenta tu conquista..." disabled={isBusy} />
-          <ActionButton label={publishActionLabel} onPress={() => void publish()} disabled={isBusy} />
+          <ActionButton label={publishActionLabel} onPress={() => void publish()} disabled={isPublishDisabled} />
         </View>
       </Panel>
 
@@ -597,7 +602,7 @@ export function SocialScreen() {
       <Panel title="Chat privado">
         <View style={{ gap: 10 }}>
           <SocialInput value={targetPlayerId} onChangeText={setTargetPlayerId} placeholder="ID del rider" disabled={isBusy} />
-          <ActionButton label={openChatActionLabel} variant="secondary" onPress={() => void openChat()} disabled={isBusy} />
+          <ActionButton label={openChatActionLabel} variant="secondary" onPress={() => void openChat()} disabled={isOpenChatDisabled} />
           <ActionButton
             label={openClanChatActionLabel}
             variant="secondary"
@@ -615,7 +620,7 @@ export function SocialScreen() {
                 </Text>
               ))}
               <SocialInput value={messageBody} onChangeText={setMessageBody} placeholder="Mensaje" disabled={isBusy} />
-              <ActionButton label={sendMessageActionLabel} onPress={() => void sendMessage()} disabled={isBusy} />
+              <ActionButton label={sendMessageActionLabel} onPress={() => void sendMessage()} disabled={isSendMessageDisabled} />
             </View>
           ) : null}
         </View>
@@ -628,14 +633,14 @@ export function SocialScreen() {
             label={shareActivityActionLabel}
             variant="secondary"
             onPress={() => void shareActivity()}
-            disabled={isBusy}
+            disabled={isShareActivityDisabled}
           />
           <SocialInput value={shareH3Index} onChangeText={setShareH3Index} placeholder="H3 conquistado" disabled={isBusy} />
           <ActionButton
             label={shareConquestActionLabel}
             variant="secondary"
             onPress={() => void shareConquest()}
-            disabled={isBusy}
+            disabled={isShareConquestDisabled}
           />
         </View>
       </Panel>

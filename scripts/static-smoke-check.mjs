@@ -587,6 +587,17 @@ assert(
     socialScreen.includes("placeholder=\"H3 conquistado\" disabled={isBusy}"),
   "Social screen must disable text inputs while busy."
 );
+assert(
+  socialScreen.includes("const isPublishDisabled = isBusy || !postBody.trim()") &&
+    socialScreen.includes("const isOpenChatDisabled = isBusy || !targetPlayerId.trim()") &&
+    socialScreen.includes("const isSendMessageDisabled = isBusy || !messageBody.trim()") &&
+    socialScreen.includes("const isShareActivityDisabled = isBusy || !shareActivityId.trim()") &&
+    socialScreen.includes("const isShareConquestDisabled = isBusy || !shareH3Index.trim()") &&
+    socialScreen.includes("disabled={isPublishDisabled}") &&
+    socialScreen.includes("disabled={isSendMessageDisabled}") &&
+    socialScreen.includes("disabled={isShareConquestDisabled}"),
+  "Social screen must disable empty input actions."
+);
 
 const phaseSixteenMigration = readFileSync(
   path.join(root, "supabase/migrations/0013_player_weekly_trends.sql"),

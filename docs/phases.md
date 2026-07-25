@@ -501,3 +501,9 @@ Status: implemented status reset for notification read actions, smoke checks and
 Disable Social text inputs while actions are busy so riders cannot edit fields during publish, share, chat or notification operations.
 
 Status: implemented Social input disabled state, smoke checks and social documentation.
+
+## Phase 85: Social Empty Action Disabled State
+
+Disable Social actions that require text or ids until their required input has content so riders do not hit avoidable validation errors.
+
+Status: implemented empty-input disabled state for Social actions, smoke checks and social documentation.
