@@ -564,6 +564,13 @@ assert(
     socialScreen.includes("setIsBusy(false)"),
   "Social screen must guard chat opening while busy."
 );
+assert(
+  socialScreen.match(/setStatus\(null\);/g)?.length >= 8 &&
+    socialScreen.includes("async function like(postId: string)") &&
+    socialScreen.includes("async function shareActivity()") &&
+    socialScreen.includes("async function sendMessage()"),
+  "Social screen must clear stale status when starting Social actions."
+);
 
 const phaseSixteenMigration = readFileSync(
   path.join(root, "supabase/migrations/0013_player_weekly_trends.sql"),

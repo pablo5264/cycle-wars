@@ -111,6 +111,7 @@ export function SocialScreen() {
     }
 
     setIsBusy(true);
+    setStatus(null);
 
     try {
       if (api.isConfigured()) {
@@ -134,6 +135,7 @@ export function SocialScreen() {
     }
 
     setIsBusy(true);
+    setStatus(null);
 
     try {
       if (api.isConfigured()) {
@@ -220,6 +222,7 @@ export function SocialScreen() {
     }
 
     setIsBusy(true);
+    setStatus(null);
 
     try {
       const text = "Ruta compartida desde Cycle Wars.";
@@ -247,6 +250,7 @@ export function SocialScreen() {
     }
 
     setIsBusy(true);
+    setStatus(null);
 
     try {
       const text = "Conquista compartida desde Cycle Wars.";
@@ -273,6 +277,7 @@ export function SocialScreen() {
     }
 
     setIsBusy(true);
+    setStatus(null);
 
     try {
       if (!api.isConfigured()) {

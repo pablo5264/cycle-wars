@@ -483,3 +483,9 @@ Status: implemented chat open busy labels, smoke checks and social documentation
 Guard Social private and clan chat open actions against repeated taps before the chat thread has finished loading.
 
 Status: implemented chat open busy guard, smoke checks and social documentation.
+
+## Phase 82: Social Action Status Reset
+
+Clear stale Social status messages when starting feed reactions, sharing and chat send actions so riders only see feedback for the current operation.
+
+Status: implemented status reset for Social actions, smoke checks and social documentation.
