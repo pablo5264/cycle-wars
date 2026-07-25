@@ -571,6 +571,13 @@ assert(
     socialScreen.includes("async function sendMessage()"),
   "Social screen must clear stale status when starting Social actions."
 );
+assert(
+  socialScreen.match(/setStatus\(null\);/g)?.length >= 10 &&
+    socialScreen.includes("async function markNotificationRead(notificationId: string)") &&
+    socialScreen.includes("async function markAllNotificationsRead()") &&
+    socialScreen.includes("setStatus(\"Notificacion leida.\")"),
+  "Social screen must clear stale status when starting notification read actions."
+);
 
 const phaseSixteenMigration = readFileSync(
   path.join(root, "supabase/migrations/0013_player_weekly_trends.sql"),

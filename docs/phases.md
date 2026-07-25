@@ -489,3 +489,9 @@ Status: implemented chat open busy guard, smoke checks and social documentation.
 Clear stale Social status messages when starting feed reactions, sharing and chat send actions so riders only see feedback for the current operation.
 
 Status: implemented status reset for Social actions, smoke checks and social documentation.
+
+## Phase 83: Notification Action Status Reset
+
+Clear stale Social status messages when starting individual and bulk notification read actions so notification feedback reflects the current operation.
+
+Status: implemented status reset for notification read actions, smoke checks and social documentation.

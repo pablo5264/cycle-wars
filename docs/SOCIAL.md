@@ -45,6 +45,7 @@ Phase 8 implements the social layer for Cycle Wars.
 - Notification inbox item separators for mobile scanning.
 - Notification inbox unread item accent.
 - Notification inbox read time labels.
+- Notification inbox action status reset.
 - Notification inbox latest alert summary.
 - Notification inbox oldest pending summary.
 - Notification inbox show-fewer action after expansion.

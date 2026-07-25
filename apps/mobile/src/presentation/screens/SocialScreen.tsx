@@ -309,6 +309,7 @@ export function SocialScreen() {
     }
 
     setIsBusy(true);
+    setStatus(null);
     try {
       if (api.isConfigured()) {
         await api.markNotificationRead(notificationId);
@@ -334,6 +335,7 @@ export function SocialScreen() {
     }
 
     setIsBusy(true);
+    setStatus(null);
     try {
       if (api.isConfigured()) {
         await api.markAllNotificationsRead();
