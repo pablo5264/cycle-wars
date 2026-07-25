@@ -425,8 +425,13 @@ export function SocialScreen() {
   } / ${socialFeedLikeCount} likes / ${socialFeedCommentCount} comentarios`;
   const latestFeedPost = posts[0];
   const socialFeedTypeSummary = `Tipo: ${socialFeedTextPostCount} texto / ${socialFeedRouteCount} rutas / ${socialFeedConquestCount} conquistas`;
+  const latestFeedPostKind = latestFeedPost?.activity_id
+    ? "ruta"
+    : latestFeedPost?.territory_h3_index
+      ? "conquista"
+      : "texto";
   const latestFeedPostSummary = latestFeedPost
-    ? `Ultima publicacion: ${latestFeedPost.author_name} / ${new Date(latestFeedPost.created_at).toLocaleDateString()}`
+    ? `Ultima publicacion: ${latestFeedPost.author_name} / ${latestFeedPostKind} / ${new Date(latestFeedPost.created_at).toLocaleDateString()}`
     : null;
   const latestFeedPostBody = latestFeedPost?.body?.trim() ?? "";
   const latestFeedPostPreview =

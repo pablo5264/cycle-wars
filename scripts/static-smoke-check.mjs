@@ -635,10 +635,15 @@ assert(
 );
 assert(
   socialScreen.includes("const latestFeedPost = posts[0]") &&
+    socialScreen.includes("const latestFeedPostKind = latestFeedPost?.activity_id") &&
+    socialScreen.includes("? \"ruta\"") &&
+    socialScreen.includes(": latestFeedPost?.territory_h3_index") &&
+    socialScreen.includes("? \"conquista\"") &&
     socialScreen.includes("const latestFeedPostSummary = latestFeedPost") &&
     socialScreen.includes("Ultima publicacion:") &&
+    socialScreen.includes("${latestFeedPostKind}") &&
     socialScreen.includes("{latestFeedPostSummary}"),
-  "Social screen must show latest feed post summary."
+  "Social screen must show latest feed post summary with post kind."
 );
 assert(
   socialScreen.includes("const latestFeedPostBody = latestFeedPost?.body?.trim()") &&
