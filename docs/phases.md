@@ -423,3 +423,9 @@ Status: implemented quick action guidance copy, smoke checks and social document
 Disable Social inbox quick-read actions while the Social screen is busy and guard notification read mutations against double taps.
 
 Status: implemented busy guard for quick-read actions, smoke checks and social documentation.
+
+## Phase 72: Notification Read Actions Busy Guard
+
+Disable individual and bulk Social inbox read actions while the screen is busy and guard bulk read mutations against repeated taps.
+
+Status: implemented busy guard for notification read actions, smoke checks and social documentation.

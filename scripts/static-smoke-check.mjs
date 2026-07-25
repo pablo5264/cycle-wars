@@ -483,6 +483,14 @@ assert(
     socialScreen.includes("setIsBusy(false)"),
   "Social screen must guard notification quick-read actions while busy."
 );
+assert(
+  socialScreen.includes("async function markAllNotificationsRead()") &&
+    socialScreen.includes("label=\"Marcar leida\"") &&
+    socialScreen.includes("label=\"Marcar todas leidas\"") &&
+    socialScreen.includes("onPress={() => void markAllNotificationsRead()}") &&
+    socialScreen.includes("disabled={isBusy}"),
+  "Social screen must guard notification read actions while busy."
+);
 
 const phaseSixteenMigration = readFileSync(
   path.join(root, "supabase/migrations/0013_player_weekly_trends.sql"),

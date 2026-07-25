@@ -82,6 +82,7 @@ This repository contains the production architecture foundation:
 - Phase 69 notification quick actions row layout.
 - Phase 70 notification quick actions guidance copy.
 - Phase 71 notification quick actions busy guard.
+- Phase 72 notification read actions busy guard.
 
 Later phases can deepen member history, governance UX, region boundary overlays and creator/community operations.
 
@@ -200,6 +201,7 @@ scripts                      Operational scripts
 - Phase 69: notification quick actions row layout complete.
 - Phase 70: notification quick actions guidance complete.
 - Phase 71: notification quick actions busy guard complete.
+- Phase 72: notification read actions busy guard complete.
 
 ## Quality Gates
 

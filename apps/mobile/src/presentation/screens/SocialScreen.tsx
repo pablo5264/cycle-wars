@@ -276,6 +276,11 @@ export function SocialScreen() {
   }
 
   async function markAllNotificationsRead() {
+    if (isBusy) {
+      return;
+    }
+
+    setIsBusy(true);
     try {
       if (api.isConfigured()) {
         await api.markAllNotificationsRead();
@@ -290,6 +295,8 @@ export function SocialScreen() {
       setStatus("Notificaciones leidas.");
     } catch (caught) {
       setStatus(caught instanceof Error ? caught.message : "No se pudieron marcar notificaciones.");
+    } finally {
+      setIsBusy(false);
     }
   }
 
@@ -476,6 +483,7 @@ export function SocialScreen() {
                   label="Marcar leida"
                   variant="secondary"
                   onPress={() => void markNotificationRead(notification.id)}
+                  disabled={isBusy}
                 />
               ) : null}
             </View>
@@ -504,6 +512,7 @@ export function SocialScreen() {
               label="Marcar todas leidas"
               variant="secondary"
               onPress={() => void markAllNotificationsRead()}
+              disabled={isBusy}
             />
           ) : null}
           {notifications.length === 0 ? <Text style={appStyles.body}>{emptyNotificationInboxMessage}</Text> : null}
