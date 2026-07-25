@@ -423,6 +423,10 @@ export function SocialScreen() {
   const socialFeedSummary = `Feed: ${posts.length} ${
     posts.length === 1 ? "publicacion" : "publicaciones"
   } / ${socialFeedLikeCount} likes / ${socialFeedCommentCount} comentarios`;
+  const socialFeedAverageEngagementSummary =
+    posts.length > 0
+      ? `Promedio engagement: ${((socialFeedLikeCount + socialFeedCommentCount) / posts.length).toFixed(1)} interacciones/post`
+      : null;
   const latestFeedPost = posts[0];
   const socialFeedTypeSummary = `Tipo: ${socialFeedTextPostCount} texto / ${socialFeedRouteCount} rutas / ${socialFeedConquestCount} conquistas`;
   const latestFeedPostKind = latestFeedPost?.activity_id
@@ -689,6 +693,9 @@ export function SocialScreen() {
       <View style={{ gap: 10 }}>
         {posts.length > 0 ? <Text style={[appStyles.body, { color: colors.faint }]}>{socialFeedSummary}</Text> : null}
         {posts.length > 0 ? <Text style={[appStyles.body, { color: colors.faint }]}>{socialFeedTypeSummary}</Text> : null}
+        {latestFeedPostSummary ? (
+          <Text style={[appStyles.body, { color: colors.faint }]}>{socialFeedAverageEngagementSummary}</Text>
+        ) : null}
         {latestFeedPostSummary ? (
           <Text style={[appStyles.body, { color: colors.faint }]}>{latestFeedPostSummary}</Text>
         ) : null}

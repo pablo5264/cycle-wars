@@ -634,6 +634,14 @@ assert(
   "Social screen must show feed engagement totals."
 );
 assert(
+  socialScreen.includes("const socialFeedAverageEngagementSummary =") &&
+    socialScreen.includes("posts.length > 0") &&
+    socialScreen.includes("Promedio engagement:") &&
+    socialScreen.includes("toFixed(1)") &&
+    socialScreen.includes("{socialFeedAverageEngagementSummary}"),
+  "Social screen must show average feed engagement summary."
+);
+assert(
   socialScreen.includes("const latestFeedPost = posts[0]") &&
     socialScreen.includes("const latestFeedPostKind = latestFeedPost?.activity_id") &&
     socialScreen.includes("? \"ruta\"") &&
