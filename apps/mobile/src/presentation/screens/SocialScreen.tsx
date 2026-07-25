@@ -415,7 +415,11 @@ export function SocialScreen() {
   const isSendMessageDisabled = isBusy || !messageBody.trim();
   const isShareActivityDisabled = isBusy || !shareActivityId.trim();
   const isShareConquestDisabled = isBusy || !shareH3Index.trim();
-  const socialFeedSummary = `Feed: ${posts.length} ${posts.length === 1 ? "publicacion" : "publicaciones"}`;
+  const socialFeedLikeCount = posts.reduce((total, post) => total + Number(post.like_count), 0);
+  const socialFeedCommentCount = posts.reduce((total, post) => total + Number(post.comment_count), 0);
+  const socialFeedSummary = `Feed: ${posts.length} ${
+    posts.length === 1 ? "publicacion" : "publicaciones"
+  } / ${socialFeedLikeCount} likes / ${socialFeedCommentCount} comentarios`;
 
   return (
     <ScrollView style={appStyles.screen} contentContainerStyle={{ gap: 16, paddingBottom: 24 }}>

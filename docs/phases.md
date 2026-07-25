@@ -525,3 +525,9 @@ Status: implemented Social feed empty state, smoke checks and social documentati
 Show a compact Social feed count summary when posts are loaded so riders can quickly confirm how much activity is visible.
 
 Status: implemented Social feed summary, smoke checks and social documentation.
+
+## Phase 89: Social Feed Engagement Summary
+
+Add total likes and comments to the Social feed summary so riders can quickly confirm visible engagement after reactions update.
+
+Status: implemented Social feed engagement summary, smoke checks and social documentation.

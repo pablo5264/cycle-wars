@@ -625,6 +625,14 @@ assert(
     socialScreen.includes("{socialFeedSummary}"),
   "Social screen must show a feed summary when posts are loaded."
 );
+assert(
+  socialScreen.includes("const socialFeedLikeCount = posts.reduce") &&
+    socialScreen.includes("Number(post.like_count)") &&
+    socialScreen.includes("const socialFeedCommentCount = posts.reduce") &&
+    socialScreen.includes("Number(post.comment_count)") &&
+    socialScreen.includes("${socialFeedLikeCount} likes / ${socialFeedCommentCount} comentarios"),
+  "Social screen must show feed engagement totals."
+);
 
 const phaseSixteenMigration = readFileSync(
   path.join(root, "supabase/migrations/0013_player_weekly_trends.sql"),
