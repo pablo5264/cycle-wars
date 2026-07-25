@@ -444,6 +444,9 @@ export function SocialScreen() {
   ).length;
   const quietPostSummary =
     posts.length > 0 ? `Posts sin engagement: ${quietPostCount} de ${posts.length}` : null;
+  const activePostCount = posts.length - quietPostCount;
+  const activePostSummary =
+    posts.length > 0 ? `Posts con engagement: ${activePostCount} de ${posts.length}` : null;
   const latestFeedPost = posts[0];
   const socialFeedTypeSummary = `Tipo: ${socialFeedTextPostCount} texto / ${socialFeedRouteCount} rutas / ${socialFeedConquestCount} conquistas`;
   const latestFeedPostKind = latestFeedPost?.activity_id
@@ -718,6 +721,9 @@ export function SocialScreen() {
         ) : null}
         {quietPostSummary ? (
           <Text style={[appStyles.body, { color: colors.faint }]}>{quietPostSummary}</Text>
+        ) : null}
+        {activePostSummary ? (
+          <Text style={[appStyles.body, { color: colors.faint }]}>{activePostSummary}</Text>
         ) : null}
         {latestFeedPostSummary ? (
           <Text style={[appStyles.body, { color: colors.faint }]}>{latestFeedPostSummary}</Text>

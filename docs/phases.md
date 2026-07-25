@@ -591,3 +591,9 @@ Status: implemented Social feed top engagement summary, smoke checks and social 
 Show how many visible Social feed posts have no likes or comments so riders can spot activity that still needs engagement.
 
 Status: implemented Social feed quiet posts summary, smoke checks and social documentation.
+
+## Phase 100: Social Feed Active Posts Summary
+
+Show how many visible Social feed posts have at least one like or comment so riders can see active engagement coverage.
+
+Status: implemented Social feed active posts summary, smoke checks and social documentation.
