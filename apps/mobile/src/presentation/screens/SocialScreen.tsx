@@ -379,11 +379,19 @@ export function SocialScreen() {
     ? formatNotificationKind(selectedNotificationKind)
     : null;
   const lastSocialRefreshLabel = lastSocialRefreshAt ? formatRefreshTime(lastSocialRefreshAt) : "Pendiente";
-  const publishActionLabel = isBusy ? "Procesando" : "Publicar";
-  const shareActivityActionLabel = isBusy ? "Compartiendo ruta" : "Compartir ruta";
-  const shareConquestActionLabel = isBusy ? "Compartiendo conquista" : "Compartir conquista";
-  const sendMessageActionLabel = isBusy ? "Enviando" : "Enviar";
-  const openChatActionLabel = isBusy ? "Abriendo chat" : "Abrir chat";
+  const publishActionLabel = isBusy ? "Procesando" : postBody.trim() ? "Publicar" : "Escribe para publicar";
+  const shareActivityActionLabel = isBusy
+    ? "Compartiendo ruta"
+    : shareActivityId.trim()
+      ? "Compartir ruta"
+      : "Ingresa actividad";
+  const shareConquestActionLabel = isBusy
+    ? "Compartiendo conquista"
+    : shareH3Index.trim()
+      ? "Compartir conquista"
+      : "Ingresa H3";
+  const sendMessageActionLabel = isBusy ? "Enviando" : messageBody.trim() ? "Enviar" : "Escribe mensaje";
+  const openChatActionLabel = isBusy ? "Abriendo chat" : targetPlayerId.trim() ? "Abrir chat" : "Ingresa ID";
   const openClanChatActionLabel = isBusy ? "Abriendo clan" : "Abrir chat de clan";
   const likeActionLabel = isBusy ? "Marcando like" : "Like";
   const commentActionLabel = isBusy ? "Comentando" : "Comentar";

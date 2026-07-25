@@ -514,14 +514,19 @@ assert(
   "Social screen must guard notification pagination while busy."
 );
 assert(
-  socialScreen.includes('const publishActionLabel = isBusy ? "Procesando" : "Publicar"') &&
+  socialScreen.includes('const publishActionLabel = isBusy ? "Procesando"') &&
+    socialScreen.includes('"Escribe para publicar"') &&
     socialScreen.includes("label={publishActionLabel}") &&
     socialScreen.includes("onPress={() => void publish()}"),
   "Social screen must show a busy label for publishing."
 );
 assert(
-  socialScreen.includes('const shareActivityActionLabel = isBusy ? "Compartiendo ruta" : "Compartir ruta"') &&
-    socialScreen.includes('const shareConquestActionLabel = isBusy ? "Compartiendo conquista" : "Compartir conquista"') &&
+  socialScreen.includes('const shareActivityActionLabel = isBusy') &&
+    socialScreen.includes('"Compartiendo ruta"') &&
+    socialScreen.includes('"Ingresa actividad"') &&
+    socialScreen.includes('const shareConquestActionLabel = isBusy') &&
+    socialScreen.includes('"Compartiendo conquista"') &&
+    socialScreen.includes('"Ingresa H3"') &&
     socialScreen.includes("label={shareActivityActionLabel}") &&
     socialScreen.includes("label={shareConquestActionLabel}") &&
     socialScreen.includes("onPress={() => void shareActivity()}") &&
@@ -530,7 +535,8 @@ assert(
   "Social screen must guard share actions while busy."
 );
 assert(
-  socialScreen.includes('const sendMessageActionLabel = isBusy ? "Enviando" : "Enviar"') &&
+  socialScreen.includes('const sendMessageActionLabel = isBusy ? "Enviando"') &&
+    socialScreen.includes('"Escribe mensaje"') &&
     socialScreen.includes("async function sendMessage()") &&
     socialScreen.includes("label={sendMessageActionLabel}") &&
     socialScreen.includes("onPress={() => void sendMessage()}") &&
@@ -548,7 +554,8 @@ assert(
   "Social screen must guard feed reactions while busy."
 );
 assert(
-  socialScreen.includes('const openChatActionLabel = isBusy ? "Abriendo chat" : "Abrir chat"') &&
+  socialScreen.includes('const openChatActionLabel = isBusy ? "Abriendo chat"') &&
+    socialScreen.includes('"Ingresa ID"') &&
     socialScreen.includes('const openClanChatActionLabel = isBusy ? "Abriendo clan" : "Abrir chat de clan"') &&
     socialScreen.includes("label={openChatActionLabel}") &&
     socialScreen.includes("label={openClanChatActionLabel}") &&
@@ -597,6 +604,14 @@ assert(
     socialScreen.includes("disabled={isSendMessageDisabled}") &&
     socialScreen.includes("disabled={isShareConquestDisabled}"),
   "Social screen must disable empty input actions."
+);
+assert(
+  socialScreen.includes('"Escribe para publicar"') &&
+    socialScreen.includes('"Ingresa actividad"') &&
+    socialScreen.includes('"Ingresa H3"') &&
+    socialScreen.includes('"Escribe mensaje"') &&
+    socialScreen.includes('"Ingresa ID"'),
+  "Social screen must label empty input actions."
 );
 
 const phaseSixteenMigration = readFileSync(

@@ -24,6 +24,7 @@ Phase 8 implements the social layer for Cycle Wars.
 - Social action status reset.
 - Social input busy guard.
 - Social empty action disabled state.
+- Social empty action labels.
 - Social tab unread notification badge.
 - Notification inbox manual refresh action.
 - Notification inbox refresh timestamp.

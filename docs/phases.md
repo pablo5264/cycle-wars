@@ -507,3 +507,9 @@ Status: implemented Social input disabled state, smoke checks and social documen
 Disable Social actions that require text or ids until their required input has content so riders do not hit avoidable validation errors.
 
 Status: implemented empty-input disabled state for Social actions, smoke checks and social documentation.
+
+## Phase 86: Social Empty Action Labels
+
+Show clear disabled-action labels on Social buttons when required text or ids are missing so riders know what to enter next.
+
+Status: implemented empty-action labels, smoke checks and social documentation.
