@@ -415,6 +415,7 @@ export function SocialScreen() {
   const isSendMessageDisabled = isBusy || !messageBody.trim();
   const isShareActivityDisabled = isBusy || !shareActivityId.trim();
   const isShareConquestDisabled = isBusy || !shareH3Index.trim();
+  const socialFeedSummary = `Feed: ${posts.length} ${posts.length === 1 ? "publicacion" : "publicaciones"}`;
 
   return (
     <ScrollView style={appStyles.screen} contentContainerStyle={{ gap: 16, paddingBottom: 24 }}>
@@ -654,6 +655,7 @@ export function SocialScreen() {
       </Panel>
 
       <View style={{ gap: 10 }}>
+        {posts.length > 0 ? <Text style={[appStyles.body, { color: colors.faint }]}>{socialFeedSummary}</Text> : null}
         {posts.length === 0 ? (
           <Text style={appStyles.body}>Sin publicaciones por ahora. Publica una ruta o conquista para iniciar el feed.</Text>
         ) : null}

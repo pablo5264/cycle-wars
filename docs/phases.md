@@ -519,3 +519,9 @@ Status: implemented empty-action labels, smoke checks and social documentation.
 Show a helpful empty state when the Social feed has no posts so riders know how to start activity in the feed.
 
 Status: implemented Social feed empty state, smoke checks and social documentation.
+
+## Phase 88: Social Feed Summary
+
+Show a compact Social feed count summary when posts are loaded so riders can quickly confirm how much activity is visible.
+
+Status: implemented Social feed summary, smoke checks and social documentation.

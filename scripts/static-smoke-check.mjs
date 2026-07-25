@@ -619,6 +619,12 @@ assert(
     socialScreen.includes("Publica una ruta o conquista"),
   "Social screen must show an empty state for the feed."
 );
+assert(
+  socialScreen.includes("const socialFeedSummary = `Feed: ${posts.length}") &&
+    socialScreen.includes("posts.length === 1 ? \"publicacion\" : \"publicaciones\"") &&
+    socialScreen.includes("{socialFeedSummary}"),
+  "Social screen must show a feed summary when posts are loaded."
+);
 
 const phaseSixteenMigration = readFileSync(
   path.join(root, "supabase/migrations/0013_player_weekly_trends.sql"),
