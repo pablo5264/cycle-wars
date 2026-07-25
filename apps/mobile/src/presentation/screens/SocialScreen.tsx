@@ -447,6 +447,10 @@ export function SocialScreen() {
   const activePostCount = posts.length - quietPostCount;
   const activePostSummary =
     posts.length > 0 ? `Posts con engagement: ${activePostCount} de ${posts.length}` : null;
+  const engagementCoverageSummary =
+    posts.length > 0
+      ? `Cobertura engagement: ${Math.round((activePostCount / posts.length) * 100)}% del feed`
+      : null;
   const latestFeedPost = posts[0];
   const socialFeedTypeSummary = `Tipo: ${socialFeedTextPostCount} texto / ${socialFeedRouteCount} rutas / ${socialFeedConquestCount} conquistas`;
   const latestFeedPostKind = latestFeedPost?.activity_id
@@ -724,6 +728,9 @@ export function SocialScreen() {
         ) : null}
         {activePostSummary ? (
           <Text style={[appStyles.body, { color: colors.faint }]}>{activePostSummary}</Text>
+        ) : null}
+        {engagementCoverageSummary ? (
+          <Text style={[appStyles.body, { color: colors.faint }]}>{engagementCoverageSummary}</Text>
         ) : null}
         {latestFeedPostSummary ? (
           <Text style={[appStyles.body, { color: colors.faint }]}>{latestFeedPostSummary}</Text>

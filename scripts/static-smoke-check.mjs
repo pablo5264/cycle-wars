@@ -668,6 +668,14 @@ assert(
   "Social screen must show active feed posts summary."
 );
 assert(
+  socialScreen.includes("const engagementCoverageSummary =") &&
+    socialScreen.includes("Math.round((activePostCount / posts.length) * 100)") &&
+    socialScreen.includes("Cobertura engagement:") &&
+    socialScreen.includes("% del feed") &&
+    socialScreen.includes("{engagementCoverageSummary}"),
+  "Social screen must show feed engagement coverage summary."
+);
+assert(
   socialScreen.includes("const latestFeedPost = posts[0]") &&
     socialScreen.includes("const latestFeedPostKind = latestFeedPost?.activity_id") &&
     socialScreen.includes("? \"ruta\"") &&
