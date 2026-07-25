@@ -439,6 +439,11 @@ export function SocialScreen() {
   const topEngagementPostSummary = topEngagementPost
     ? `Top engagement: ${topEngagementPost.author_name} / ${topEngagementPostScore} interacciones`
     : null;
+  const quietPostCount = posts.filter(
+    (post) => Number(post.like_count) + Number(post.comment_count) === 0
+  ).length;
+  const quietPostSummary =
+    posts.length > 0 ? `Posts sin engagement: ${quietPostCount} de ${posts.length}` : null;
   const latestFeedPost = posts[0];
   const socialFeedTypeSummary = `Tipo: ${socialFeedTextPostCount} texto / ${socialFeedRouteCount} rutas / ${socialFeedConquestCount} conquistas`;
   const latestFeedPostKind = latestFeedPost?.activity_id
@@ -710,6 +715,9 @@ export function SocialScreen() {
         ) : null}
         {topEngagementPostSummary ? (
           <Text style={[appStyles.body, { color: colors.faint }]}>{topEngagementPostSummary}</Text>
+        ) : null}
+        {quietPostSummary ? (
+          <Text style={[appStyles.body, { color: colors.faint }]}>{quietPostSummary}</Text>
         ) : null}
         {latestFeedPostSummary ? (
           <Text style={[appStyles.body, { color: colors.faint }]}>{latestFeedPostSummary}</Text>

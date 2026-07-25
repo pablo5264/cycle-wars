@@ -652,6 +652,14 @@ assert(
   "Social screen must show top feed engagement summary."
 );
 assert(
+  socialScreen.includes("const quietPostCount = posts.filter") &&
+    socialScreen.includes("Number(post.like_count) + Number(post.comment_count) === 0") &&
+    socialScreen.includes("const quietPostSummary =") &&
+    socialScreen.includes("Posts sin engagement:") &&
+    socialScreen.includes("{quietPostSummary}"),
+  "Social screen must show quiet feed posts summary."
+);
+assert(
   socialScreen.includes("const latestFeedPost = posts[0]") &&
     socialScreen.includes("const latestFeedPostKind = latestFeedPost?.activity_id") &&
     socialScreen.includes("? \"ruta\"") &&

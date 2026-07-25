@@ -585,3 +585,9 @@ Status: implemented Social feed average engagement summary, smoke checks and soc
 Show the visible Social feed post with the highest combined likes and comments so riders can spot the current leader.
 
 Status: implemented Social feed top engagement summary, smoke checks and social documentation.
+
+## Phase 99: Social Feed Quiet Posts Summary
+
+Show how many visible Social feed posts have no likes or comments so riders can spot activity that still needs engagement.
+
+Status: implemented Social feed quiet posts summary, smoke checks and social documentation.
