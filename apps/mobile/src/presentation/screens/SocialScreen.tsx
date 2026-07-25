@@ -325,6 +325,10 @@ export function SocialScreen() {
     : null;
   const lastSocialRefreshLabel = lastSocialRefreshAt ? formatRefreshTime(lastSocialRefreshAt) : "Pendiente";
   const notificationRefreshLabel = isBusy ? "Actualizando" : "Actualizar";
+  const notificationReadActionLabel = isBusy ? "Marcando" : "Marcar leida";
+  const notificationReadAllActionLabel = isBusy ? "Marcando todas" : "Marcar todas leidas";
+  const newestQuickReadLabel = isBusy ? "Marcando reciente" : "Marcar mas reciente leida";
+  const oldestQuickReadLabel = isBusy ? "Marcando antigua" : "Marcar mas antigua leida";
   const activeNotificationFilterCount = countActiveNotificationFilters(showUnreadOnly, selectedNotificationKind);
   const notificationFilterSummary = formatNotificationFilterSummary(showUnreadOnly, selectedNotificationKind);
   const emptyFilteredNotificationMessage = formatEmptyFilteredNotificationMessage(
@@ -388,14 +392,14 @@ export function SocialScreen() {
               </Text>
               <View style={notificationQuickActionsStyle}>
                 <ActionButton
-                  label="Marcar mas reciente leida"
+                  label={newestQuickReadLabel}
                   variant="secondary"
                   onPress={() => void markNotificationRead(newestPendingNotification.id)}
                   disabled={isBusy}
                 />
                 {canShowOldestPendingQuickRead && oldestPendingNotification ? (
                   <ActionButton
-                    label="Marcar mas antigua leida"
+                    label={oldestQuickReadLabel}
                     variant="secondary"
                     onPress={() => void markNotificationRead(oldestPendingNotification.id)}
                     disabled={isBusy}
@@ -480,7 +484,7 @@ export function SocialScreen() {
               </Text>
               {!notification.read_at ? (
                 <ActionButton
-                  label="Marcar leida"
+                  label={notificationReadActionLabel}
                   variant="secondary"
                   onPress={() => void markNotificationRead(notification.id)}
                   disabled={isBusy}
@@ -509,7 +513,7 @@ export function SocialScreen() {
           ) : null}
           {notifications.some((notification) => !notification.read_at) ? (
             <ActionButton
-              label="Marcar todas leidas"
+              label={notificationReadAllActionLabel}
               variant="secondary"
               onPress={() => void markAllNotificationsRead()}
               disabled={isBusy}

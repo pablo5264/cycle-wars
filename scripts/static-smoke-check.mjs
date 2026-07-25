@@ -485,11 +485,18 @@ assert(
 );
 assert(
   socialScreen.includes("async function markAllNotificationsRead()") &&
-    socialScreen.includes("label=\"Marcar leida\"") &&
-    socialScreen.includes("label=\"Marcar todas leidas\"") &&
+    socialScreen.includes("notificationReadActionLabel") &&
+    socialScreen.includes("notificationReadAllActionLabel") &&
     socialScreen.includes("onPress={() => void markAllNotificationsRead()}") &&
     socialScreen.includes("disabled={isBusy}"),
   "Social screen must guard notification read actions while busy."
+);
+assert(
+  socialScreen.includes('isBusy ? "Marcando" : "Marcar leida"') &&
+    socialScreen.includes('isBusy ? "Marcando todas" : "Marcar todas leidas"') &&
+    socialScreen.includes('isBusy ? "Marcando reciente" : "Marcar mas reciente leida"') &&
+    socialScreen.includes('isBusy ? "Marcando antigua" : "Marcar mas antigua leida"'),
+  "Social screen must show busy labels for notification read actions."
 );
 
 const phaseSixteenMigration = readFileSync(

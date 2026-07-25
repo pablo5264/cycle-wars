@@ -48,6 +48,7 @@ Phase 8 implements the social layer for Cycle Wars.
 - Notification inbox quick-read guidance copy.
 - Notification inbox quick-read busy guard.
 - Notification inbox read actions busy guard.
+- Notification inbox read actions busy labels.
 - Notification inbox read actions for one item or all unread items.
 - Notification inbox unread-only filter.
 - Notification inbox kind labels for faster scanning.

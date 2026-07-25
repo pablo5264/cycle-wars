@@ -429,3 +429,9 @@ Status: implemented busy guard for quick-read actions, smoke checks and social d
 Disable individual and bulk Social inbox read actions while the screen is busy and guard bulk read mutations against repeated taps.
 
 Status: implemented busy guard for notification read actions, smoke checks and social documentation.
+
+## Phase 73: Notification Read Actions Busy Labels
+
+Show in-progress labels on Social inbox read actions so riders can see when a read or bulk-read mutation is being processed.
+
+Status: implemented busy labels for notification read actions, smoke checks and social documentation.
