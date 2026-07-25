@@ -453,3 +453,9 @@ Status: implemented busy guard for notification pagination, smoke checks and soc
 Show a processing label on the Social publish action while the screen is busy so riders get immediate feedback after tapping publish.
 
 Status: implemented publish busy label, smoke checks and social documentation.
+
+## Phase 77: Social Share Busy Guard
+
+Guard Social route/conquest sharing against repeated taps and show in-progress labels while share actions are being processed.
+
+Status: implemented share busy guard, share busy labels, smoke checks and social documentation.

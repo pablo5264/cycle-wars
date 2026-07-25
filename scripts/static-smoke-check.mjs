@@ -519,6 +519,16 @@ assert(
     socialScreen.includes("onPress={() => void publish()}"),
   "Social screen must show a busy label for publishing."
 );
+assert(
+  socialScreen.includes('const shareActivityActionLabel = isBusy ? "Compartiendo ruta" : "Compartir ruta"') &&
+    socialScreen.includes('const shareConquestActionLabel = isBusy ? "Compartiendo conquista" : "Compartir conquista"') &&
+    socialScreen.includes("label={shareActivityActionLabel}") &&
+    socialScreen.includes("label={shareConquestActionLabel}") &&
+    socialScreen.includes("onPress={() => void shareActivity()}") &&
+    socialScreen.includes("onPress={() => void shareConquest()}") &&
+    socialScreen.includes("disabled={isBusy}"),
+  "Social screen must guard share actions while busy."
+);
 
 const phaseSixteenMigration = readFileSync(
   path.join(root, "supabase/migrations/0013_player_weekly_trends.sql"),

@@ -191,6 +191,12 @@ export function SocialScreen() {
       return;
     }
 
+    if (isBusy) {
+      return;
+    }
+
+    setIsBusy(true);
+
     try {
       const text = "Ruta compartida desde Cycle Wars.";
       const post = api.isConfigured()
@@ -201,6 +207,8 @@ export function SocialScreen() {
       setStatus("Ruta compartida.");
     } catch (caught) {
       setStatus(caught instanceof Error ? caught.message : "No se pudo compartir ruta.");
+    } finally {
+      setIsBusy(false);
     }
   }
 
@@ -209,6 +217,12 @@ export function SocialScreen() {
       setStatus("Ingresa el H3 conquistado.");
       return;
     }
+
+    if (isBusy) {
+      return;
+    }
+
+    setIsBusy(true);
 
     try {
       const text = "Conquista compartida desde Cycle Wars.";
@@ -220,6 +234,8 @@ export function SocialScreen() {
       setStatus("Conquista compartida.");
     } catch (caught) {
       setStatus(caught instanceof Error ? caught.message : "No se pudo compartir conquista.");
+    } finally {
+      setIsBusy(false);
     }
   }
 
@@ -325,6 +341,8 @@ export function SocialScreen() {
     : null;
   const lastSocialRefreshLabel = lastSocialRefreshAt ? formatRefreshTime(lastSocialRefreshAt) : "Pendiente";
   const publishActionLabel = isBusy ? "Procesando" : "Publicar";
+  const shareActivityActionLabel = isBusy ? "Compartiendo ruta" : "Compartir ruta";
+  const shareConquestActionLabel = isBusy ? "Compartiendo conquista" : "Compartir conquista";
   const notificationRefreshLabel = isBusy ? "Actualizando" : "Actualizar";
   const notificationReadActionLabel = isBusy ? "Marcando" : "Marcar leida";
   const notificationReadAllActionLabel = isBusy ? "Marcando todas" : "Marcar todas leidas";
@@ -557,9 +575,19 @@ export function SocialScreen() {
       <Panel title="Compartir">
         <View style={{ gap: 10 }}>
           <SocialInput value={shareActivityId} onChangeText={setShareActivityId} placeholder="ID de actividad" />
-          <ActionButton label="Compartir ruta" variant="secondary" onPress={() => void shareActivity()} />
+          <ActionButton
+            label={shareActivityActionLabel}
+            variant="secondary"
+            onPress={() => void shareActivity()}
+            disabled={isBusy}
+          />
           <SocialInput value={shareH3Index} onChangeText={setShareH3Index} placeholder="H3 conquistado" />
-          <ActionButton label="Compartir conquista" variant="secondary" onPress={() => void shareConquest()} />
+          <ActionButton
+            label={shareConquestActionLabel}
+            variant="secondary"
+            onPress={() => void shareConquest()}
+            disabled={isBusy}
+          />
         </View>
       </Panel>
 
