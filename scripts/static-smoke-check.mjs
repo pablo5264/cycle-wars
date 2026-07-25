@@ -661,6 +661,15 @@ assert(
   "Social screen must show latest feed post engagement summary."
 );
 assert(
+  socialScreen.includes("const latestFeedPostAgeDays = latestFeedPost") &&
+    socialScreen.includes("Date.now() - new Date(latestFeedPost.created_at).getTime()") &&
+    socialScreen.includes("const latestFeedPostFreshnessSummary =") &&
+    socialScreen.includes("Frescura ultimo post:") &&
+    socialScreen.includes("hace ${latestFeedPostAgeDays} dias") &&
+    socialScreen.includes("{latestFeedPostFreshnessSummary}"),
+  "Social screen must show latest feed post freshness summary."
+);
+assert(
   socialScreen.includes("const socialFeedConquestCount = posts.filter") &&
     socialScreen.includes("Boolean(post.territory_h3_index)") &&
     socialScreen.includes("const socialFeedRouteCount = posts.filter") &&

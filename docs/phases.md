@@ -567,3 +567,9 @@ Status: implemented Social latest post kind summary, smoke checks and social doc
 Show likes and comments for the latest Social feed post so riders can verify newest-post reactions at a glance.
 
 Status: implemented Social latest post engagement summary, smoke checks and social documentation.
+
+## Phase 96: Social Latest Post Freshness Summary
+
+Show whether the latest Social feed post is from today or how many days old it is so riders can judge feed freshness quickly.
+
+Status: implemented Social latest post freshness summary, smoke checks and social documentation.

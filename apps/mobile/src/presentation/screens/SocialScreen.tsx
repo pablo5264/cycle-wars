@@ -441,6 +441,13 @@ export function SocialScreen() {
   const latestFeedPostEngagementSummary = latestFeedPost
     ? `Engagement ultimo post: ${latestFeedPost.like_count} likes / ${latestFeedPost.comment_count} comentarios`
     : null;
+  const latestFeedPostAgeDays = latestFeedPost
+    ? Math.max(0, Math.floor((Date.now() - new Date(latestFeedPost.created_at).getTime()) / 86400000))
+    : null;
+  const latestFeedPostFreshnessSummary =
+    latestFeedPostAgeDays === null
+      ? null
+      : `Frescura ultimo post: ${latestFeedPostAgeDays === 0 ? "hoy" : `hace ${latestFeedPostAgeDays} dias`}`;
 
   return (
     <ScrollView style={appStyles.screen} contentContainerStyle={{ gap: 16, paddingBottom: 24 }}>
@@ -690,6 +697,9 @@ export function SocialScreen() {
         ) : null}
         {latestFeedPostEngagementSummary ? (
           <Text style={[appStyles.body, { color: colors.faint }]}>{latestFeedPostEngagementSummary}</Text>
+        ) : null}
+        {latestFeedPostFreshnessSummary ? (
+          <Text style={[appStyles.body, { color: colors.faint }]}>{latestFeedPostFreshnessSummary}</Text>
         ) : null}
         {posts.length === 0 ? (
           <Text style={appStyles.body}>Sin publicaciones por ahora. Publica una ruta o conquista para iniciar el feed.</Text>
