@@ -10,6 +10,7 @@ const requiredFiles = [
   "docs/RELEASE.md",
   "docs/ANALYTICS.md",
   "docs/EVENTS.md",
+  "docs/CONSTRUCTION_COMPLETE.md",
   "docs/REGIONAL_CONTROL.md",
   "supabase/migrations/0009_optimization_observability.sql",
   "supabase/migrations/0010_regional_control.sql",
@@ -113,6 +114,13 @@ function assert(condition, message) {
 for (const file of requiredFiles) {
   assert(existsSync(path.join(root, file)), `Missing required file: ${file}`);
 }
+
+const constructionCompleteDoc = readFileSync(
+  path.join(root, "docs/CONSTRUCTION_COMPLETE.md"),
+  "utf8"
+);
+assert(constructionCompleteDoc.includes("Construction Complete"), "Construction closeout doc must mark the build as complete.");
+assert(constructionCompleteDoc.includes("Testing Handoff"), "Construction closeout doc must include testing handoff guidance.");
 
 for (const functionName of requiredFunctions) {
   assert(
