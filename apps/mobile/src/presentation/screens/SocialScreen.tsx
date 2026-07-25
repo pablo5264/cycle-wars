@@ -244,6 +244,12 @@ export function SocialScreen() {
       return;
     }
 
+    if (isBusy) {
+      return;
+    }
+
+    setIsBusy(true);
+
     try {
       if (!api.isConfigured()) {
         setMessages([
@@ -263,6 +269,8 @@ export function SocialScreen() {
       setMessageBody("");
     } catch (caught) {
       setStatus(caught instanceof Error ? caught.message : "No se pudo enviar mensaje.");
+    } finally {
+      setIsBusy(false);
     }
   }
 
@@ -343,6 +351,7 @@ export function SocialScreen() {
   const publishActionLabel = isBusy ? "Procesando" : "Publicar";
   const shareActivityActionLabel = isBusy ? "Compartiendo ruta" : "Compartir ruta";
   const shareConquestActionLabel = isBusy ? "Compartiendo conquista" : "Compartir conquista";
+  const sendMessageActionLabel = isBusy ? "Enviando" : "Enviar";
   const notificationRefreshLabel = isBusy ? "Actualizando" : "Actualizar";
   const notificationReadActionLabel = isBusy ? "Marcando" : "Marcar leida";
   const notificationReadAllActionLabel = isBusy ? "Marcando todas" : "Marcar todas leidas";
@@ -566,7 +575,7 @@ export function SocialScreen() {
                 </Text>
               ))}
               <SocialInput value={messageBody} onChangeText={setMessageBody} placeholder="Mensaje" />
-              <ActionButton label="Enviar" onPress={() => void sendMessage()} />
+              <ActionButton label={sendMessageActionLabel} onPress={() => void sendMessage()} disabled={isBusy} />
             </View>
           ) : null}
         </View>

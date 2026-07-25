@@ -17,6 +17,7 @@ Phase 8 implements the social layer for Cycle Wars.
 - Mobile Social tab with feed, publishing, notifications and private chat.
 - Social publish action busy label.
 - Social share actions busy guard.
+- Social chat send busy guard.
 - Social tab unread notification badge.
 - Notification inbox manual refresh action.
 - Notification inbox refresh timestamp.

@@ -88,6 +88,7 @@ This repository contains the production architecture foundation:
 - Phase 75 notification pagination busy guard.
 - Phase 76 social publish busy label.
 - Phase 77 social share busy guard.
+- Phase 78 social chat send busy guard.
 
 Later phases can deepen member history, governance UX, region boundary overlays and creator/community operations.
 
@@ -212,6 +213,7 @@ scripts                      Operational scripts
 - Phase 75: notification pagination busy guard complete.
 - Phase 76: social publish busy label complete.
 - Phase 77: social share busy guard complete.
+- Phase 78: social chat send busy guard complete.
 
 ## Quality Gates
 

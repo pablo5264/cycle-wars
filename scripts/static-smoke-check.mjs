@@ -529,6 +529,14 @@ assert(
     socialScreen.includes("disabled={isBusy}"),
   "Social screen must guard share actions while busy."
 );
+assert(
+  socialScreen.includes('const sendMessageActionLabel = isBusy ? "Enviando" : "Enviar"') &&
+    socialScreen.includes("async function sendMessage()") &&
+    socialScreen.includes("label={sendMessageActionLabel}") &&
+    socialScreen.includes("onPress={() => void sendMessage()}") &&
+    socialScreen.includes("disabled={isBusy}"),
+  "Social screen must guard chat sending while busy."
+);
 
 const phaseSixteenMigration = readFileSync(
   path.join(root, "supabase/migrations/0013_player_weekly_trends.sql"),

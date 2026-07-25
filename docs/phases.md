@@ -459,3 +459,9 @@ Status: implemented publish busy label, smoke checks and social documentation.
 Guard Social route/conquest sharing against repeated taps and show in-progress labels while share actions are being processed.
 
 Status: implemented share busy guard, share busy labels, smoke checks and social documentation.
+
+## Phase 78: Social Chat Send Busy Guard
+
+Guard Social chat message sending against repeated taps and show an in-progress label while messages are being sent.
+
+Status: implemented chat send busy guard, chat send busy label, smoke checks and social documentation.
