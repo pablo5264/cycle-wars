@@ -471,6 +471,11 @@ assert(
     socialScreen.includes('flexDirection: "row"'),
   "Social screen must group notification quick actions in a compact row."
 );
+assert(
+  socialScreen.includes("Acciones rapidas:") &&
+    socialScreen.includes("lo que lleva mas tiempo pendiente"),
+  "Social screen must explain notification quick-read actions."
+);
 
 const phaseSixteenMigration = readFileSync(
   path.join(root, "supabase/migrations/0013_player_weekly_trends.sql"),

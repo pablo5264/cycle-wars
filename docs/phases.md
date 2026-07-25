@@ -411,3 +411,9 @@ Status: implemented quick-read dedupe guard, oldest action visibility check, smo
 Group Social inbox quick-read actions into a compact wrapping row so newest/oldest pending actions use less vertical space on mobile.
 
 Status: implemented quick actions row style, grouped quick-read controls, smoke checks and social documentation.
+
+## Phase 70: Notification Quick Actions Guidance
+
+Add short guidance copy above Social inbox quick-read actions so riders understand when to use newest-first or oldest-first review.
+
+Status: implemented quick action guidance copy, smoke checks and social documentation.

@@ -368,20 +368,25 @@ export function SocialScreen() {
             <Text style={[appStyles.body, { color: colors.faint }]}>{oldestPendingNotificationSummary}</Text>
           ) : null}
           {newestPendingNotification ? (
-            <View style={notificationQuickActionsStyle}>
-              <ActionButton
-                label="Marcar mas reciente leida"
-                variant="secondary"
-                onPress={() => void markNotificationRead(newestPendingNotification.id)}
-              />
-              {canShowOldestPendingQuickRead && oldestPendingNotification ? (
+            <>
+              <Text style={[appStyles.body, { color: colors.faint }]}>
+                Acciones rapidas: revisa primero lo nuevo o lo que lleva mas tiempo pendiente.
+              </Text>
+              <View style={notificationQuickActionsStyle}>
                 <ActionButton
-                  label="Marcar mas antigua leida"
+                  label="Marcar mas reciente leida"
                   variant="secondary"
-                  onPress={() => void markNotificationRead(oldestPendingNotification.id)}
+                  onPress={() => void markNotificationRead(newestPendingNotification.id)}
                 />
-              ) : null}
-            </View>
+                {canShowOldestPendingQuickRead && oldestPendingNotification ? (
+                  <ActionButton
+                    label="Marcar mas antigua leida"
+                    variant="secondary"
+                    onPress={() => void markNotificationRead(oldestPendingNotification.id)}
+                  />
+                ) : null}
+              </View>
+            </>
           ) : null}
           {unreadSummary.length > 0 ? (
             <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 8 }}>
