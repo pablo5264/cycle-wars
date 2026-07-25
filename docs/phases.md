@@ -417,3 +417,9 @@ Status: implemented quick actions row style, grouped quick-read controls, smoke 
 Add short guidance copy above Social inbox quick-read actions so riders understand when to use newest-first or oldest-first review.
 
 Status: implemented quick action guidance copy, smoke checks and social documentation.
+
+## Phase 71: Notification Quick Actions Busy Guard
+
+Disable Social inbox quick-read actions while the Social screen is busy and guard notification read mutations against double taps.
+
+Status: implemented busy guard for quick-read actions, smoke checks and social documentation.

@@ -251,6 +251,11 @@ export function SocialScreen() {
   }
 
   async function markNotificationRead(notificationId: string) {
+    if (isBusy) {
+      return;
+    }
+
+    setIsBusy(true);
     try {
       if (api.isConfigured()) {
         await api.markNotificationRead(notificationId);
@@ -265,6 +270,8 @@ export function SocialScreen() {
       setStatus("Notificacion leida.");
     } catch (caught) {
       setStatus(caught instanceof Error ? caught.message : "No se pudo marcar la notificacion.");
+    } finally {
+      setIsBusy(false);
     }
   }
 
@@ -377,12 +384,14 @@ export function SocialScreen() {
                   label="Marcar mas reciente leida"
                   variant="secondary"
                   onPress={() => void markNotificationRead(newestPendingNotification.id)}
+                  disabled={isBusy}
                 />
                 {canShowOldestPendingQuickRead && oldestPendingNotification ? (
                   <ActionButton
                     label="Marcar mas antigua leida"
                     variant="secondary"
                     onPress={() => void markNotificationRead(oldestPendingNotification.id)}
+                    disabled={isBusy}
                   />
                 ) : null}
               </View>

@@ -476,6 +476,13 @@ assert(
     socialScreen.includes("lo que lleva mas tiempo pendiente"),
   "Social screen must explain notification quick-read actions."
 );
+assert(
+  socialScreen.includes("if (isBusy)") &&
+    socialScreen.includes("setIsBusy(true)") &&
+    socialScreen.includes("disabled={isBusy}") &&
+    socialScreen.includes("setIsBusy(false)"),
+  "Social screen must guard notification quick-read actions while busy."
+);
 
 const phaseSixteenMigration = readFileSync(
   path.join(root, "supabase/migrations/0013_player_weekly_trends.sql"),
