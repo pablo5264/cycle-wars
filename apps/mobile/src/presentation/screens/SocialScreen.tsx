@@ -368,6 +368,8 @@ export function SocialScreen() {
   const shareActivityActionLabel = isBusy ? "Compartiendo ruta" : "Compartir ruta";
   const shareConquestActionLabel = isBusy ? "Compartiendo conquista" : "Compartir conquista";
   const sendMessageActionLabel = isBusy ? "Enviando" : "Enviar";
+  const openChatActionLabel = isBusy ? "Abriendo chat" : "Abrir chat";
+  const openClanChatActionLabel = isBusy ? "Abriendo clan" : "Abrir chat de clan";
   const likeActionLabel = isBusy ? "Marcando like" : "Like";
   const commentActionLabel = isBusy ? "Comentando" : "Comentar";
   const notificationRefreshLabel = isBusy ? "Actualizando" : "Actualizar";
@@ -580,8 +582,13 @@ export function SocialScreen() {
       <Panel title="Chat privado">
         <View style={{ gap: 10 }}>
           <SocialInput value={targetPlayerId} onChangeText={setTargetPlayerId} placeholder="ID del rider" />
-          <ActionButton label="Abrir chat" variant="secondary" onPress={() => void openChat()} disabled={isBusy} />
-          <ActionButton label="Abrir chat de clan" variant="secondary" onPress={() => void openClanChat()} disabled={isBusy} />
+          <ActionButton label={openChatActionLabel} variant="secondary" onPress={() => void openChat()} disabled={isBusy} />
+          <ActionButton
+            label={openClanChatActionLabel}
+            variant="secondary"
+            onPress={() => void openClanChat()}
+            disabled={isBusy}
+          />
           {thread ? (
             <View style={{ gap: 8 }}>
               <Text style={appStyles.body}>

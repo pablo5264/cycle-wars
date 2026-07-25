@@ -471,3 +471,9 @@ Status: implemented chat send busy guard, chat send busy label, smoke checks and
 Guard Social feed likes and comments against repeated taps and show in-progress labels while reaction actions are being processed.
 
 Status: implemented feed reaction busy guard, reaction busy labels, smoke checks and social documentation.
+
+## Phase 80: Social Chat Open Busy Labels
+
+Show in-progress labels on Social private and clan chat open actions while chat threads and messages are being loaded.
+
+Status: implemented chat open busy labels, smoke checks and social documentation.

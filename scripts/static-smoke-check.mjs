@@ -547,6 +547,15 @@ assert(
     socialScreen.includes("disabled={isBusy}"),
   "Social screen must guard feed reactions while busy."
 );
+assert(
+  socialScreen.includes('const openChatActionLabel = isBusy ? "Abriendo chat" : "Abrir chat"') &&
+    socialScreen.includes('const openClanChatActionLabel = isBusy ? "Abriendo clan" : "Abrir chat de clan"') &&
+    socialScreen.includes("label={openChatActionLabel}") &&
+    socialScreen.includes("label={openClanChatActionLabel}") &&
+    socialScreen.includes("onPress={() => void openChat()}") &&
+    socialScreen.includes("onPress={() => void openClanChat()}"),
+  "Social screen must show busy labels when opening chats."
+);
 
 const phaseSixteenMigration = readFileSync(
   path.join(root, "supabase/migrations/0013_player_weekly_trends.sql"),
