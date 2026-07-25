@@ -428,6 +428,11 @@ export function SocialScreen() {
   const latestFeedPostSummary = latestFeedPost
     ? `Ultima publicacion: ${latestFeedPost.author_name} / ${new Date(latestFeedPost.created_at).toLocaleDateString()}`
     : null;
+  const latestFeedPostBody = latestFeedPost?.body?.trim() ?? "";
+  const latestFeedPostPreview =
+    latestFeedPostBody.length > 0
+      ? `Vista previa: ${latestFeedPostBody.slice(0, 80)}${latestFeedPostBody.length > 80 ? "..." : ""}`
+      : null;
 
   return (
     <ScrollView style={appStyles.screen} contentContainerStyle={{ gap: 16, paddingBottom: 24 }}>
@@ -671,6 +676,9 @@ export function SocialScreen() {
         {posts.length > 0 ? <Text style={[appStyles.body, { color: colors.faint }]}>{socialFeedTypeSummary}</Text> : null}
         {latestFeedPostSummary ? (
           <Text style={[appStyles.body, { color: colors.faint }]}>{latestFeedPostSummary}</Text>
+        ) : null}
+        {latestFeedPostPreview ? (
+          <Text style={[appStyles.body, { color: colors.faint }]}>{latestFeedPostPreview}</Text>
         ) : null}
         {posts.length === 0 ? (
           <Text style={appStyles.body}>Sin publicaciones por ahora. Publica una ruta o conquista para iniciar el feed.</Text>

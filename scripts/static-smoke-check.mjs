@@ -641,6 +641,14 @@ assert(
   "Social screen must show latest feed post summary."
 );
 assert(
+  socialScreen.includes("const latestFeedPostBody = latestFeedPost?.body?.trim()") &&
+    socialScreen.includes("const latestFeedPostPreview =") &&
+    socialScreen.includes("Vista previa:") &&
+    socialScreen.includes("latestFeedPostBody.slice(0, 80)") &&
+    socialScreen.includes("{latestFeedPostPreview}"),
+  "Social screen must show latest feed post preview."
+);
+assert(
   socialScreen.includes("const socialFeedConquestCount = posts.filter") &&
     socialScreen.includes("Boolean(post.territory_h3_index)") &&
     socialScreen.includes("const socialFeedRouteCount = posts.filter") &&

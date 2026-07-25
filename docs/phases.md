@@ -549,3 +549,9 @@ Status: implemented Social feed type summary, smoke checks and social documentat
 Separate route shares from text posts and conquest shares in the Social feed type summary so riders can see what kind of activity is visible.
 
 Status: implemented Social feed route share summary, smoke checks and social documentation.
+
+## Phase 93: Social Latest Post Preview
+
+Show a short preview of the latest Social feed post so riders can quickly recognize the newest visible activity.
+
+Status: implemented Social latest post preview, smoke checks and social documentation.
