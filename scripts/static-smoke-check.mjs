@@ -13,6 +13,8 @@ const requiredFiles = [
   "docs/CONSTRUCTION_COMPLETE.md",
   "docs/MOBILE_TESTING.md",
   "docs/MOBILE_QA_REPORT.md",
+  "docs/ANDROID_DEVICE_SETUP.md",
+  "docs/APK_BUILD_TROUBLESHOOTING.md",
   "docs/REGIONAL_CONTROL.md",
   "supabase/migrations/0009_optimization_observability.sql",
   "supabase/migrations/0010_regional_control.sql",
@@ -141,6 +143,24 @@ assert(mobileQaReportDoc.includes("Mobile QA Report"), "Mobile QA report doc mus
 assert(mobileQaReportDoc.includes("Manual QA Matrix"), "Mobile QA report doc must include the manual QA matrix.");
 assert(mobileQaReportDoc.includes("Crash And Log Review"), "Mobile QA report doc must include crash and log review.");
 assert(mobileQaReportDoc.includes("Exit Decision"), "Mobile QA report doc must include an exit decision section.");
+
+const androidDeviceSetupDoc = readFileSync(
+  path.join(root, "docs/ANDROID_DEVICE_SETUP.md"),
+  "utf8"
+);
+assert(androidDeviceSetupDoc.includes("Android Device And ADB Setup"), "Android device setup doc must define ADB setup.");
+assert(androidDeviceSetupDoc.includes("ADB Health Check"), "Android device setup doc must include ADB health checks.");
+assert(androidDeviceSetupDoc.includes("Physical Phone Checklist"), "Android device setup doc must include physical phone checks.");
+assert(androidDeviceSetupDoc.includes("Emulator Checklist"), "Android device setup doc must include emulator checks.");
+
+const apkBuildTroubleshootingDoc = readFileSync(
+  path.join(root, "docs/APK_BUILD_TROUBLESHOOTING.md"),
+  "utf8"
+);
+assert(apkBuildTroubleshootingDoc.includes("APK Build Troubleshooting"), "APK troubleshooting doc must define build troubleshooting.");
+assert(apkBuildTroubleshootingDoc.includes("Capture A Build Log"), "APK troubleshooting doc must include build log capture.");
+assert(apkBuildTroubleshootingDoc.includes("Maven Or Dependency Download Failure"), "APK troubleshooting doc must include Maven failure guidance.");
+assert(apkBuildTroubleshootingDoc.includes("Metro Cannot Find Entry File"), "APK troubleshooting doc must include Metro entry guidance.");
 
 for (const functionName of requiredFunctions) {
   assert(

@@ -115,6 +115,8 @@ This repository contains the production architecture foundation:
 - Phase 102 construction closeout and testing handoff.
 - Phase 103 mobile testing environment checklist.
 - Phase 104 mobile QA report template.
+- Phase 105 Android device and ADB setup guide.
+- Phase 106 APK build troubleshooting guide.
 
 Construction is now closed for the current app build. The next workstream is the testing environment, device validation and release hardening.
 
@@ -266,6 +268,8 @@ scripts                      Operational scripts
 - Phase 102: construction closeout and testing handoff complete.
 - Phase 103: mobile testing environment checklist complete.
 - Phase 104: mobile QA report template complete.
+- Phase 105: Android device and ADB setup guide complete.
+- Phase 106: APK build troubleshooting guide complete.
 
 ## Quality Gates
 

@@ -83,3 +83,7 @@ Expected result:
 - Notes for each failed QA path with exact screen and action.
 
 Record each run in `docs/MOBILE_QA_REPORT.md`.
+
+Use `docs/ANDROID_DEVICE_SETUP.md` when `adb devices` is empty, unauthorized or the APK cannot be installed.
+
+Use `docs/APK_BUILD_TROUBLESHOOTING.md` when the release APK build fails or produces a crashing install.

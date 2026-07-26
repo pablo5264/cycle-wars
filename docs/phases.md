@@ -621,3 +621,15 @@ Status: implemented mobile testing checklist, README state update and smoke chec
 Add a reusable mobile QA report template for recording APK, emulator, physical-device, manual-flow and crash-log evidence.
 
 Status: implemented mobile QA report template, mobile testing link, README state update and smoke check coverage.
+
+## Phase 105: Android Device And ADB Setup Guide
+
+Document the Android Studio, SDK, ADB, emulator and physical phone checks needed before installing and launching the APK.
+
+Status: implemented Android device setup guide, mobile testing link, README state update and smoke check coverage.
+
+## Phase 106: APK Build Troubleshooting Guide
+
+Document the common Gradle, Maven, Metro, React Native CLI, Java and SDK failures that can block release APK generation.
+
+Status: implemented APK build troubleshooting guide, mobile testing link, README state update and smoke check coverage.
