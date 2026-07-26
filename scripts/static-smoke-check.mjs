@@ -15,6 +15,7 @@ const requiredFiles = [
   "docs/MOBILE_QA_REPORT.md",
   "docs/ANDROID_DEVICE_SETUP.md",
   "docs/APK_BUILD_TROUBLESHOOTING.md",
+  "docs/ANDROID_LOG_TRIAGE.md",
   "docs/REGIONAL_CONTROL.md",
   "supabase/migrations/0009_optimization_observability.sql",
   "supabase/migrations/0010_regional_control.sql",
@@ -161,6 +162,15 @@ assert(apkBuildTroubleshootingDoc.includes("APK Build Troubleshooting"), "APK tr
 assert(apkBuildTroubleshootingDoc.includes("Capture A Build Log"), "APK troubleshooting doc must include build log capture.");
 assert(apkBuildTroubleshootingDoc.includes("Maven Or Dependency Download Failure"), "APK troubleshooting doc must include Maven failure guidance.");
 assert(apkBuildTroubleshootingDoc.includes("Metro Cannot Find Entry File"), "APK troubleshooting doc must include Metro entry guidance.");
+
+const androidLogTriageDoc = readFileSync(
+  path.join(root, "docs/ANDROID_LOG_TRIAGE.md"),
+  "utf8"
+);
+assert(androidLogTriageDoc.includes("Android Log Triage"), "Android log triage doc must define log triage.");
+assert(androidLogTriageDoc.includes("Clear And Reproduce"), "Android log triage doc must include clear and reproduce steps.");
+assert(androidLogTriageDoc.includes("JavaScript Runtime Crash"), "Android log triage doc must include JS crash triage.");
+assert(androidLogTriageDoc.includes("Bundle Or Asset Failure"), "Android log triage doc must include bundle failure triage.");
 
 for (const functionName of requiredFunctions) {
   assert(

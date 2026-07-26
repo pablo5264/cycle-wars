@@ -117,6 +117,7 @@ This repository contains the production architecture foundation:
 - Phase 104 mobile QA report template.
 - Phase 105 Android device and ADB setup guide.
 - Phase 106 APK build troubleshooting guide.
+- Phase 107 Android log triage guide.
 
 Construction is now closed for the current app build. The next workstream is the testing environment, device validation and release hardening.
 
@@ -270,6 +271,7 @@ scripts                      Operational scripts
 - Phase 104: mobile QA report template complete.
 - Phase 105: Android device and ADB setup guide complete.
 - Phase 106: APK build troubleshooting guide complete.
+- Phase 107: Android log triage guide complete.
 
 ## Quality Gates
 

@@ -633,3 +633,9 @@ Status: implemented Android device setup guide, mobile testing link, README stat
 Document the common Gradle, Maven, Metro, React Native CLI, Java and SDK failures that can block release APK generation.
 
 Status: implemented APK build troubleshooting guide, mobile testing link, README state update and smoke check coverage.
+
+## Phase 107: Android Log Triage Guide
+
+Document how to clear, reproduce, capture and classify Android, React Native, bundle and permission failures during APK QA.
+
+Status: implemented Android log triage guide, QA report link, README state update and smoke check coverage.

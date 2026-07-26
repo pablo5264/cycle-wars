@@ -60,6 +60,8 @@ C:\Users\Pablo\AppData\Local\Android\Sdk\platform-tools\adb.exe logcat -d -t 500
 | --- | --- | --- | --- | --- |
 |  |  |  |  |  |
 
+Classify crashes with `docs/ANDROID_LOG_TRIAGE.md`.
+
 ## Screenshots And Evidence
 
 - Emulator launch:
