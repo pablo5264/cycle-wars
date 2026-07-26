@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { ScrollView, Text, View } from "react-native";
 import type { BattleSummary, SessionUser, GpsSampleResult, RideActivity } from "../../domain/models/AppModels";
 import type { TerritoryConquestView } from "../../domain/models/ConquestModels";
+import type { MapCenter } from "../../domain/models/MapModels";
 import type { GpsSamplePayload } from "../../infrastructure/api/CycleWarsApi";
 import type { RideLocation } from "../../infrastructure/location/LocationTracker";
 import { useAppContainer } from "../../application/state/AppContext";
@@ -9,6 +10,7 @@ import { ActionButton } from "../components/ActionButton";
 import { BattlePanel } from "../components/BattlePanel";
 import { Panel } from "../components/Panel";
 import { ProgressBar } from "../components/ProgressBar";
+import { LiveRideMapView } from "../map/LiveRideMapView";
 import { appStyles } from "../theme/styles";
 import { colors } from "../theme/theme";
 
@@ -24,8 +26,18 @@ export function RideScreen({ user }: RideScreenProps) {
   const [queuedSamples, setQueuedSamples] = useState(offlineRideQueue.size());
   const [message, setMessage] = useState<string | null>(null);
   const [isBusy, setIsBusy] = useState(false);
+  const [liveLocation, setLiveLocation] = useState<RideLocation | null>(null);
+  const [ridePath, setRidePath] = useState<RideLocation[]>([]);
   const startedAtRef = useRef<string | null>(null);
   const lastLocationRef = useRef<RideLocation | null>(null);
+  const mapCenter = useMemo<MapCenter>(
+    () =>
+      liveLocation
+        ? { latitude: liveLocation.latitude, longitude: liveLocation.longitude }
+        : { latitude: -33.4489, longitude: -70.6693 },
+    [liveLocation]
+  );
+  const distanceMeters = useMemo(() => calculateDistanceMeters(ridePath), [ridePath]);
 
   useEffect(() => {
     let isMounted = true;
@@ -48,6 +60,43 @@ export function RideScreen({ user }: RideScreenProps) {
     };
   }, [offlineRideQueue]);
 
+  useEffect(() => {
+    if (!activity || activity.status !== "recording") {
+      return undefined;
+    }
+
+    let didCancel = false;
+    let stopWatching: (() => void) | null = null;
+
+    location
+      .watchRideLocation((current) => {
+        if (didCancel) {
+          return;
+        }
+
+        lastLocationRef.current = current;
+        setLiveLocation(current);
+        setRidePath((currentPath) => appendRoutePoint(currentPath, current));
+      })
+      .then((stop) => {
+        if (didCancel) {
+          stop();
+        } else {
+          stopWatching = stop;
+        }
+      })
+      .catch(() => {
+        if (!didCancel) {
+          setMessage("No se pudo activar el seguimiento continuo del mapa.");
+        }
+      });
+
+    return () => {
+      didCancel = true;
+      stopWatching?.();
+    };
+  }, [activity, location]);
+
   async function startRide() {
     setIsBusy(true);
     setMessage(null);
@@ -59,6 +108,10 @@ export function RideScreen({ user }: RideScreenProps) {
       }
 
       const startedAt = new Date().toISOString();
+      const current = await location.currentLocation();
+      lastLocationRef.current = current;
+      setLiveLocation(current);
+      setRidePath([current]);
       startedAtRef.current = startedAt;
       setActivity(
         await api.startActivity({
@@ -87,6 +140,8 @@ export function RideScreen({ user }: RideScreenProps) {
       const sampleStartedAt = Date.now();
       const current = await location.optimizedRideLocation(lastLocationRef.current);
       lastLocationRef.current = current;
+      setLiveLocation(current);
+      setRidePath((currentPath) => appendRoutePoint(currentPath, current));
       payload = {
         activityId: activity.id,
         ...current,
@@ -182,23 +237,29 @@ export function RideScreen({ user }: RideScreenProps) {
 
   return (
     <ScrollView style={appStyles.screen} contentContainerStyle={{ gap: 16, paddingBottom: 24 }}>
-      <View style={{ gap: 6 }}>
-        <Text style={appStyles.eyebrow}>Actividad</Text>
-        <Text style={appStyles.title}>Centro de ruta</Text>
-        <Text style={appStyles.body}>
-          Registra GPS, calcula influencia y abre batallas si otro ciclista esta en el mismo H3.
-        </Text>
-      </View>
+      <LiveRideMapView
+        center={mapCenter}
+        riderLocation={liveLocation}
+        route={ridePath}
+        isRecording={activity?.status === "recording"}
+      />
 
-      <Panel title="Estado">
+      <Panel title="Ruta en vivo">
         <View style={{ gap: 8 }}>
           <Text style={{ color: colors.text, fontSize: 20, fontWeight: "800" }}>
             {activity ? activity.status : "Sin ruta activa"}
           </Text>
           <Text style={appStyles.body}>
-            {activity?.id ?? startedAtRef.current ?? "Inicia una ruta para comenzar a conquistar."}
+            {activity?.id ?? startedAtRef.current ?? "Inicia una ruta para ver tu avance sobre el mapa real."}
           </Text>
-          <Text style={appStyles.body}>Muestras pendientes: {queuedSamples}</Text>
+          <View style={appStyles.row}>
+            <Text style={appStyles.body}>Distancia: {formatDistance(distanceMeters)}</Text>
+            <Text style={appStyles.body}>Velocidad: {Math.round(liveLocation?.speedKmh ?? 0)} km/h</Text>
+          </View>
+          <View style={appStyles.row}>
+            <Text style={appStyles.body}>Puntos GPS: {ridePath.length}</Text>
+            <Text style={appStyles.body}>Pendientes: {queuedSamples}</Text>
+          </View>
         </View>
       </Panel>
 
@@ -209,7 +270,7 @@ export function RideScreen({ user }: RideScreenProps) {
           disabled={isBusy || !!activity}
         />
         <ActionButton
-          label="Enviar muestra GPS"
+          label="Sincronizar avance"
           variant="secondary"
           onPress={() => void sendSample()}
           disabled={isBusy || !activity || activity.status !== "recording"}
@@ -243,6 +304,54 @@ export function RideScreen({ user }: RideScreenProps) {
       />
     </ScrollView>
   );
+}
+
+function appendRoutePoint(route: RideLocation[], nextPoint: RideLocation): RideLocation[] {
+  const previousPoint = route[route.length - 1];
+  if (!previousPoint) {
+    return [nextPoint];
+  }
+
+  if (calculatePointDistanceMeters(previousPoint, nextPoint) < 3) {
+    return route;
+  }
+
+  return [...route.slice(-119), nextPoint];
+}
+
+function calculateDistanceMeters(route: RideLocation[]): number {
+  return route.reduce((total, point, index) => {
+    const previousPoint = route[index - 1];
+    return previousPoint ? total + calculatePointDistanceMeters(previousPoint, point) : total;
+  }, 0);
+}
+
+function calculatePointDistanceMeters(from: RideLocation, to: RideLocation): number {
+  const earthRadiusMeters = 6371000;
+  const latitudeDelta = toRadians(to.latitude - from.latitude);
+  const longitudeDelta = toRadians(to.longitude - from.longitude);
+  const fromLatitude = toRadians(from.latitude);
+  const toLatitude = toRadians(to.latitude);
+  const haversine =
+    Math.sin(latitudeDelta / 2) * Math.sin(latitudeDelta / 2) +
+    Math.cos(fromLatitude) *
+      Math.cos(toLatitude) *
+      Math.sin(longitudeDelta / 2) *
+      Math.sin(longitudeDelta / 2);
+
+  return earthRadiusMeters * 2 * Math.atan2(Math.sqrt(haversine), Math.sqrt(1 - haversine));
+}
+
+function toRadians(value: number): number {
+  return (value * Math.PI) / 180;
+}
+
+function formatDistance(distanceMeters: number): string {
+  if (distanceMeters >= 1000) {
+    return `${(distanceMeters / 1000).toFixed(2)} km`;
+  }
+
+  return `${Math.round(distanceMeters)} m`;
 }
 
 interface ConquestSamplePanelProps {

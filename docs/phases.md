@@ -639,3 +639,9 @@ Status: implemented APK build troubleshooting guide, mobile testing link, README
 Document how to clear, reproduce, capture and classify Android, React Native, bundle and permission failures during APK QA.
 
 Status: implemented Android log triage guide, QA report link, README state update and smoke check coverage.
+
+## Phase 108: Live Ride Map Experience
+
+Move the primary ride flow toward an Uber-like real map experience with continuous GPS tracking, camera-following movement, a visible rider marker and route line.
+
+Status: implemented live ride map view, continuous location watcher, ride path metrics and README state update.

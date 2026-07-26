@@ -6,6 +6,7 @@ const root = process.cwd();
 const requiredFiles = [
   "apps/mobile/src/presentation/navigation/AppNavigator.tsx",
   "apps/mobile/src/infrastructure/location/LocationTracker.ts",
+  "apps/mobile/src/presentation/map/LiveRideMapView.tsx",
   "docs/api/openapi.yaml",
   "docs/RELEASE.md",
   "docs/ANALYTICS.md",
@@ -200,8 +201,21 @@ assert(
   rideScreen.includes("optimizedRideLocation") &&
     rideScreen.includes("recordPerformanceEvent") &&
     rideScreen.includes("offlineRideQueue") &&
-    rideScreen.includes(".hydrate()"),
-  "Ride screen must use optimized GPS, performance telemetry and hydrated offline queue."
+    rideScreen.includes(".hydrate()") &&
+    rideScreen.includes("LiveRideMapView") &&
+    rideScreen.includes("Sincronizar avance"),
+  "Ride screen must use optimized GPS, live map telemetry and hydrated offline queue."
+);
+
+const liveRideMapView = readFileSync(
+  path.join(root, "apps/mobile/src/presentation/map/LiveRideMapView.tsx"),
+  "utf8"
+);
+assert(
+  liveRideMapView.includes("Mapa real activo") &&
+    liveRideMapView.includes("live-ride-route-line") &&
+    liveRideMapView.includes("LiveRiderMarker"),
+  "Live ride map view must render a real-map route line and visible rider marker."
 );
 
 const mobilePackage = readFileSync(path.join(root, "apps/mobile/package.json"), "utf8");

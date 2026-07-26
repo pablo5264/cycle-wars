@@ -118,6 +118,7 @@ This repository contains the production architecture foundation:
 - Phase 105 Android device and ADB setup guide.
 - Phase 106 APK build troubleshooting guide.
 - Phase 107 Android log triage guide.
+- Phase 108 live ride map experience with camera-following GPS movement, a route line and a rider marker over the real map.
 
 Construction is now closed for the current app build. The next workstream is the testing environment, device validation and release hardening.
 
@@ -272,6 +273,7 @@ scripts                      Operational scripts
 - Phase 105: Android device and ADB setup guide complete.
 - Phase 106: APK build troubleshooting guide complete.
 - Phase 107: Android log triage guide complete.
+- Phase 108: Live ride map experience complete.
 
 ## Quality Gates
 

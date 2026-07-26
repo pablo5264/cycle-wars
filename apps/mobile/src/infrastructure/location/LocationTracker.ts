@@ -29,11 +29,30 @@ export class LocationTracker {
     return this.readLocation(accuracy);
   }
 
+  async watchRideLocation(onLocation: (location: RideLocation) => void): Promise<() => void> {
+    const subscription = await Location.watchPositionAsync(
+      {
+        accuracy: Location.Accuracy.BestForNavigation,
+        distanceInterval: 5,
+        timeInterval: 2500
+      },
+      (location) => {
+        onLocation(this.toRideLocation(location));
+      }
+    );
+
+    return () => subscription.remove();
+  }
+
   private async readLocation(accuracy: Location.Accuracy): Promise<RideLocation> {
     const location = await Location.getCurrentPositionAsync({
       accuracy
     });
 
+    return this.toRideLocation(location);
+  }
+
+  private toRideLocation(location: Location.LocationObject): RideLocation {
     return {
       latitude: location.coords.latitude,
       longitude: location.coords.longitude,
