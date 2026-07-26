@@ -6,6 +6,8 @@ export function openStreetMapRasterStyle(tileUrl: string) {
         type: "raster",
         tiles: [tileUrl],
         tileSize: 256,
+        minzoom: 0,
+        maxzoom: 20,
         attribution: "OpenStreetMap contributors"
       }
     },

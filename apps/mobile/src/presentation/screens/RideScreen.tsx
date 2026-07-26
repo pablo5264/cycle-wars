@@ -61,6 +61,41 @@ export function RideScreen({ user }: RideScreenProps) {
   }, [offlineRideQueue]);
 
   useEffect(() => {
+    let isMounted = true;
+
+    async function centerMapOnGps() {
+      setMessage(null);
+      try {
+        const hasPermission = await location.requestPermission();
+        if (!hasPermission) {
+          if (isMounted) {
+            setMessage("Activa permisos de ubicacion para mostrar tu posicion en el mapa.");
+          }
+          return;
+        }
+
+        const current = await location.currentLocation();
+        if (!isMounted) {
+          return;
+        }
+
+        lastLocationRef.current = current;
+        setLiveLocation(current);
+        setRidePath((currentPath) => (currentPath.length > 0 ? currentPath : [current]));
+      } catch (caught) {
+        if (isMounted) {
+          setMessage(caught instanceof Error ? caught.message : "No se pudo centrar el mapa con tu GPS.");
+        }
+      }
+    }
+
+    void centerMapOnGps();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [location]);
+  useEffect(() => {
     if (!activity || activity.status !== "recording") {
       return undefined;
     }

@@ -30,7 +30,7 @@ const tabs: Array<{ key: TabKey; label: string; icon: keyof typeof Ionicons.glyp
 export function AppNavigator() {
   const session = useSession();
   const { api } = useAppContainer();
-  const [activeTab, setActiveTab] = useState<TabKey>("map");
+  const [activeTab, setActiveTab] = useState<TabKey>("ride");
   const [unreadNotificationCount, setUnreadNotificationCount] = useState(0);
 
   useEffect(() => {

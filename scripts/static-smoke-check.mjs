@@ -212,10 +212,11 @@ const liveRideMapView = readFileSync(
   "utf8"
 );
 assert(
-  liveRideMapView.includes("Mapa real activo") &&
+  liveRideMapView.includes("Mapa real CARTO") &&
     liveRideMapView.includes("live-ride-route-line") &&
-    liveRideMapView.includes("LiveRiderMarker"),
-  "Live ride map view must render a real-map route line and visible rider marker."
+    liveRideMapView.includes("LiveRiderMarker") &&
+    liveRideMapView.includes("UserLocation"),
+  "Live ride map view must render a real-map route line, user location and visible rider marker."
 );
 
 const mobilePackage = readFileSync(path.join(root, "apps/mobile/package.json"), "utf8");

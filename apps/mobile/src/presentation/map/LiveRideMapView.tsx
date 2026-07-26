@@ -18,6 +18,7 @@ interface MapLibreModule {
   Camera: ComponentType<Record<string, unknown>>;
   ShapeSource: ComponentType<Record<string, unknown>>;
   LineLayer: ComponentType<Record<string, unknown>>;
+  UserLocation?: ComponentType<Record<string, unknown>>;
   setAccessToken?: (token: string | null) => void;
 }
 
@@ -28,7 +29,9 @@ export function LiveRideMapView({
   isRecording
 }: LiveRideMapViewProps) {
   const [mapLibre] = useState<MapLibreModule | null>(() => loadMapLibre());
-  const tileUrl = process.env.EXPO_PUBLIC_MAP_TILE_URL ?? "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
+  const tileUrl =
+    process.env.EXPO_PUBLIC_MAP_TILE_URL ??
+    "https://a.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png";
   const style = useMemo(() => openStreetMapRasterStyle(tileUrl), [tileUrl]);
   const routeShape = useMemo(
     () => ({
@@ -63,7 +66,7 @@ export function LiveRideMapView({
     );
   }
 
-  const { MapView, Camera, ShapeSource, LineLayer } = mapLibre;
+  const { MapView, Camera, ShapeSource, LineLayer, UserLocation } = mapLibre;
 
   return (
     <View style={styles.mapShell}>
@@ -78,10 +81,11 @@ export function LiveRideMapView({
       >
         <Camera
           centerCoordinate={[center.longitude, center.latitude]}
-          zoomLevel={16}
-          pitch={52}
+          zoomLevel={17}
+          pitch={42}
           animationDuration={900}
         />
+        {UserLocation ? <UserLocation visible showsUserHeadingIndicator /> : null}
         <ShapeSource id="live-ride-route" shape={routeShape}>
           <LineLayer
             id="live-ride-route-line"
@@ -130,7 +134,7 @@ function MapStatusPill({ accuracyLabel }: { accuracyLabel: string }) {
   return (
     <View style={styles.statusPill} pointerEvents="none">
       <View style={styles.statusDot} />
-      <Text style={styles.statusText}>Mapa real activo - {accuracyLabel}</Text>
+      <Text style={styles.statusText}>Mapa real CARTO - {accuracyLabel}</Text>
     </View>
   );
 }

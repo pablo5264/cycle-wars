@@ -32,7 +32,9 @@ export function TerritoryMapView({
   onCenterChange
 }: TerritoryMapViewProps) {
   const [mapLibre] = useState<MapLibreModule | null>(() => loadMapLibre());
-  const tileUrl = process.env.EXPO_PUBLIC_MAP_TILE_URL ?? "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
+  const tileUrl =
+    process.env.EXPO_PUBLIC_MAP_TILE_URL ??
+    "https://a.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png";
   const style = useMemo(() => openStreetMapRasterStyle(tileUrl), [tileUrl]);
   const featureCollection = useMemo(
     () => ({
