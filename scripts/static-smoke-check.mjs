@@ -198,13 +198,12 @@ const rideScreen = readFileSync(
   "utf8"
 );
 assert(
-  rideScreen.includes("optimizedRideLocation") &&
-    rideScreen.includes("recordPerformanceEvent") &&
-    rideScreen.includes("offlineRideQueue") &&
-    rideScreen.includes(".hydrate()") &&
+  rideScreen.includes("watchRideLocation") &&
+    rideScreen.includes("centerMapOnGps") &&
     rideScreen.includes("LiveRideMapView") &&
-    rideScreen.includes("Sincronizar avance"),
-  "Ride screen must use optimized GPS, live map telemetry and hydrated offline queue."
+    !rideScreen.includes("Sincronizar avance") &&
+    !rideScreen.includes("Ruta en vivo"),
+  "Ride screen must use live GPS tracking with a minimal full-screen map UI."
 );
 
 const liveRideMapView = readFileSync(
@@ -212,13 +211,12 @@ const liveRideMapView = readFileSync(
   "utf8"
 );
 assert(
-  liveRideMapView.includes("Mapa real CARTO") &&
+  liveRideMapView.includes("RasterSource") &&
     liveRideMapView.includes("live-ride-route-line") &&
-    liveRideMapView.includes("LiveRiderMarker") &&
+    liveRideMapView.includes("Ionicons") &&
     liveRideMapView.includes("UserLocation") &&
-    liveRideMapView.includes("RasterSource") &&
-    liveRideMapView.includes("Centrar"),
-  "Live ride map view must render raster tiles, user location, center action and visible rider marker."
+    liveRideMapView.includes("Centrar mapa en mi ubicacion"),
+  "Live ride map view must render raster tiles, user location and icon-only center action."
 );
 
 const mobilePackage = readFileSync(path.join(root, "apps/mobile/package.json"), "utf8");
@@ -316,12 +314,15 @@ const appNavigator = readFileSync(
   "utf8"
 );
 assert(
-  appNavigator.includes("EventsScreen") && appNavigator.includes("Eventos"),
-  "App navigator must expose Events tab."
+  appNavigator.includes('useState<TabKey>("map")') &&
+    appNavigator.includes("Territorios") &&
+    appNavigator.includes("Estadisticas") &&
+    appNavigator.includes("Perfil"),
+  "App navigator must expose the minimal map-first bottom navigation."
 );
 assert(
-  appNavigator.includes("unreadNotificationCount") && appNavigator.includes("9+"),
-  "App navigator must show unread notification badge."
+  appNavigator.includes("showUnselectedLabels") || !appNavigator.includes("unreadNotificationCount"),
+  "App navigator must keep the minimal navigation free of notification panels."
 );
 
 const eventsScreen = readFileSync(

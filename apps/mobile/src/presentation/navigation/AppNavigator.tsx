@@ -1,87 +1,55 @@
 import { Ionicons } from "@expo/vector-icons";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { useSession } from "../../application/hooks/useSession";
-import { useAppContainer } from "../../application/state/AppContext";
 import { AuthScreen } from "../screens/AuthScreen";
-import { ClanScreen } from "../screens/ClanScreen";
-import { EventsScreen } from "../screens/EventsScreen";
-import { MapScreen } from "../screens/MapScreen";
 import { ProfileScreen } from "../screens/ProfileScreen";
 import { RegionScreen } from "../screens/RegionScreen";
 import { RideScreen } from "../screens/RideScreen";
-import { ShopScreen } from "../screens/ShopScreen";
-import { SocialScreen } from "../screens/SocialScreen";
 import { colors } from "../theme/theme";
 
-type TabKey = "map" | "ride" | "regions" | "events" | "social" | "profile" | "clan" | "shop";
+type TabKey = "map" | "territories" | "stats" | "profile";
 
 const tabs: Array<{ key: TabKey; label: string; icon: keyof typeof Ionicons.glyphMap }> = [
   { key: "map", label: "Mapa", icon: "map" },
-  { key: "ride", label: "Ruta", icon: "radio" },
-  { key: "regions", label: "Zonas", icon: "flag" },
-  { key: "events", label: "Eventos", icon: "trophy" },
-  { key: "social", label: "Social", icon: "chatbubbles" },
-  { key: "profile", label: "Perfil", icon: "person-circle" },
-  { key: "clan", label: "Clan", icon: "shield" },
-  { key: "shop", label: "Tienda", icon: "bag" }
+  { key: "territories", label: "Territorios", icon: "trophy" },
+  { key: "stats", label: "Estadisticas", icon: "stats-chart" },
+  { key: "profile", label: "Perfil", icon: "person-circle" }
 ];
 
 export function AppNavigator() {
   const session = useSession();
-  const { api } = useAppContainer();
-  const [activeTab, setActiveTab] = useState<TabKey>("ride");
-  const [unreadNotificationCount, setUnreadNotificationCount] = useState(0);
-
-  useEffect(() => {
-    if (!session.user || !api.isConfigured()) {
-      setUnreadNotificationCount(0);
-      return;
-    }
-
-    let isMounted = true;
-    api
-      .getNotifications()
-      .then((notifications) => {
-        if (isMounted) {
-          setUnreadNotificationCount(notifications.filter((item) => item.read_at === null).length);
-        }
-      })
-      .catch(() => setUnreadNotificationCount(0));
-
-    return () => {
-      isMounted = false;
-    };
-  }, [activeTab, api, session.user]);
+  const [activeTab, setActiveTab] = useState<TabKey>("map");
 
   if (!session.user) {
     return <AuthScreen session={session} />;
   }
 
   return (
-    <View style={{ flex: 1, backgroundColor: colors.background }}>
+    <View style={{ flex: 1, backgroundColor: "#FFFFFF" }}>
       <View style={{ flex: 1 }}>
-        {activeTab === "map" ? <MapScreen /> : null}
-        {activeTab === "ride" ? <RideScreen user={session.user} /> : null}
-        {activeTab === "regions" ? <RegionScreen /> : null}
-        {activeTab === "events" ? <EventsScreen /> : null}
-        {activeTab === "social" ? <SocialScreen /> : null}
+        {activeTab === "map" ? <RideScreen user={session.user} /> : null}
+        {activeTab === "territories" ? <RegionScreen /> : null}
+        {activeTab === "stats" ? <PlaceholderScreen title="Estadisticas" /> : null}
         {activeTab === "profile" ? <ProfileScreen session={session} /> : null}
-        {activeTab === "clan" ? <ClanScreen /> : null}
-        {activeTab === "shop" ? <ShopScreen /> : null}
       </View>
 
       <View
         style={{
-          minHeight: 74,
-          paddingHorizontal: 8,
-          paddingTop: 8,
-          paddingBottom: 12,
-          borderTopColor: colors.border,
+          minHeight: 72,
+          paddingHorizontal: 12,
+          paddingTop: 7,
+          paddingBottom: 10,
+          borderTopColor: "rgba(60,64,67,0.14)",
           borderTopWidth: 1,
-          backgroundColor: "#09141E",
+          backgroundColor: "#FFFFFF",
           flexDirection: "row",
-          justifyContent: "space-around"
+          justifyContent: "space-around",
+          shadowColor: "#000000",
+          shadowOffset: { width: 0, height: -2 },
+          shadowOpacity: 0.08,
+          shadowRadius: 10,
+          elevation: 12
         }}
       >
         {tabs.map((tab) => {
@@ -92,52 +60,31 @@ export function AppNavigator() {
               accessibilityRole="button"
               accessibilityLabel={tab.label}
               onPress={() => setActiveTab(tab.key)}
-              style={{ alignItems: "center", justifyContent: "center", width: 43, gap: 4, position: "relative" }}
+              style={{ alignItems: "center", justifyContent: "center", minWidth: 68, gap: 3 }}
             >
               <Ionicons
                 name={tab.icon}
-                color={isActive ? colors.green : colors.faint}
+                color={isActive ? "#1A73E8" : "#5F6368"}
                 size={24}
               />
-              {tab.key === "social" && unreadNotificationCount > 0 ? (
-                <View
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    right: 4,
-                    minWidth: 18,
-                    height: 18,
-                    borderRadius: 9,
-                    backgroundColor: colors.red,
-                    alignItems: "center",
-                    justifyContent: "center",
-                    paddingHorizontal: 4
-                  }}
-                >
-                  <Text
-                    style={{
-                      color: colors.text,
-                      fontSize: 9,
-                      fontWeight: "900"
-                    }}
-                  >
-                    {unreadNotificationCount > 9 ? "9+" : unreadNotificationCount}
-                  </Text>
-                </View>
+              {isActive ? (
+                <Text style={{ color: "#1A73E8", fontSize: 11, fontWeight: "700" }}>
+                  {tab.label}
+                </Text>
               ) : null}
-              <Text
-                style={{
-                  color: isActive ? colors.green : colors.faint,
-                  fontSize: 9,
-                  fontWeight: "700"
-                }}
-              >
-                {tab.label}
-              </Text>
             </TouchableOpacity>
           );
         })}
       </View>
+    </View>
+  );
+}
+
+function PlaceholderScreen({ title }: { title: string }) {
+  return (
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: colors.background }}>
+      <Text style={{ color: colors.text, fontSize: 18, fontWeight: "800" }}>{title}</Text>
+      <Text style={{ color: colors.muted, marginTop: 8 }}>Pantalla en construccion</Text>
     </View>
   );
 }
