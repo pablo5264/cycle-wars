@@ -200,6 +200,7 @@ const rideScreen = readFileSync(
 assert(
   rideScreen.includes("watchRideLocation") &&
     rideScreen.includes("centerMapOnGps") &&
+    rideScreen.includes("toggleTracking") &&
     rideScreen.includes("LiveRideMapView") &&
     !rideScreen.includes("Sincronizar avance") &&
     !rideScreen.includes("Ruta en vivo"),
@@ -215,8 +216,10 @@ assert(
     liveRideMapView.includes("live-ride-route-line") &&
     liveRideMapView.includes("Ionicons") &&
     liveRideMapView.includes("UserLocation") &&
-    liveRideMapView.includes("Centrar mapa en mi ubicacion"),
-  "Live ride map view must render raster tiles, user location and icon-only center action."
+    liveRideMapView.includes("Centrar mapa en mi ubicacion") &&
+    liveRideMapView.includes("Iniciar recorrido") &&
+    liveRideMapView.includes("Finalizar recorrido"),
+  "Live ride map view must render raster tiles, user location and icon-only ride actions."
 );
 
 const mobilePackage = readFileSync(path.join(root, "apps/mobile/package.json"), "utf8");

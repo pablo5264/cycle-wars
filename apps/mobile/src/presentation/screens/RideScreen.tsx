@@ -12,8 +12,10 @@ interface RideScreenProps {
 
 export function RideScreen({ user: _user }: RideScreenProps) {
   const { location } = useAppContainer();
+  const [isTracking, setIsTracking] = useState(false);
   const [liveLocation, setLiveLocation] = useState<RideLocation | null>(null);
   const [ridePath, setRidePath] = useState<RideLocation[]>([]);
+  const isTrackingRef = useRef(false);
   const lastLocationRef = useRef<RideLocation | null>(null);
   const mapCenter = useMemo<MapCenter>(
     () =>
@@ -40,6 +42,10 @@ export function RideScreen({ user: _user }: RideScreenProps) {
   }, [centerMapOnGps]);
 
   useEffect(() => {
+    isTrackingRef.current = isTracking;
+  }, [isTracking]);
+
+  useEffect(() => {
     let didCancel = false;
     let stopWatching: (() => void) | null = null;
 
@@ -56,7 +62,9 @@ export function RideScreen({ user: _user }: RideScreenProps) {
 
         lastLocationRef.current = current;
         setLiveLocation(current);
-        setRidePath((currentPath) => appendRoutePoint(currentPath, current));
+        if (isTrackingRef.current) {
+          setRidePath((currentPath) => appendRoutePoint(currentPath, current));
+        }
       });
     }
 
@@ -68,12 +76,32 @@ export function RideScreen({ user: _user }: RideScreenProps) {
     };
   }, [location]);
 
+  const toggleTracking = useCallback(async () => {
+    if (isTrackingRef.current) {
+      setIsTracking(false);
+      return;
+    }
+
+    const hasPermission = await location.requestPermission();
+    if (!hasPermission) {
+      return;
+    }
+
+    const current = await location.currentLocation();
+    lastLocationRef.current = current;
+    setLiveLocation(current);
+    setRidePath([current]);
+    setIsTracking(true);
+  }, [location]);
+
   return (
     <View style={{ flex: 1 }}>
       <LiveRideMapView
         center={mapCenter}
         route={ridePath}
+        isTracking={isTracking}
         onCenterPress={() => void centerMapOnGps()}
+        onTrackingPress={() => void toggleTracking()}
       />
     </View>
   );

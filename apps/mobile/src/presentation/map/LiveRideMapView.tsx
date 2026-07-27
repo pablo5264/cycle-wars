@@ -9,7 +9,9 @@ import { colors } from "../theme/theme";
 interface LiveRideMapViewProps {
   center: MapCenter;
   route: RideLocation[];
+  isTracking: boolean;
   onCenterPress: () => void;
+  onTrackingPress: () => void;
 }
 
 interface MapLibreModule {
@@ -23,7 +25,13 @@ interface MapLibreModule {
   setAccessToken?: (token: string | null) => void;
 }
 
-export function LiveRideMapView({ center, route, onCenterPress }: LiveRideMapViewProps) {
+export function LiveRideMapView({
+  center,
+  route,
+  isTracking,
+  onCenterPress,
+  onTrackingPress
+}: LiveRideMapViewProps) {
   const [mapLibre] = useState<MapLibreModule | null>(() => loadMapLibre());
   const tileUrl =
     process.env.EXPO_PUBLIC_MAP_TILE_URL ??
@@ -53,6 +61,7 @@ export function LiveRideMapView({ center, route, onCenterPress }: LiveRideMapVie
       <View style={styles.mapShell}>
         <FallbackLiveMap />
         <CenterMapButton onPress={onCenterPress} />
+        <TrackingButton isTracking={isTracking} onPress={onTrackingPress} />
       </View>
     );
   }
@@ -99,6 +108,7 @@ export function LiveRideMapView({ center, route, onCenterPress }: LiveRideMapVie
         </ShapeSource>
       </MapView>
       <CenterMapButton onPress={onCenterPress} />
+      <TrackingButton isTracking={isTracking} onPress={onTrackingPress} />
     </View>
   );
 }
@@ -112,6 +122,29 @@ function CenterMapButton({ onPress }: { onPress: () => void }) {
       style={styles.centerButton}
     >
       <Ionicons name="locate" color="#1A73E8" size={25} />
+    </TouchableOpacity>
+  );
+}
+
+function TrackingButton({
+  isTracking,
+  onPress
+}: {
+  isTracking: boolean;
+  onPress: () => void;
+}) {
+  return (
+    <TouchableOpacity
+      accessibilityRole="button"
+      accessibilityLabel={isTracking ? "Finalizar recorrido" : "Iniciar recorrido"}
+      onPress={onPress}
+      style={[styles.trackingButton, isTracking ? styles.trackingButtonActive : null]}
+    >
+      <Ionicons
+        name={isTracking ? "stop" : "play"}
+        color="#FFFFFF"
+        size={22}
+      />
     </TouchableOpacity>
   );
 }
@@ -161,6 +194,25 @@ const styles = {
     elevation: 8,
     alignItems: "center" as const,
     justifyContent: "center" as const
+  },
+  trackingButton: {
+    position: "absolute" as const,
+    alignSelf: "center" as const,
+    bottom: 24,
+    width: 62,
+    height: 62,
+    borderRadius: 31,
+    backgroundColor: "#1A73E8",
+    shadowColor: "#000000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.28,
+    shadowRadius: 10,
+    elevation: 10,
+    alignItems: "center" as const,
+    justifyContent: "center" as const
+  },
+  trackingButtonActive: {
+    backgroundColor: "#D93025"
   },
   fallbackMap: {
     flex: 1,
