@@ -1,8 +1,7 @@
 import { useMemo, useState } from "react";
 import type { ComponentType } from "react";
-import { Text, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import type { MapCenter } from "../../domain/models/MapModels";
-import { openStreetMapRasterStyle } from "../../infrastructure/map/mapStyle";
 import type { RideLocation } from "../../infrastructure/location/LocationTracker";
 import { colors } from "../theme/theme";
 
@@ -11,6 +10,7 @@ interface LiveRideMapViewProps {
   riderLocation: RideLocation | null;
   route: RideLocation[];
   isRecording: boolean;
+  onCenterPress: () => void;
 }
 
 interface MapLibreModule {
@@ -18,6 +18,8 @@ interface MapLibreModule {
   Camera: ComponentType<Record<string, unknown>>;
   ShapeSource: ComponentType<Record<string, unknown>>;
   LineLayer: ComponentType<Record<string, unknown>>;
+  RasterSource: ComponentType<Record<string, unknown>>;
+  RasterLayer: ComponentType<Record<string, unknown>>;
   UserLocation?: ComponentType<Record<string, unknown>>;
   setAccessToken?: (token: string | null) => void;
 }
@@ -26,13 +28,13 @@ export function LiveRideMapView({
   center,
   riderLocation,
   route,
-  isRecording
+  isRecording,
+  onCenterPress
 }: LiveRideMapViewProps) {
   const [mapLibre] = useState<MapLibreModule | null>(() => loadMapLibre());
   const tileUrl =
     process.env.EXPO_PUBLIC_MAP_TILE_URL ??
     "https://a.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png";
-  const style = useMemo(() => openStreetMapRasterStyle(tileUrl), [tileUrl]);
   const routeShape = useMemo(
     () => ({
       type: "FeatureCollection",
@@ -66,13 +68,13 @@ export function LiveRideMapView({
     );
   }
 
-  const { MapView, Camera, ShapeSource, LineLayer, UserLocation } = mapLibre;
+  const { MapView, Camera, ShapeSource, LineLayer, RasterSource, RasterLayer, UserLocation } = mapLibre;
 
   return (
     <View style={styles.mapShell}>
       <MapView
         style={{ flex: 1 }}
-        styleJSON={JSON.stringify(style)}
+        mapStyle={{ version: 8, sources: {}, layers: [] }}
         logoEnabled={false}
         attributionEnabled
         compassEnabled
@@ -85,6 +87,16 @@ export function LiveRideMapView({
           pitch={42}
           animationDuration={900}
         />
+        <RasterSource
+          id="live-raster-map"
+          tileUrlTemplates={[tileUrl]}
+          tileSize={256}
+          minZoomLevel={0}
+          maxZoomLevel={20}
+          attribution="OpenStreetMap contributors"
+        >
+          <RasterLayer id="live-raster-map-layer" sourceID="live-raster-map" />
+        </RasterSource>
         {UserLocation ? <UserLocation visible showsUserHeadingIndicator /> : null}
         <ShapeSource id="live-ride-route" shape={routeShape}>
           <LineLayer
@@ -107,6 +119,7 @@ export function LiveRideMapView({
       </MapView>
       <LiveRiderMarker statusLabel={statusLabel} speedLabel={speedLabel} />
       <MapStatusPill accuracyLabel={accuracyLabel} />
+      <CenterMapButton onPress={onCenterPress} />
     </View>
   );
 }
@@ -136,6 +149,19 @@ function MapStatusPill({ accuracyLabel }: { accuracyLabel: string }) {
       <View style={styles.statusDot} />
       <Text style={styles.statusText}>Mapa real CARTO - {accuracyLabel}</Text>
     </View>
+  );
+}
+
+function CenterMapButton({ onPress }: { onPress: () => void }) {
+  return (
+    <TouchableOpacity
+      accessibilityRole="button"
+      accessibilityLabel="Centrar mapa en mi ubicacion"
+      onPress={onPress}
+      style={styles.centerButton}
+    >
+      <Text style={styles.centerButtonText}>Centrar</Text>
+    </TouchableOpacity>
   );
 }
 
@@ -268,6 +294,22 @@ const styles = {
     color: colors.text,
     fontSize: 12,
     fontWeight: "800" as const
+  },
+  centerButton: {
+    position: "absolute" as const,
+    right: 18,
+    bottom: 22,
+    minHeight: 44,
+    borderRadius: 8,
+    backgroundColor: colors.green,
+    paddingHorizontal: 14,
+    alignItems: "center" as const,
+    justifyContent: "center" as const
+  },
+  centerButtonText: {
+    color: "#062013",
+    fontSize: 13,
+    fontWeight: "900" as const
   },
   fallbackMap: {
     flex: 1,

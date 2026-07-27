@@ -69,7 +69,7 @@ export function TerritoryMapView({
     >
       <MapView
         style={{ flex: 1 }}
-        styleJSON={JSON.stringify(style)}
+        mapStyle={style}
         compassEnabled
         logoEnabled={false}
         attributionEnabled
